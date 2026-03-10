@@ -25,7 +25,7 @@ Each archetype contains 3–5 named sub-archetypes grounded in established frame
 
 ## Web Tool
 
-**`index.html`** — Open directly in any browser or visit the GitHub Pages site.
+**`index.html`** — Open directly in any browser or visit https://rhinoautomator.com/assessment.
 
 **Features:**
 - Score capability 0–10 on each of the 8 archetypes using sliders
