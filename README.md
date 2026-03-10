@@ -1,6 +1,6 @@
 # Archetypes of Automation — Team Capability Assessment
 
-A framework that helps teams identify their collective strengths and gaps across **8 dimensions of automation capability** — regardless of industry, size, or technical maturity.
+A framework by **Brian Simpson** that helps individuals and teams identify their collective strengths and gaps across **8 dimensions of automation capability** — regardless of industry, size, or technical maturity.
 
 ---
 
@@ -10,16 +10,16 @@ The core insight: the biggest barrier to automation is not technical skill — i
 
 | # | Archetype | What it covers |
 |---|-----------|----------------|
-| 1 | Process & Knowledge Holding | Understanding and documenting how work actually happens |
-| 2 | Problem Definition | Identifying and prioritizing what is worth automating |
-| 3 | Design & Logic Thinking | Translating processes into explicit logic before touching any tool |
+| 1 | Process & Knowledge Holding | Understanding, retaining, and communicating how work actually happens |
+| 2 | Problem Definition | Identifying, articulating, and prioritizing what is worth automating |
+| 3 | Design & Logic Thinking | Translating real-world processes into explicit logic before touching any tool |
 | 4 | Communication & Translation | Bridging the gap between process owners and builders |
 | 5 | Building & Implementation | Constructing automations using tools, AI, or both |
 | 6 | Quality & Oversight | Verifying automations work correctly, including failure scenarios |
 | 7 | Human & Organizational Awareness | Managing adoption, resistance, ownership, and compliance |
 | 8 | Strategic & Vision Thinking | Connecting automation work to measurable business outcomes |
 
-Each archetype contains 3–5 named sub-archetypes grounded in established frameworks (Goldratt, Lean, Kotter, Rogers, and more).
+Each archetype contains 3–5 named sub-archetypes grounded in established frameworks — see [Framework Citations](#framework-citations) below.
 
 ---
 
@@ -28,31 +28,33 @@ Each archetype contains 3–5 named sub-archetypes grounded in established frame
 **`index.html`** — Open directly in any browser or visit the GitHub Pages site.
 
 **Features:**
-- Score your team's capability 0–10 on each of the 8 archetypes using sliders
+- Score capability 0–10 on each of the 8 archetypes using sliders
 - Expand any archetype to read sub-archetype descriptions and calibrate your score
 - Live radar chart updates as you score
-- Total score and team capability profile shown instantly
+- Total score and individual capability profile shown instantly
 - **Export** your assessment to a JSON file to return later
 - **Import** a previously exported JSON file to resume or review
-- **+ Add Perspective** — add your assessment to a shared comparison view
-- Compare Perspectives tab overlays all evaluators on a single radar chart
+- **+ Add to Team Assessment** — push your individual assessment into the shared team view
+- **Team Assessment tab** overlays all evaluators on a single radar chart
 - Gap analysis ranks archetypes from lowest to highest average score
-- Export and import full perspective sets as a single JSON file
+- **Generate Report** — export a printable PDF of the full team capability report, with optional individual breakdowns and short or long dimension explainers
 
-**Assessment workflow:**
+**Individual Assessment workflow:**
 1. Open `index.html` in your browser
-2. Enter your name and role (e.g. "Jane Smith, Operations Lead")
-3. Score your **team's capability** 0–10 on each archetype — you are evaluating the team as a whole, not your own skills. Expand each section and ask: *does our team have someone who reliably fills this role?*
-4. Click **Export** to save your assessment as a `.json` file
-5. To resume later: open the tool again and click **Import**
+2. Enter the name of the person being assessed (e.g. "Jane Smith, Operations Lead")
+3. Score their capability 0–10 on each archetype — expand each section and ask: *does this person demonstrate these characteristics?*
+4. Click **Export** to save the assessment as a `.json` file
+5. Click **+ Add to Team Assessment** to include them in the team view
+6. To resume later: open the tool again and click **Import**
 
-**Compare Perspectives workflow:**
-1. Collect assessments from multiple evaluators — for example, an owner, an ops lead, and a senior technician
-2. Each person completes their own assessment and clicks **+ Add Perspective**
-3. Or share exported `.json` files with a facilitator who imports them via the Compare Perspectives tab
-4. Where radars diverge on an archetype, that disagreement is signal worth discussing
+**Team Assessment workflow:**
+1. Collect individual assessments from each team member
+2. Each person completes their own assessment on the Individual Assessment tab and clicks **+ Add to Team Assessment**
+3. Or share exported `.json` files with a facilitator who imports them via the Team Assessment tab
+4. Where radars diverge on an archetype, that disagreement is worth discussing
 5. Where all evaluators score an archetype low, that is your most urgent gap
-6. Export the combined set to share or revisit
+6. Click **Generate Report** to produce a printable PDF of the full team capability profile
+7. Export the combined set to share or revisit
 
 **GitHub Pages:** Enable GitHub Pages on this repository (Settings → Pages → Deploy from branch: `main`, folder: `/`) and the tool will be available at `https://<your-org>.github.io/<repo-name>/`.
 
@@ -64,21 +66,21 @@ Each archetype contains 3–5 named sub-archetypes grounded in established frame
 
 | Score | Meaning |
 |-------|---------|
-| 0–2 | No one on the team fills this role; this capability is absent |
-| 3–4 | Emerging — someone shows instinct but no consistent, structured practice |
-| 5–6 | Functional — team has some coverage here, but with notable gaps |
-| 7–8 | Strong — reliable team capability; people know who to go to |
-| 9–10 | Exceptional — a clear team strength; this is where you set the standard |
+| 0–2 | No demonstrated capability in this area |
+| 3–4 | Emerging — shows instinct but no consistent, structured practice |
+| 5–6 | Functional — can contribute meaningfully, but with notable gaps |
+| 7–8 | Strong — reliable and practiced; others lean on them here |
+| 9–10 | Exceptional — a defining strength; sets the standard |
 
-### Team Capability Profile (Total out of 80)
+### Individual Capability Profile (Total out of 80)
 
 | Total | Profile |
 |-------|---------|
-| 0–20 | Early-Stage Team |
-| 21–35 | Developing Team |
-| 36–50 | Capable Team |
-| 51–65 | Strong Team |
-| 66–80 | High-Performing Team |
+| 0–20 | Automation Newcomer |
+| 21–35 | Developing Contributor |
+| 36–50 | Capable Generalist |
+| 51–65 | Strong Practitioner |
+| 66–80 | Automation All-Rounder |
 
 ---
 
@@ -97,7 +99,30 @@ Each archetype contains 3–5 named sub-archetypes grounded in established frame
 
 The sub-archetypes are grounded in established management, systems, and process frameworks:
 
-Theory of Constraints (Goldratt) · Lean / Toyota Production System · Design Thinking (IDEO/Stanford d.school) · Agile / Scrum · Diffusion of Innovations (Everett Rogers) · Kotter's 8-Step Change Model · Prosci ADKAR · RACI Matrix (PMI) · Team Topologies (Skelton & Pais) · Cynefin Framework (Dave Snowden) · FMEA · Thinking in Systems (Donella Meadows) · Co-Intelligence (Ethan Mollick) · Tacit vs. Explicit Knowledge (Nonaka & Takeuchi) · Jobs To Be Done (Clayton Christensen) · Pre-Mortem Analysis (Gary Klein)
+| Framework | Source |
+|-----------|--------|
+| Theory of Constraints | Eliyahu M. Goldratt & Jeff Cox, *The Goal: A Process of Ongoing Improvement* (1984) |
+| Lean / Toyota Production System | Taiichi Ohno, *Toyota Production System: Beyond Large-Scale Production* (1988); James P. Womack & Daniel T. Jones, *Lean Thinking* (1996) |
+| Design Thinking | IDEO, [The Field Guide to Human-Centered Design](https://www.designkit.org/); Stanford d.school, [Design Thinking Resources](https://dschool.stanford.edu/resources) |
+| Agile / Scrum | Beck et al., [Manifesto for Agile Software Development](https://agilemanifesto.org/) (2001); Jeff Sutherland & Ken Schwaber, [The Scrum Guide](https://scrumguides.org/) |
+| Diffusion of Innovations | Everett M. Rogers, *Diffusion of Innovations* (5th ed., 2003) |
+| Kotter's 8-Step Change Model | John P. Kotter, *Leading Change* (1996) |
+| Prosci ADKAR | Jeff Hiatt, *ADKAR: A Model for Change in Business, Government and Our Community* (2006); [Prosci ADKAR Model Overview](https://www.prosci.com/methodology/adkar) |
+| RACI Matrix | Project Management Institute, *A Guide to the Project Management Body of Knowledge (PMBOK Guide)* |
+| Team Topologies | Matthew Skelton & Manuel Pais, *Team Topologies: Organizing Business and Technology Teams for Fast Flow* (2019); [teamtopologies.com](https://teamtopologies.com/) |
+| Cynefin Framework | Dave Snowden & Mary Boone, ["A Leader's Framework for Decision Making"](https://hbr.org/2007/11/a-leaders-framework-for-decision-making) (*Harvard Business Review*, 2007) |
+| FMEA | US Military Procedure MIL-P-1629 (1949); [ASQ FMEA Overview](https://asq.org/quality-resources/fmea) |
+| Thinking in Systems | Donella H. Meadows, *Thinking in Systems: A Primer* (2008, posthumous ed.) |
+| Co-Intelligence / AI Collaboration | Ethan Mollick, *Co-Intelligence: Living and Working with AI* (2024); [One Useful Thing](https://www.oneusefulthing.org/) (Substack) |
+| Tacit vs. Explicit Knowledge | Ikujiro Nonaka & Hirotaka Takeuchi, *The Knowledge-Creating Company* (1995) |
+| Jobs To Be Done | Clayton M. Christensen, Taddy Hall, Karen Dillon & David S. Duncan, *Competing Against Luck: The Story of Innovation and Customer Choice* (2016) |
+| Pre-Mortem Analysis | Gary Klein, ["Performing a Project Premortem"](https://hbr.org/2007/09/performing-a-project-premortem) (*Harvard Business Review*, 2007) |
+
+---
+
+## Contribute & Feedback
+
+Found an issue, have a suggestion, or want to contribute? Open an issue or pull request on [GitHub](https://github.com/bmsimp/automation-archetypes-assessment).
 
 ---
 
