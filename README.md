@@ -123,11 +123,9 @@ python assessment/generate_xlsx.py
 ├── README.md
 ├── LICENSE                         # GPL v3
 ├── CLAUDE.md                       # Project context for Claude Code sessions
-├── assessment/
-│   ├── self-assessment.xlsx        # Excel workbook (pre-generated)
-│   └── generate_xlsx.py            # Python script to regenerate the workbook
-└── docs/
-    └── (additional documentation)
+└── assessment/
+    ├── self-assessment.xlsx        # Excel workbook (pre-generated)
+    └── generate_xlsx.py            # Python script to regenerate the workbook
 ```
 
 ---
