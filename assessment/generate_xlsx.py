@@ -114,6 +114,17 @@ PROFILES = [
     (66, 80, "High-Performing Team"),
 ]
 
+SHORT_NAMES = [
+    "1. Process",
+    "2. Problem Def.",
+    "3. Design & Logic",
+    "4. Communication",
+    "5. Building",
+    "6. Quality",
+    "7. People & Org.",
+    "8. Strategy",
+]
+
 BANDS = [
     "0-2: No one on the team fills this role; this capability is absent",
     "3-4: Emerging - someone shows instinct but no consistent, structured practice",
@@ -174,7 +185,7 @@ def build_instructions(ws):
 
     ws.merge_cells('B3:D3')
     c = ws['B3']
-    c.value = "Building Automation Muscle Without a Dev Team  ·  MSP/ITSP Framework"
+    c.value = "A Team Capability Framework  ·  8 Dimensions of Automation Readiness"
     c.font = Font(italic=True, size=10, color=HEADER_FG)
     c.fill = fill(PURPLE)
     c.alignment = align('left', 'center')
@@ -205,8 +216,8 @@ def build_instructions(ws):
         row += 1
 
     heading("What is this workbook?")
-    para("This workbook supports the Archetypes of Automation framework — a team capability assessment tool for MSP/ITSP leaders. It is designed to be completed by a key team member or person in a position of authority evaluating their team's collective strengths and gaps.")
-    para("The biggest barrier to automation in small MSP teams is not technical skill — it is process thinking, team composition, and role awareness. This tool helps you see where your team stands across 8 automation capability dimensions.")
+    para("This workbook supports the Archetypes of Automation framework — a team capability assessment tool for any organisation building automation capabilities. It is designed to be completed by a team leader or person in a position of authority evaluating their team's collective strengths and gaps.")
+    para("The biggest barrier to automation is not technical skill — it is process thinking, team composition, and role awareness. This tool helps you see where your team stands across 8 automation capability dimensions.")
     blank()
 
     heading("Sheets in this workbook")
@@ -407,25 +418,32 @@ def build_individual(ws):
     ws.row_dimensions[profile_row].height = 28
     ws.merge_cells(f'E{profile_row}:F{profile_row}')
 
+    # ── Short-name helper column (H) for radar labels — hidden ──
+    ws.column_dimensions['H'].width = 18
+    ws.column_dimensions['H'].hidden = True
+    for si, sn in enumerate(SHORT_NAMES):
+        ws.cell(6 + si, 8, sn)
+
     # ── Radar Chart ──
     chart = RadarChart()
     chart.type = "filled"
-    chart.style = 10
     chart.title = "Automation Archetype Radar"
     chart.y_axis.delete = False
+    chart.y_axis.scaling.min = 0
+    chart.y_axis.scaling.max = 10
 
     # Data: scores in E6:E(row-1)
     data_ref = Reference(ws, min_col=5, min_row=5, max_row=row-1)
     chart.add_data(data_ref, titles_from_data=True)
 
-    # Labels: archetype names in C6:C(row-1)
-    cats = Reference(ws, min_col=3, min_row=6, max_row=row-1)
+    # Labels: short names in H6:H(row-1)
+    cats = Reference(ws, min_col=8, min_row=6, max_row=row-1)
     chart.set_categories(cats)
 
     chart.shape = 4
-    chart.width = 18
-    chart.height = 16
-    ws.add_chart(chart, f'H6')
+    chart.width = 22
+    chart.height = 20
+    ws.add_chart(chart, 'I5')
 
 
 # ──────────────────────────────────────────────
@@ -639,26 +657,36 @@ def build_team(ws):
         )
     )
 
-    # ── Team Radar Chart ──
+    # ── Short-name helper column for radar labels — hidden ──
+    short_col_idx = avg_col_idx + 1
+    short_col_l = get_column_letter(short_col_idx)
+    ws.column_dimensions[short_col_l].width = 18
+    ws.column_dimensions[short_col_l].hidden = True
+    for si, sn in enumerate(SHORT_NAMES):
+        ws.cell(5 + si, short_col_idx, sn)
+
+    # ── Perspectives Radar Chart ──
+    # Use "marker" type so multiple overlapping series remain legible
     chart = RadarChart()
-    chart.type = "filled"
-    chart.style = 10
+    chart.type = "marker"
     chart.title = "Assessment Perspectives Radar"
+    chart.y_axis.scaling.min = 0
+    chart.y_axis.scaling.max = 10
 
     # Add each member as a series
     for m in range(NUM_MEMBERS):
         col = 4 + m
-        col_l = get_column_letter(col)
         data_ref = Reference(ws, min_col=col, min_row=4, max_row=4+8)
         chart.add_data(data_ref, titles_from_data=True)
 
-    cats = Reference(ws, min_col=3, min_row=5, max_row=12)
+    # Labels: short names
+    cats = Reference(ws, min_col=short_col_idx, min_row=5, max_row=12)
     chart.set_categories(cats)
     chart.shape = 4
-    chart.width = 20
-    chart.height = 18
+    chart.width = 24
+    chart.height = 22
 
-    anchor_col = get_column_letter(avg_col_idx + 2)
+    anchor_col = get_column_letter(avg_col_idx + 3)
     ws.add_chart(chart, f'{anchor_col}4')
 
 
