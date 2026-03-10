@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archetypes of Automation — Self-Assessment Tool</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --border: #dde3ee;
+      --accent: #3b5bdb;
+      --accent-light: #e8ecfc;
+      --accent2: #7048e8;
+      --text: #1a1f36;
+      --muted: #6b7394;
+      --score-0: #e9ecef;
+      --score-high: #3b5bdb;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #fff; padding: 20px 32px; display: flex; align-items: center; gap: 16px;
+      box-shadow: 0 2px 16px rgba(59,91,219,0.18);
+    }
+    header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+    header p { font-size: 0.82rem; opacity: 0.82; margin-top: 2px; }
+    .header-logo { font-size: 2.2rem; }
+
+    /* ── Tab Nav ── */
+    .tabs { display: flex; gap: 0; background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 32px; }
+    .tab-btn {
+      padding: 14px 24px; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      border: none; background: none; color: var(--muted); border-bottom: 3px solid transparent;
+      margin-bottom: -2px; transition: all 0.15s;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn:hover:not(.active) { color: var(--text); }
+
+    /* ── Main Layout ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .layout { display: grid; grid-template-columns: 1fr 420px; gap: 24px; padding: 24px 32px; align-items: start; }
+    @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
+    .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .card-header h2 { font-size: 1rem; font-weight: 700; }
+    .card-body { padding: 20px; }
+
+    /* ── Name Input ── */
+    .name-row { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .name-row label { font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    .name-row input {
+      flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+      font-size: 0.95rem; font-family: inherit; transition: border 0.15s;
+    }
+    .name-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,91,219,0.12); }
+
+    /* ── Archetype Section ── */
+    .archetype-section {
+      border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    .archetype-section:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .archetype-header {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+      cursor: pointer; user-select: none; background: #fafbff;
+    }
+    .archetype-header:hover { background: var(--accent-light); }
+    .archetype-num {
+      width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+    }
+    .archetype-name { font-weight: 700; font-size: 0.93rem; flex: 1; }
+    .archetype-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .archetype-score-badge {
+      min-width: 36px; height: 36px; border-radius: 8px; background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .expand-icon { font-size: 0.8rem; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+    .archetype-section.open .expand-icon { transform: rotate(180deg); }
+
+    /* ── Slider Area ── */
+    .archetype-body { padding: 14px 16px 16px; border-top: 1px solid var(--border); background: #fff; }
+    .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .slider-row input[type=range] {
+      flex: 1; -webkit-appearance: none; appearance: none; height: 6px;
+      border-radius: 3px; background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 0%), var(--score-0) var(--pct, 0%), var(--score-0) 100%);
+      cursor: pointer; outline: none;
+    }
+    .slider-row input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); cursor: pointer;
+    }
+    .slider-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); margin-bottom: 10px; }
+
+    /* ── Sub-archetypes ── */
+    .sub-list { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
+    .sub-list-title { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .sub-item { margin-bottom: 7px; padding: 8px 10px; background: #f8f9fc; border-radius: 6px; border-left: 3px solid var(--accent); }
+    .sub-item-name { font-size: 0.82rem; font-weight: 600; }
+    .sub-item-desc { font-size: 0.77rem; color: var(--muted); margin-top: 1px; }
+    .sub-item-ref { font-size: 0.72rem; color: #9ba6c8; margin-top: 2px; font-style: italic; }
+
+    /* ── Scoring bands ── */
+    .band-hint { font-size: 0.78rem; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+    /* ── Chart card ── */
+    .chart-card { position: sticky; top: 24px; }
+    .chart-wrap { width: 100%; aspect-ratio: 1; max-width: 360px; margin: 0 auto; }
+
+    /* ── Score Summary ── */
+    .score-summary { margin-top: 16px; }
+    .score-total { font-size: 2rem; font-weight: 800; color: var(--accent); text-align: center; }
+    .score-label { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 8px; }
+    .profile-badge {
+      background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 0.9rem;
+      text-align: center; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(59,91,219,0.2);
+    }
+    .score-breakdown { margin-top: 14px; display: grid; gap: 5px; }
+    .breakdown-row { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+    .breakdown-row .b-name { flex: 1; color: var(--muted); }
+    .breakdown-bar-wrap { width: 80px; height: 6px; background: var(--score-0); border-radius: 3px; overflow: hidden; }
+    .breakdown-bar { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s; }
+    .breakdown-val { width: 22px; text-align: right; font-weight: 600; color: var(--text); }
+
+    /* ── Action Buttons ── */
+    .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .btn {
+      padding: 9px 18px; border-radius: 7px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      border: none; transition: all 0.15s; font-family: inherit;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #2f4bc4; }
+    .btn-secondary { background: #fff; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--bg); }
+    .btn-success { background: #2f9e44; color: #fff; }
+    .btn-success:hover { background: #257a35; }
+    .btn-danger { background: #e03131; color: #fff; }
+    .btn-danger:hover { background: #b52929; }
+
+    /* ── Team Tab ── */
+    .team-layout { display: grid; grid-template-columns: 1fr 440px; gap: 24px; padding: 24px 32px; align-items: start; }
+    @media (max-width: 960px) { .team-layout { grid-template-columns: 1fr; } }
+    .member-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: #fff; margin-bottom: 12px; }
+    .member-card-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .member-name-display { font-weight: 700; font-size: 0.95rem; }
+    .member-total { font-size: 0.82rem; color: var(--muted); }
+    .member-scores { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .score-chip {
+      padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+      background: var(--accent-light); color: var(--accent);
+    }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+    /* ── Gap Analysis ── */
+    .gap-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-rank { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-rank.low { background: #e03131; }
+    .gap-name { flex: 1; font-size: 0.84rem; font-weight: 600; }
+    .gap-avg { font-size: 0.82rem; color: var(--muted); }
+    .gap-bar-wrap { width: 80px; height: 6px; background: var(--score-0); border-radius: 3px; overflow: hidden; }
+    .gap-bar { height: 100%; border-radius: 3px; transition: width 0.3s; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: #1a1f36; color: #fff; padding: 12px 22px; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.25s ease; z-index: 1000; pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── About tab ── */
+    .about-content { max-width: 760px; margin: 32px auto; padding: 0 32px; }
+    .about-content h2 { font-size: 1.25rem; font-weight: 700; margin: 24px 0 10px; }
+    .about-content p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+    .about-content table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0 20px; }
+    .about-content th { background: var(--accent-light); color: var(--accent); padding: 8px 12px; text-align: left; font-weight: 700; }
+    .about-content td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .about-content tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">⚙️</div>
+  <div>
+    <h1>Archetypes of Automation — Self-Assessment Tool</h1>
+    <p>Building Automation Muscle Without a Dev Team · MSP/ITSP Framework</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="switchTab('individual')">Individual Assessment</button>
+  <button class="tab-btn" onclick="switchTab('team')">Team View</button>
+  <button class="tab-btn" onclick="switchTab('about')">About the Framework</button>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     INDIVIDUAL TAB
+════════════════════════════════════════════ -->
+<div id="tab-individual" class="tab-content active">
+  <div class="layout">
+    <!-- Left: Sliders -->
+    <div>
+      <div class="card" style="margin-bottom:0">
+        <div class="card-header">
+          <h2>Your Assessment</h2>
+          <div class="action-row" style="margin:0">
+            <button class="btn btn-secondary" onclick="importJSON()">⬆ Import</button>
+            <button class="btn btn-primary" onclick="exportJSON()">⬇ Export</button>
+            <button class="btn btn-success" onclick="addToTeam()">+ Add to Team</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="name-row">
+            <label for="assessor-name">Your name:</label>
+            <input type="text" id="assessor-name" placeholder="Enter your name…" oninput="updateChart()" />
+          </div>
+          <div id="archetypes-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Chart + Summary -->
+    <div class="chart-card">
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-header"><h2>Your Radar</h2></div>
+        <div class="card-body">
+          <div class="chart-wrap">
+            <canvas id="individual-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>Score Summary</h2></div>
+        <div class="card-body">
+          <div class="score-summary">
+            <div class="score-total" id="total-display">0</div>
+            <div class="score-label">out of 80</div>
+            <div class="profile-badge" id="profile-display">Automation Newcomer</div>
+            <div class="score-breakdown" id="breakdown-display"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     TEAM TAB
+════════════════════════════════════════════ -->
+<div id="tab-team" class="tab-content">
+  <div class="team-layout">
+    <!-- Left: Member List -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Team Members</h2>
+          <div class="action-row" style="margin:0">
+            <button class="btn btn-secondary" onclick="importTeamJSON()">⬆ Import Team</button>
+            <button class="btn btn-primary" onclick="exportTeamJSON()">⬇ Export Team</button>
+            <button class="btn btn-danger" onclick="clearTeam()">Clear All</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="team-member-list">
+            <div class="empty-state">
+              <div class="empty-icon">👥</div>
+              <p>No team members yet. Complete an individual assessment and click <strong>+ Add to Team</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Team Chart + Gap Analysis -->
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-header"><h2>Team Radar</h2></div>
+        <div class="card-body">
+          <div class="chart-wrap">
+            <canvas id="team-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>Gap Analysis</h2><span style="font-size:0.78rem;color:var(--muted)">Lowest → Highest avg score</span></div>
+        <div class="card-body" id="gap-analysis">
+          <p style="color:var(--muted);font-size:0.85rem">Add team members to see gap analysis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ABOUT TAB
+════════════════════════════════════════════ -->
+<div id="tab-about" class="tab-content">
+  <div class="about-content">
+    <h2>The Archetypes of Automation Framework</h2>
+    <p>Developed for the talk <em>"Building Automation Muscle Without a Dev Team"</em>, this framework helps MSP/ITSP teams identify their collective strengths and gaps across 8 dimensions of automation capability.</p>
+    <p>The core insight: the biggest barrier to automation in small MSP teams is not technical skill — it is process thinking, team composition, and role awareness. No single person covers all archetypes. Teams need to assess collectively and identify gaps to guide hiring, training, or partnership decisions.</p>
+
+    <h2>How to Use This Tool</h2>
+    <p><strong>Individual:</strong> Score yourself 0–10 on each archetype. Use the sub-archetype descriptions to calibrate. Click <em>Export</em> to save your results as a JSON file so you can return later.</p>
+    <p><strong>Team:</strong> Each team member completes their individual assessment, clicks <em>Add to Team</em>, then exports the combined team file. Anyone can import a team file to view the shared radar and gap analysis.</p>
+
+    <h2>Individual Score Profiles</h2>
+    <table>
+      <tr><th>Total (out of 80)</th><th>Profile</th></tr>
+      <tr><td>0–20</td><td>Automation Newcomer</td></tr>
+      <tr><td>21–35</td><td>Developing Contributor</td></tr>
+      <tr><td>36–50</td><td>Capable Generalist</td></tr>
+      <tr><td>51–65</td><td>Strong Practitioner</td></tr>
+      <tr><td>66–80</td><td>Automation All-Rounder</td></tr>
+    </table>
+
+    <h2>Scoring Bands</h2>
+    <table>
+      <tr><th>Score</th><th>Meaning</th></tr>
+      <tr><td>0–2</td><td>No awareness or capability; this lens is absent</td></tr>
+      <tr><td>3–4</td><td>Emerging — some instinct but no structured practice</td></tr>
+      <tr><td>5–6</td><td>Functional — can contribute meaningfully with some gaps</td></tr>
+      <tr><td>7–8</td><td>Strong — reliable, practiced, others lean on you here</td></tr>
+      <tr><td>9–10</td><td>Exceptional — this is a defining strength; you set the standard</td></tr>
+    </table>
+
+    <h2>Reading the Team Radar</h2>
+    <p>Each team member appears as a separate shape on the radar. Look for <strong>coverage, not duplication</strong> — two 9s in Building with zero in Quality is a risk profile. The Gap Analysis sorts archetypes from lowest to highest average team score, highlighting where investment is most urgent.</p>
+
+    <h2>Framework Citations</h2>
+    <table>
+      <tr><th>Framework</th><th>Source</th></tr>
+      <tr><td>Theory of Constraints</td><td>Goldratt, <em>The Goal</em></td></tr>
+      <tr><td>Lean / Toyota Production System</td><td>Ohno; Womack &amp; Jones</td></tr>
+      <tr><td>Design Thinking</td><td>IDEO / Stanford d.school</td></tr>
+      <tr><td>Agile / Scrum</td><td>Agile Manifesto; Schwaber &amp; Sutherland</td></tr>
+      <tr><td>Diffusion of Innovations</td><td>Everett Rogers</td></tr>
+      <tr><td>Kotter's 8-Step Change Model</td><td>John Kotter</td></tr>
+      <tr><td>Prosci ADKAR</td><td>Jeff Hiatt</td></tr>
+      <tr><td>RACI Matrix</td><td>Project Management Institute (PMI)</td></tr>
+      <tr><td>Team Topologies</td><td>Skelton &amp; Pais</td></tr>
+      <tr><td>Cynefin Framework</td><td>Dave Snowden</td></tr>
+      <tr><td>FMEA</td><td>Originally US Military MIL-P-1629; widely adopted</td></tr>
+      <tr><td>Thinking in Systems</td><td>Donella Meadows</td></tr>
+      <tr><td>Co-Intelligence / AI Collaboration</td><td>Ethan Mollick</td></tr>
+      <tr><td>Tacit vs. Explicit Knowledge</td><td>Nonaka &amp; Takeuchi</td></tr>
+      <tr><td>Jobs To Be Done</td><td>Clayton Christensen</td></tr>
+      <tr><td>Pre-Mortem Analysis</td><td>Gary Klein</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+const ARCHETYPES = [
+  {
+    id: 1,
+    name: "Process & Knowledge Holding",
+    description: "Understanding, retaining, and communicating how work actually happens",
+    subs: [
+      { name: "The Tribal Knowledge Keeper", desc: "Holds undocumented 'real' process knowledge", ref: "Nonaka & Takeuchi — tacit vs. explicit knowledge" },
+      { name: "The Exception Whisperer", desc: "Knows every edge case", ref: "FMEA; Agile edge case testing" },
+      { name: "The Process Archaeologist", desc: "Understands why processes exist", ref: "Root Cause Analysis; Toyota 5 Whys" },
+      { name: "The Documenter", desc: "Translates processes into structured written steps", ref: "BPM documentation standards; Systemology — Jenyns" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Problem Definition",
+    description: "Identifying, articulating, and prioritizing what is worth automating",
+    subs: [
+      { name: "The Friction Finder", desc: "Identifies where work is slow or painful", ref: "Lean Muda; Making Work Visible — DeGrandis" },
+      { name: "The Bottleneck Spotter", desc: "Sees constraints in flow", ref: "Theory of Constraints — Goldratt" },
+      { name: "The Scope Realist", desc: "Prevents over-engineering", ref: "Agile MVP; Walking Skeleton pattern" },
+      { name: "The Problem Reframer", desc: "Challenges whether the stated problem is the real problem", ref: "Design Thinking — Stanford d.school/IDEO; Jobs To Be Done — Christensen" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Design & Logic Thinking",
+    description: "Translating real-world processes into explicit logic before touching any tool",
+    subs: [
+      { name: "The Decision Tree Builder", desc: "Thinks in if/then/else without coding", ref: "Decision Theory; BPMN standards" },
+      { name: "The Data Modeler", desc: "Thinks about data flowing through a process", ref: "Data Flow Diagrams; Entity-Relationship modeling" },
+      { name: "The Workflow Choreographer", desc: "Thinks in sequences and dependencies", ref: "Critical Path Method; PMBOK" },
+      { name: "The Edge Case Hunter", desc: "Proactively hunts failure modes", ref: "FMEA; Pre-Mortem analysis — Gary Klein" },
+      { name: "The Simplicity Advocate", desc: "Enforces maintainability", ref: "KISS Principle; Occam's Razor; Lean" }
+    ]
+  },
+  {
+    id: 4,
+    name: "Communication & Translation",
+    description: "Bridging the gap between process owners and builders",
+    subs: [
+      { name: "The Bridge Builder", desc: "Translates between technical and non-technical", ref: "Team Topologies — Skelton & Pais; T-shaped skills" },
+      { name: "The Stakeholder Whisperer", desc: "Manages the political side of automation", ref: "Kotter's 8-Step; Prosci ADKAR" },
+      { name: "The Requirements Articulator", desc: "Converts vague requests into testable requirements", ref: "Agile User Stories; INVEST criteria" },
+      { name: "The Trainer", desc: "Ensures work outlives its creator", ref: "Kirkpatrick Model; See One Do One Teach One" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Building & Implementation",
+    description: "Constructing automations using tools, AI, or both",
+    subs: [
+      { name: "The Rapid Prototyper", desc: "Gets something working fast to test assumptions", ref: "Lean Startup Build-Measure-Learn; Fail Fast" },
+      { name: "The Finisher", desc: "Completes the last 20%", ref: "Pareto Principle; Agile Definition of Done" },
+      { name: "The Tool Native", desc: "Picks up new platforms intuitively", ref: "Diffusion of Innovations — Rogers, Early Adopter" },
+      { name: "The AI Whisperer", desc: "Uses AI as a design and building partner", ref: "Co-Intelligence — Mollick; Prompt Engineering" },
+      { name: "The Integration Thinker", desc: "Thinks across system boundaries", ref: "Zachman Framework; API-first design" }
+    ]
+  },
+  {
+    id: 6,
+    name: "Quality & Oversight",
+    description: "Verifying automations work correctly, including failure scenarios",
+    subs: [
+      { name: "The QA Mindset", desc: "Tests with intent to break", ref: "Software Testing fundamentals; TDD" },
+      { name: "The Auditor", desc: "Builds in logging, monitoring, checkpoints", ref: "COBIT; SOC 2; DevOps Observability" },
+      { name: "The Risk Modeler", desc: "Evaluates failure impact before deploying", ref: "Risk Matrix; FMEA; ISO 31000" }
+    ]
+  },
+  {
+    id: 7,
+    name: "Human & Organizational Awareness",
+    description: "Managing adoption, resistance, ownership, and compliance",
+    subs: [
+      { name: "The Change Champion", desc: "Drives adoption", ref: "Kotter Step 1 + 4; Prosci ADKAR" },
+      { name: "The Skeptic", desc: "Healthy devil's advocate", ref: "Red Team/Blue Team; Pre-Mortem" },
+      { name: "The Reluctant Participant", desc: "Represents the average user; their confusion is signal", ref: "Rogers — Late Majority; UAT" },
+      { name: "The Compliance Voice", desc: "Asks 'is this allowed?'", ref: "GDPR/HIPAA/SOC 2; Privacy by Design — Cavoukian" },
+      { name: "The Ownership Taker", desc: "Maintains automations post-launch", ref: "RACI Accountable; DevOps 'You Build It, You Run It'" }
+    ]
+  },
+  {
+    id: 8,
+    name: "Strategic & Vision Thinking",
+    description: "Connecting automation work to measurable business outcomes",
+    subs: [
+      { name: "The ROI Tracker", desc: "Measures impact", ref: "OKR Framework — Doerr; Lean ROI; Time-on-Task analysis" },
+      { name: "The Automation Evangelist", desc: "Drives organizational will", ref: "Diffusion of Innovations — Innovator profile" },
+      { name: "The Systems Thinker", desc: "Sees the larger connected whole", ref: "Thinking in Systems — Meadows; Cynefin — Snowden" }
+    ]
+  }
+];
+
+const PROFILES = [
+  { max: 20, label: "Automation Newcomer" },
+  { max: 35, label: "Developing Contributor" },
+  { max: 50, label: "Capable Generalist" },
+  { max: 65, label: "Strong Practitioner" },
+  { max: 80, label: "Automation All-Rounder" }
+];
+
+const BAND_HINTS = [
+  "0–2: No awareness or capability; this lens is absent",
+  "3–4: Emerging — some instinct but no structured practice",
+  "5–6: Functional — can contribute meaningfully",
+  "7–8: Strong — reliable; others lean on you here",
+  "9–10: Exceptional — this is a defining strength"
+];
+
+const CHART_COLORS = [
+  'rgba(59,91,219,0.75)', 'rgba(112,72,232,0.75)', 'rgba(231,70,148,0.75)',
+  'rgba(22,160,133,0.75)', 'rgba(230,126,34,0.75)', 'rgba(52,152,219,0.75)',
+  'rgba(155,89,182,0.75)', 'rgba(26,188,156,0.75)'
+];
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let scores = new Array(8).fill(0);
+let teamMembers = []; // [{name, scores:[...]}]
+
+// ═══════════════════════════════════════
+// BUILD INDIVIDUAL UI
+// ═══════════════════════════════════════
+function buildArchetypesList() {
+  const container = document.getElementById('archetypes-list');
+  container.innerHTML = '';
+  ARCHETYPES.forEach((arch, i) => {
+    const section = document.createElement('div');
+    section.className = 'archetype-section';
+    section.id = `arch-section-${i}`;
+    section.innerHTML = `
+      <div class="archetype-header" onclick="toggleSection(${i})">
+        <div class="archetype-num">${arch.id}</div>
+        <div style="flex:1">
+          <div class="archetype-name">${arch.name}</div>
+          <div class="archetype-desc">${arch.description}</div>
+        </div>
+        <div class="archetype-score-badge" id="badge-${i}">0</div>
+        <div class="expand-icon">▼</div>
+      </div>
+      <div class="archetype-body" style="display:none" id="arch-body-${i}">
+        <div class="slider-row">
+          <span style="font-size:0.78rem;color:var(--muted);white-space:nowrap">0</span>
+          <input type="range" min="0" max="10" value="0" id="slider-${i}"
+            oninput="onSlider(${i}, this.value)"
+            style="--pct:0%" />
+          <span style="font-size:0.78rem;color:var(--muted);white-space:nowrap">10</span>
+        </div>
+        <div class="slider-labels">
+          <span>No capability</span><span>Exceptional</span>
+        </div>
+        <div class="band-hint" id="hint-${i}">0–2: No awareness or capability; this lens is absent</div>
+        <div class="sub-list">
+          <div class="sub-list-title">Sub-Archetypes (expand to calibrate)</div>
+          ${arch.subs.map(s => `
+            <div class="sub-item">
+              <div class="sub-item-name">${s.name}</div>
+              <div class="sub-item-desc">${s.desc}</div>
+              <div class="sub-item-ref">📚 ${s.ref}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    container.appendChild(section);
+  });
+}
+
+function toggleSection(i) {
+  const body = document.getElementById(`arch-body-${i}`);
+  const section = document.getElementById(`arch-section-${i}`);
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  section.classList.toggle('open', !open);
+}
+
+function onSlider(i, val) {
+  val = parseInt(val);
+  scores[i] = val;
+  // Update badge
+  const badge = document.getElementById(`badge-${i}`);
+  badge.textContent = val;
+  badge.style.background = scoreColor(val);
+  // Update slider gradient
+  const slider = document.getElementById(`slider-${i}`);
+  slider.style.setProperty('--pct', `${val * 10}%`);
+  // Update hint
+  const hintIndex = val <= 2 ? 0 : val <= 4 ? 1 : val <= 6 ? 2 : val <= 8 ? 3 : 4;
+  document.getElementById(`hint-${i}`).textContent = BAND_HINTS[hintIndex];
+  updateChart();
+}
+
+function scoreColor(v) {
+  if (v <= 2) return '#adb5bd';
+  if (v <= 4) return '#f08c00';
+  if (v <= 6) return '#2b8a3e';
+  if (v <= 8) return '#1971c2';
+  return '#5f3dc4';
+}
+
+// ═══════════════════════════════════════
+// CHART — INDIVIDUAL
+// ═══════════════════════════════════════
+let individualChart = null;
+
+function buildIndividualChart() {
+  const ctx = document.getElementById('individual-chart').getContext('2d');
+  individualChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ARCHETYPES.map(a => a.name.split(' ').slice(0,3).join(' ')),
+      datasets: [{
+        label: 'You',
+        data: scores,
+        backgroundColor: 'rgba(59,91,219,0.18)',
+        borderColor: 'rgba(59,91,219,0.9)',
+        pointBackgroundColor: 'rgba(59,91,219,0.9)',
+        pointRadius: 4,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      scales: { r: { min: 0, max: 10, ticks: { stepSize: 2, font: { size: 10 } }, pointLabels: { font: { size: 10 } } } },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+function updateChart() {
+  if (individualChart) {
+    const name = document.getElementById('assessor-name').value.trim() || 'You';
+    individualChart.data.datasets[0].label = name;
+    individualChart.data.datasets[0].data = [...scores];
+    individualChart.update('none');
+  }
+  updateSummary();
+}
+
+function updateSummary() {
+  const total = scores.reduce((a, b) => a + b, 0);
+  document.getElementById('total-display').textContent = total;
+  const profile = PROFILES.find(p => total <= p.max) || PROFILES[PROFILES.length - 1];
+  document.getElementById('profile-display').textContent = profile.label;
+
+  const bd = document.getElementById('breakdown-display');
+  bd.innerHTML = ARCHETYPES.map((a, i) => `
+    <div class="breakdown-row">
+      <span class="b-name">${a.id}. ${a.name.split('&')[0].trim()}</span>
+      <div class="breakdown-bar-wrap"><div class="breakdown-bar" style="width:${scores[i]*10}%;background:${scoreColor(scores[i])}"></div></div>
+      <span class="breakdown-val">${scores[i]}</span>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// CHART — TEAM
+// ═══════════════════════════════════════
+let teamChart = null;
+
+function buildTeamChart() {
+  const ctx = document.getElementById('team-chart').getContext('2d');
+  teamChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ARCHETYPES.map(a => a.name.split(' ').slice(0,3).join(' ')),
+      datasets: []
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      scales: { r: { min: 0, max: 10, ticks: { stepSize: 2, font: { size: 10 } }, pointLabels: { font: { size: 10 } } } },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } } }
+    }
+  });
+}
+
+function updateTeamChart() {
+  if (!teamChart) return;
+  teamChart.data.datasets = teamMembers.map((m, i) => ({
+    label: m.name || `Member ${i+1}`,
+    data: [...m.scores],
+    backgroundColor: CHART_COLORS[i % CHART_COLORS.length].replace('0.75','0.12'),
+    borderColor: CHART_COLORS[i % CHART_COLORS.length],
+    pointBackgroundColor: CHART_COLORS[i % CHART_COLORS.length],
+    pointRadius: 3,
+    borderWidth: 2
+  }));
+  teamChart.update();
+  updateGapAnalysis();
+  renderTeamMembers();
+}
+
+function updateGapAnalysis() {
+  const gap = document.getElementById('gap-analysis');
+  if (teamMembers.length === 0) {
+    gap.innerHTML = '<p style="color:var(--muted);font-size:0.85rem">Add team members to see gap analysis.</p>';
+    return;
+  }
+  const avgs = ARCHETYPES.map((a, i) => ({
+    name: a.name,
+    avg: teamMembers.reduce((sum, m) => sum + m.scores[i], 0) / teamMembers.length
+  }));
+  avgs.sort((a, b) => a.avg - b.avg);
+  gap.innerHTML = avgs.map((item, rank) => {
+    const pct = Math.round(item.avg * 10);
+    const barColor = item.avg < 4 ? '#e03131' : item.avg < 6 ? '#f08c00' : '#2b8a3e';
+    return `<div class="gap-item">
+      <div class="gap-rank ${item.avg < 4 ? 'low' : ''}">${rank+1}</div>
+      <span class="gap-name">${item.name}</span>
+      <div class="gap-bar-wrap"><div class="gap-bar" style="width:${pct}%;background:${barColor}"></div></div>
+      <span class="gap-avg">${item.avg.toFixed(1)}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderTeamMembers() {
+  const list = document.getElementById('team-member-list');
+  if (teamMembers.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><p>No team members yet. Complete an individual assessment and click <strong>+ Add to Team</strong>.</p></div>`;
+    return;
+  }
+  list.innerHTML = teamMembers.map((m, i) => {
+    const total = m.scores.reduce((a,b)=>a+b,0);
+    const color = CHART_COLORS[i % CHART_COLORS.length];
+    return `<div class="member-card">
+      <div class="member-card-header">
+        <span class="member-name-display" style="color:${color}">${m.name || 'Member '+(i+1)}</span>
+        <span class="member-total">Total: ${total}/80</span>
+        <button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem" onclick="removeMember(${i})">Remove</button>
+      </div>
+      <div class="member-scores">
+        ${ARCHETYPES.map((a, j) => `<span class="score-chip" title="${a.name}">${a.id}: ${m.scores[j]}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function removeMember(i) {
+  teamMembers.splice(i, 1);
+  updateTeamChart();
+}
+
+// ═══════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════
+function addToTeam() {
+  const name = document.getElementById('assessor-name').value.trim() || `Member ${teamMembers.length + 1}`;
+  teamMembers.push({ name, scores: [...scores] });
+  updateTeamChart();
+  showToast(`✓ ${name} added to team`);
+}
+
+function exportJSON() {
+  const data = {
+    type: 'individual',
+    version: 1,
+    name: document.getElementById('assessor-name').value.trim(),
+    scores: [...scores],
+    exported: new Date().toISOString()
+  };
+  downloadJSON(data, `archetypes-${data.name || 'assessment'}.json`);
+}
+
+function importJSON() {
+  pickFile(data => {
+    if (data.type === 'individual') {
+      document.getElementById('assessor-name').value = data.name || '';
+      data.scores.forEach((v, i) => {
+        scores[i] = v;
+        const slider = document.getElementById(`slider-${i}`);
+        if (slider) { slider.value = v; onSlider(i, v); }
+      });
+      showToast('✓ Assessment imported');
+    } else if (data.type === 'team') {
+      if (confirm('This file contains a team assessment. Switch to Team View and import there?')) {
+        teamMembers = data.members || [];
+        switchTab('team');
+        updateTeamChart();
+        showToast('✓ Team imported');
+      }
+    } else {
+      alert('Unrecognised file format.');
+    }
+  });
+}
+
+function exportTeamJSON() {
+  if (teamMembers.length === 0) { showToast('No team members to export'); return; }
+  const data = { type: 'team', version: 1, members: teamMembers, exported: new Date().toISOString() };
+  downloadJSON(data, `archetypes-team.json`);
+}
+
+function importTeamJSON() {
+  pickFile(data => {
+    if (data.type === 'team') {
+      teamMembers = data.members || [];
+      updateTeamChart();
+      showToast(`✓ Team imported (${teamMembers.length} members)`);
+    } else if (data.type === 'individual') {
+      teamMembers.push({ name: data.name, scores: data.scores });
+      updateTeamChart();
+      showToast(`✓ ${data.name || 'Member'} added to team`);
+    } else {
+      alert('Unrecognised file format.');
+    }
+  });
+}
+
+function clearTeam() {
+  if (teamMembers.length === 0) return;
+  if (confirm(`Remove all ${teamMembers.length} team members?`)) {
+    teamMembers = [];
+    updateTeamChart();
+  }
+}
+
+// ═══════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════
+function downloadJSON(data, filename) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+  showToast(`✓ Exported as ${filename}`);
+}
+
+function pickFile(callback) {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json,application/json';
+  input.onchange = e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try { callback(JSON.parse(ev.target.result)); }
+      catch { alert('Could not parse file. Make sure it is a valid JSON export from this tool.'); }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(name === 'about' ? 'about' : name === 'team' ? 'team' : 'individual'))
+      b.classList.add('active');
+  });
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildArchetypesList();
+  buildIndividualChart();
+  buildTeamChart();
+  updateSummary();
+  renderTeamMembers();
+});
+</script>
+</body>
+</html>
