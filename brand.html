@@ -5,47 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Rhino Automator — Brand Guidelines</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="_includes/tokens.css"/>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Barlow Condensed', sans-serif; background: #0C1016; color: #F0F6FF; }
+  .site-nav { max-width: 1200px; }
   .swatch { cursor: pointer; transition: transform 0.12s; }
   .swatch:hover { transform: scale(1.02); }
-  .toast { position:fixed;bottom:20px;right:20px;padding:8px 16px;border-radius:6px;font-family:'DM Mono',monospace;font-size:16px;z-index:999;pointer-events:none;opacity:0;transition:opacity 0.2s; }
+  .toast { position:fixed;bottom:20px;right:20px;padding:8px 16px;border-radius:6px;font-family:var(--ff-mono);font-size:var(--fs-body);z-index:999;pointer-events:none;opacity:0;transition:opacity 0.2s; }
   .toast.show { opacity:1; }
-  .section-label { font-family:'DM Mono',monospace;font-size:16px;color:#8B9EB8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px; }
-  .section-label::after { content:'';flex:1;height:1px;background:#243044; }
-  h2 { font-family:'Bebas Neue';font-size:32px;letter-spacing:0.06em;color:#F0F6FF;margin-bottom:6px; }
-
-  /* Nav */
-  .site-nav {
-    background: #0C1016; border-bottom: 1px solid #243044;
-    padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
-    max-width: 1200px; margin: 0 auto;
-  }
-  .site-nav .logo { font-family: 'Bebas Neue'; font-size: 26px; letter-spacing: 0.07em; color: #F0F6FF; text-decoration: none; }
-  .site-nav .logo span { color: #D1DCE8; }
-  .site-nav .links { display: flex; gap: 20px; }
-  .site-nav .links a {
-    font-weight: 600; font-size: 15px; letter-spacing: 0.09em; text-transform: uppercase;
-    color: #8B9EB8; text-decoration: none; transition: color 0.15s;
-  }
-  .site-nav .links a:hover { color: #F0F6FF; }
-  .site-nav .links a.active { color: #34D399; }
-  .nav-dropdown { position: relative; }
-  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-  .nav-dropdown > a .dd-arrow { font-size: 0.6rem; transition: transform 0.2s; }
-  .nav-dropdown.open > a .dd-arrow { transform: rotate(180deg); }
-  .nav-dropdown-menu {
-    display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 200;
-    background: #141B24; border: 1px solid #243044; border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35); min-width: 180px; overflow: hidden;
-  }
-  .nav-dropdown.open .nav-dropdown-menu { display: block; }
-  .nav-dropdown-menu a {
-    display: block; padding: 10px 18px; font-weight: 600; font-size: 15px;
-    letter-spacing: 0.06em; color: #8B9EB8; transition: all 0.12s; text-transform: uppercase;
-  }
-  .nav-dropdown-menu a:hover { background: rgba(59,130,246,0.08); color: #34D399; }
+  .section-label { font-family:var(--ff-mono);font-size:var(--fs-body);color:var(--muted);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px; }
+  .section-label::after { content:'';flex:1;height:1px;background:var(--border); }
+  h2 { font-family:var(--ff-display);font-size:var(--fs-h2-content);letter-spacing:0.06em;color:var(--text);margin-bottom:6px; }
 </style>
 </head>
 <body>
