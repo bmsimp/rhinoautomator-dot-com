@@ -36,7 +36,7 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
       border: none; background: none; color: var(--muted); border-bottom: 3px solid transparent;
       margin-bottom: -2px; transition: all 0.15s; letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .tab-btn.active { color: #34D399; border-bottom-color: #34D399; }
+    .tab-btn.active { color: var(--emerald); border-bottom-color: var(--emerald); }
     .tab-btn:hover:not(.active) { color: var(--text); }
 
     /* ── Layout ── */
@@ -218,8 +218,8 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     .opt-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
     .opt-row:last-child { margin-bottom: 0; }
     .opt-row input { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
-    .opt-label-text strong { display: block; font-size: 1rem; color: var(--text); cursor: pointer; }
-    .opt-label-text span { font-size: 0.92rem; color: var(--muted); line-height: 1.45; }
+    .opt-label-text strong { display: block; font-size: var(--fs-assess-body); color: var(--text); cursor: pointer; }
+    .opt-label-text span { font-size: var(--fs-assess-breakdown); color: var(--muted); line-height: 1.45; }
   </style>
 </head>
 <body>
