@@ -177,8 +177,8 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     .about-content p { font-size: var(--fs-assess-body); color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
     .about-content ul, .about-content ol { font-size: var(--fs-assess-body); color: var(--muted); line-height: 1.65; margin: 0 0 12px 20px; }
     .about-content li { margin-bottom: 6px; }
-    .about-content table { width: 100%; border-collapse: collapse; font-size: 1rem; margin: 12px 0 20px; }
-    .about-content th { background: var(--accent-light); color: var(--accent); padding: 8px 12px; text-align: left; font-family: var(--ff-mono); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .about-content table { width: 100%; border-collapse: collapse; font-size: var(--fs-assess-body); margin: 12px 0 20px; }
+    .about-content th { background: var(--accent-light); color: var(--accent); padding: 8px 12px; text-align: left; font-family: var(--ff-mono); font-weight: 500; font-size: var(--fs-assess-chip-val); letter-spacing: 0.06em; text-transform: uppercase; }
     .about-content td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
     .about-content tr:last-child td { border-bottom: none; }
     .about-content strong { color: var(--text); }
@@ -195,26 +195,26 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     }
     .tab-dropdown.open .tab-dropdown-menu { display: block; }
     .tab-dropdown-item {
-      display: block; width: 100%; padding: 12px 20px; font-size: 1rem; font-weight: 600;
+      display: block; width: 100%; padding: 12px 20px; font-size: var(--fs-assess-body); font-weight: 600;
       cursor: pointer; border: none; background: none; color: var(--muted); text-align: left;
       font-family: var(--ff-body); transition: all 0.12s; letter-spacing: 0.04em;
     }
-    .tab-dropdown-item:hover { background: var(--accent-light); color: #34D399; }
-    .tab-dropdown-item.active { color: #34D399; font-weight: 700; background: var(--accent-light); }
+    .tab-dropdown-item:hover { background: var(--accent-light); color: var(--emerald); }
+    .tab-dropdown-item.active { color: var(--emerald); font-weight: 700; background: var(--accent-light); }
 
     /* ── PDF Modal ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(0,0,0,0.5); width: 500px; max-width: 95vw; }
     .modal-header { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .modal-header h3 { font-family: var(--ff-display); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.05em; }
+    .modal-header h3 { font-family: var(--ff-display); font-size: var(--fs-assess-h2); font-weight: 400; letter-spacing: 0.05em; }
     .modal-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); line-height: 1; padding: 0 4px; }
     .modal-close:hover { color: var(--text); }
     .modal-body { padding: 20px 22px; }
     .modal-footer { padding: 14px 22px 18px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
     .opt-group { margin-bottom: 18px; }
     .opt-group:last-child { margin-bottom: 0; }
-    .opt-group-label { font-family: var(--ff-mono); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+    .opt-group-label { font-family: var(--ff-mono); font-weight: 500; font-size: var(--fs-assess-hint); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
     .opt-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
     .opt-row:last-child { margin-bottom: 0; }
     .opt-row input { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
