@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archetypes of Automation — Team Capability Assessment</title>
+  <title>Archetypes of Automation — Team Capability Assessment | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     /* ── Theme variables ── */
     :root {
-      --bg: #0d1117;
-      --surface: #161b22;
-      --surface-alt: #21283a;
-      --border: #3d444d;
-      --accent: #5b7af5;
-      --accent-light: #1a2456;
-      --accent2: #9d6cf7;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --score-0: #3d444d;
+      --bg: #0C1016;
+      --surface: #141B24;
+      --surface-alt: #1A2333;
+      --border: #243044;
+      --accent: #3B82F6;
+      --accent-light: rgba(59,130,246,0.12);
+      --accent2: #34D399;
+      --text: #F0F6FF;
+      --muted: #8B9EB8;
+      --silver: #D1DCE8;
+      --score-0: #243044;
       --radius: 10px;
       --shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
@@ -25,41 +27,44 @@
       --surface: #ffffff;
       --surface-alt: #f0f2f9;
       --border: #dde3ee;
-      --accent: #3b5bdb;
-      --accent-light: #e8ecfc;
-      --accent2: #7048e8;
+      --accent: #3B82F6;
+      --accent-light: rgba(59,130,246,0.08);
+      --accent2: #34D399;
       --text: #1a1f36;
       --muted: #6b7394;
+      --silver: #4a5568;
       --score-0: #e9ecef;
       --shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Barlow Condensed', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
     /* ── Header ── */
     header {
-      background: linear-gradient(135deg, #111a3e 0%, #1e1042 100%);
+      background: linear-gradient(135deg, #0C1016 0%, #141B24 100%);
       color: #fff; padding: 20px 32px; display: flex; align-items: center; gap: 16px;
-      border-bottom: 1px solid rgba(91,122,245,0.2);
+      border-bottom: 1px solid #243044;
       box-shadow: 0 2px 16px rgba(0,0,0,0.4);
     }
     html[data-theme="light"] header {
-      background: linear-gradient(135deg, #3b5bdb 0%, #7048e8 100%);
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
       border-bottom: none;
-      box-shadow: 0 2px 16px rgba(59,91,219,0.25);
+      box-shadow: 0 2px 16px rgba(59,130,246,0.25);
     }
-    header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
-    header p { font-size: 0.82rem; opacity: 0.82; margin-top: 2px; }
+    header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; font-weight: 400; letter-spacing: 0.05em; }
+    header h1 .brand-silver { color: #D1DCE8; }
+    header p { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: #8B9EB8; margin-top: 2px; letter-spacing: 0.05em; }
+    html[data-theme="light"] header p { color: rgba(255,255,255,0.8); }
     .header-logo { font-size: 2.2rem; }
 
     /* ── Tab Nav ── */
     .tabs { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 32px; }
     .tab-btn {
-      padding: 14px 24px; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      padding: 14px 24px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer;
       border: none; background: none; color: var(--muted); border-bottom: 3px solid transparent;
-      margin-bottom: -2px; transition: all 0.15s;
+      margin-bottom: -2px; transition: all 0.15s; letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn.active { color: #34D399; border-bottom-color: #34D399; }
     .tab-btn:hover:not(.active) { color: var(--text); }
 
     /* ── Layout ── */
@@ -71,17 +76,17 @@
     /* ── Card ── */
     .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
     .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .card-header h2 { font-size: 1rem; font-weight: 700; }
+    .card-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; font-weight: 400; letter-spacing: 0.06em; }
     .card-body { padding: 20px; }
 
     /* ── Name Input ── */
     .name-row { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .name-row label { font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    .name-row label { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
     .name-row input {
       flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
       font-size: 0.95rem; font-family: inherit; background: var(--surface); color: var(--text); transition: border 0.15s;
     }
-    .name-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,91,219,0.12); }
+    .name-row input:focus { outline: none; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
 
     /* ── Archetype Section ── */
     .archetype-section { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
@@ -92,10 +97,10 @@
     .archetype-header:hover { background: var(--accent-light); }
     .archetype-num {
       width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff;
-      display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 500; flex-shrink: 0;
     }
-    .archetype-name { font-weight: 700; font-size: 0.93rem; flex: 1; }
-    .archetype-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .archetype-name { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; flex: 1; letter-spacing: 0.04em; }
+    .archetype-desc { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
     .archetype-score-badge {
       min-width: 36px; height: 36px; border-radius: 8px; background: var(--accent); color: #fff;
       display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;
@@ -115,16 +120,17 @@
       -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
       background: var(--accent); border: 2px solid var(--surface); cursor: pointer;
     }
-    .slider-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); margin-bottom: 10px; }
-    .band-hint { font-size: 0.78rem; color: var(--muted); margin-top: 4px; font-style: italic; }
+    .slider-labels { display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-bottom: 10px; letter-spacing: 0.04em; }
+    .band-hint { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-top: 4px; font-style: normal; letter-spacing: 0.02em; }
 
     /* ── Sub-archetypes ── */
     .sub-list { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
-    .sub-list-title { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .sub-list-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 500; color: #34D399; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
     .sub-item { margin-bottom: 7px; padding: 8px 10px; background: var(--surface-alt); border-radius: 6px; border-left: 3px solid var(--accent); }
-    .sub-item-name { font-size: 0.82rem; font-weight: 600; }
-    .sub-item-desc { font-size: 0.77rem; color: var(--muted); margin-top: 1px; }
-    .sub-item-ref { font-size: 0.72rem; color: #9ba6c8; margin-top: 2px; font-style: italic; }
+    .sub-item { border-left-color: #3B82F6; }
+    .sub-item-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.84rem; font-weight: 700; }
+    .sub-item-desc { font-family: 'Barlow Condensed', sans-serif; font-size: 0.77rem; color: var(--muted); margin-top: 1px; }
+    .sub-item-ref { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: #8B9EB8; margin-top: 2px; font-style: normal; letter-spacing: 0.02em; }
 
     /* ── Chart ── */
     .chart-card { position: sticky; top: 24px; }
@@ -134,11 +140,11 @@
 
     /* ── Score Summary ── */
     .score-summary { margin-top: 16px; }
-    .score-total { font-size: 2rem; font-weight: 800; color: var(--accent); text-align: center; }
-    .score-label { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 8px; }
+    .score-total { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; font-weight: 400; color: var(--accent); text-align: center; letter-spacing: 0.04em; }
+    .score-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-align: center; margin-bottom: 8px; letter-spacing: 0.08em; }
     .profile-badge {
-      background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 0.9rem;
-      text-align: center; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(59,91,219,0.2);
+      background: var(--accent-light); color: #34D399; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1rem;
+      text-align: center; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(52,211,153,0.2); letter-spacing: 0.05em;
     }
     .score-breakdown { margin-top: 14px; display: grid; gap: 5px; }
     .breakdown-row { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
@@ -149,13 +155,13 @@
 
     /* ── Buttons ── */
     .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .btn { padding: 9px 18px; border-radius: 7px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; font-family: inherit; }
+    .btn { padding: 9px 18px; border-radius: 5px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.15s; letter-spacing: 0.06em; text-transform: uppercase; }
     .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #2f4bc4; }
-    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-    .btn-secondary:hover { background: var(--bg); }
-    .btn-success { background: #2f9e44; color: #fff; }
-    .btn-success:hover { background: #257a35; }
+    .btn-primary:hover { background: #2563EB; }
+    .btn-secondary { background: transparent; color: var(--silver, #D1DCE8); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { background: var(--surface-alt); border-color: #D1DCE8; }
+    .btn-success { background: #34D399; color: #0C1016; }
+    .btn-success:hover { background: #2bb585; }
     .btn-danger { background: #e03131; color: #fff; }
     .btn-danger:hover { background: #b52929; }
 
@@ -164,22 +170,22 @@
     @media (max-width: 960px) { .team-layout { grid-template-columns: 1fr; } }
     .member-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: var(--surface); margin-bottom: 12px; }
     .member-card-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .member-name-display { font-weight: 700; font-size: 0.95rem; }
-    .member-total { font-size: 0.82rem; color: var(--muted); }
+    .member-name-display { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.04em; }
+    .member-total { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
     .member-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; margin-top: 10px; }
     .score-chip { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 0.78rem; }
     .score-chip-label { color: var(--muted); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .score-chip-bar { width: 48px; height: 5px; background: var(--score-0); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
     .score-chip-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
-    .score-chip-val { min-width: 18px; text-align: right; font-weight: 700; color: var(--accent); font-size: 0.78rem; }
+    .score-chip-val { min-width: 18px; text-align: right; font-family: 'DM Mono', monospace; font-weight: 500; color: var(--accent); font-size: 0.75rem; }
     .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
     .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
 
     /* ── Gap Analysis ── */
     .gap-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
     .gap-item:last-child { border-bottom: none; }
-    .gap-rank { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .gap-rank.low { background: #e03131; }
+    .gap-rank { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-rank.low { background: #ef4444; }
     .gap-name { flex: 1; font-size: 0.84rem; font-weight: 600; }
     .gap-avg { font-size: 0.82rem; color: var(--muted); }
     .gap-bar-wrap { width: 80px; height: 6px; background: var(--score-0); border-radius: 3px; overflow: hidden; }
@@ -188,9 +194,9 @@
     /* ── Toast ── */
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
-      background: #1a1f36; color: #fff; padding: 12px 22px; border-radius: 8px;
-      font-size: 0.88rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      transition: transform 0.25s ease; z-index: 1000; pointer-events: none;
+      background: #141B24; color: #34D399; padding: 12px 22px; border-radius: 8px; border: 1px solid #243044;
+      font-family: 'DM Mono', monospace; font-size: 0.82rem; font-weight: 400; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.25s ease; z-index: 1000; pointer-events: none; letter-spacing: 0.04em;
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -211,13 +217,13 @@
 
     /* ── About ── */
     .about-content { max-width: 760px; margin: 32px auto; padding: 0 32px; }
-    .about-content h2 { font-size: 1.25rem; font-weight: 700; margin: 24px 0 10px; }
-    .about-content h3 { font-size: 1.05rem; font-weight: 700; margin: 18px 0 8px; color: var(--text); }
+    .about-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; font-weight: 400; margin: 24px 0 10px; letter-spacing: 0.05em; }
+    .about-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; font-weight: 400; margin: 18px 0 8px; color: var(--text); letter-spacing: 0.04em; }
     .about-content p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
     .about-content ul, .about-content ol { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 0 0 12px 20px; }
     .about-content li { margin-bottom: 6px; }
     .about-content table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0 20px; }
-    .about-content th { background: var(--accent-light); color: var(--accent); padding: 8px 12px; text-align: left; font-weight: 700; }
+    .about-content th { background: var(--accent-light); color: var(--accent); padding: 8px 12px; text-align: left; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
     .about-content td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
     .about-content tr:last-child td { border-bottom: none; }
     .about-content strong { color: var(--text); }
@@ -234,26 +240,26 @@
     }
     .tab-dropdown.open .tab-dropdown-menu { display: block; }
     .tab-dropdown-item {
-      display: block; width: 100%; padding: 12px 20px; font-size: 0.88rem; font-weight: 500;
+      display: block; width: 100%; padding: 12px 20px; font-size: 0.88rem; font-weight: 600;
       cursor: pointer; border: none; background: none; color: var(--muted); text-align: left;
-      font-family: inherit; transition: all 0.12s;
+      font-family: 'Barlow Condensed', sans-serif; transition: all 0.12s; letter-spacing: 0.04em;
     }
-    .tab-dropdown-item:hover { background: var(--accent-light); color: var(--accent); }
-    .tab-dropdown-item.active { color: var(--accent); font-weight: 600; background: var(--accent-light); }
+    .tab-dropdown-item:hover { background: var(--accent-light); color: #34D399; }
+    .tab-dropdown-item.active { color: #34D399; font-weight: 700; background: var(--accent-light); }
 
     /* ── PDF Modal ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(0,0,0,0.5); width: 500px; max-width: 95vw; }
     .modal-header { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .modal-header h3 { font-size: 1rem; font-weight: 700; }
+    .modal-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; font-weight: 400; letter-spacing: 0.05em; }
     .modal-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); line-height: 1; padding: 0 4px; }
     .modal-close:hover { color: var(--text); }
     .modal-body { padding: 20px 22px; }
     .modal-footer { padding: 14px 22px 18px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
     .opt-group { margin-bottom: 18px; }
     .opt-group:last-child { margin-bottom: 0; }
-    .opt-group-label { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 10px; }
+    .opt-group-label { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
     .opt-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
     .opt-row:last-child { margin-bottom: 0; }
     .opt-row input { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
@@ -264,10 +270,10 @@
 <body>
 
 <header>
-  <div class="header-logo">&#9881;&#65039;</div>
+  <div class="header-logo">&#129423;</div>
   <div>
-    <h1>Archetypes of Automation &#8212; Team Capability Assessment</h1>
-    <p>8 Dimensions of Automation Readiness &middot; A framework by <strong>Brian Simpson</strong></p>
+    <h1>ARCHETYPES OF AUTOMATION <span class="brand-silver">&#8212; TEAM CAPABILITY ASSESSMENT</span></h1>
+    <p>// 8 Dimensions of Automation Readiness &middot; A framework by Brian Simpson &middot; rhinoautomator.com</p>
   </div>
   <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
     <svg class="theme-icon icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -348,7 +354,7 @@
             <button class="btn btn-secondary" onclick="importTeamJSON()">&#8679; Import</button>
             <button class="btn btn-primary" onclick="exportTeamJSON()">&#8681; Export</button>
             <button class="btn btn-danger" onclick="clearTeam()">Clear All</button>
-            <button class="btn" style="background:var(--accent2);color:#fff" onclick="openPdfModal()">&#128438; Generate Report</button>
+            <button class="btn" style="background:#34D399;color:#0C1016" onclick="openPdfModal()">&#128438; Generate Report</button>
           </div>
         </div>
         <div class="card-body">
@@ -637,14 +643,14 @@ var BAND_HINTS = [
 ];
 
 var DS_COLORS = [
-  ["rgba(91,122,245,0.18)",  "rgba(91,122,245,0.9)"],
-  ["rgba(112,72,232,0.15)",  "rgba(112,72,232,0.9)"],
-  ["rgba(231,70,148,0.15)",  "rgba(231,70,148,0.9)"],
-  ["rgba(22,160,133,0.15)",  "rgba(22,160,133,0.9)"],
-  ["rgba(230,126,34,0.15)",  "rgba(230,126,34,0.9)"],
-  ["rgba(52,152,219,0.15)",  "rgba(52,152,219,0.9)"],
-  ["rgba(155,89,182,0.15)",  "rgba(155,89,182,0.9)"],
-  ["rgba(26,188,156,0.15)",  "rgba(26,188,156,0.9)"]
+  ["rgba(59,130,246,0.18)",  "rgba(59,130,246,0.9)"],
+  ["rgba(52,211,153,0.15)",  "rgba(52,211,153,0.9)"],
+  ["rgba(209,220,232,0.15)", "rgba(209,220,232,0.9)"],
+  ["rgba(96,165,250,0.15)",  "rgba(96,165,250,0.9)"],
+  ["rgba(110,231,183,0.15)", "rgba(110,231,183,0.9)"],
+  ["rgba(147,197,253,0.15)", "rgba(147,197,253,0.9)"],
+  ["rgba(167,139,250,0.15)", "rgba(167,139,250,0.9)"],
+  ["rgba(45,212,191,0.15)",  "rgba(45,212,191,0.9)"]
 ];
 
 var SHORT_LABELS = [
@@ -702,9 +708,9 @@ function drawRadar(canvasId, datasets) {
   if (!canvas) return;
 
   var isLight = document.documentElement.getAttribute("data-theme") === "light";
-  var TEXT  = isLight ? "#1a1f36" : "#e6edf3";
-  var MUTED = isLight ? "#6b7394" : "#8b949e";
-  var GRID  = isLight ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.18)";
+  var TEXT  = isLight ? "#1a1f36" : "#F0F6FF";
+  var MUTED = isLight ? "#6b7394" : "#8B9EB8";
+  var GRID  = isLight ? "rgba(0,0,0,0.15)" : "rgba(36,48,68,0.8)";
 
   var dpr  = window.devicePixelRatio || 1;
   var wrap = canvas.parentElement;
@@ -745,7 +751,7 @@ function drawRadar(canvasId, datasets) {
     ctx.lineWidth = 1;
     ctx.stroke();
     // Ring value
-    ctx.font = Math.max(8, FONT - 2) + "px Segoe UI,sans-serif";
+    ctx.font = Math.max(8, FONT - 2) + "px Barlow Condensed,sans-serif";
     ctx.fillStyle = MUTED;
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
@@ -765,7 +771,7 @@ function drawRadar(canvasId, datasets) {
 
   // Axis labels
   var LH = FONT * 1.3;
-  ctx.font = FONT + "px Segoe UI,sans-serif";
+  ctx.font = FONT + "px Barlow Condensed,sans-serif";
   ctx.fillStyle = TEXT;
   ctx.textBaseline = "middle";
   for (i = 0; i < N; i++) {
@@ -813,7 +819,7 @@ function drawRadar(canvasId, datasets) {
   // Legend (multi-dataset only)
   if (datasets.length > 1) {
     var lFontSize = 10;
-    ctx.font = lFontSize + "px Segoe UI,sans-serif";
+    ctx.font = lFontSize + "px Barlow Condensed,sans-serif";
     ctx.textBaseline = "middle";
     ctx.textAlign = "left";
     var lColW = 90;
@@ -914,11 +920,11 @@ function onSlider(i, val) {
 }
 
 function scoreColor(v) {
-  if (v <= 2) return "#adb5bd";
-  if (v <= 4) return "#f08c00";
-  if (v <= 6) return "#2b8a3e";
-  if (v <= 8) return "#1971c2";
-  return "#5f3dc4";
+  if (v <= 2) return "#8B9EB8";
+  if (v <= 4) return "#D1DCE8";
+  if (v <= 6) return "#3B82F6";
+  if (v <= 8) return "#2563EB";
+  return "#34D399";
 }
 
 function updateChart() {
@@ -970,7 +976,7 @@ function updateGapAnalysis() {
   var html = "";
   for (var k = 0; k < avgs.length; k++) {
     var pct = Math.round(avgs[k].avg * 10);
-    var col = avgs[k].avg < 4 ? "#e03131" : avgs[k].avg < 6 ? "#f08c00" : "#2b8a3e";
+    var col = avgs[k].avg < 4 ? "#ef4444" : avgs[k].avg < 6 ? "#D1DCE8" : "#34D399";
     html += '<div class="gap-item">' +
       '<div class="gap-rank' + (avgs[k].avg < 4 ? ' low' : '') + '">' + (k+1) + '</div>' +
       '<span class="gap-name">' + avgs[k].name + '</span>' +
@@ -1354,24 +1360,25 @@ function getTeamExplainer(ai, avg) {
 function buildReportHtml(includeIndiv, depth) {
   var date = new Date().toLocaleDateString("en-US", {year:"numeric", month:"long", day:"numeric"});
   var PFILLS = [
-    "rgba(91,122,245,0.25)","rgba(112,72,232,0.25)","rgba(231,70,148,0.25)","rgba(22,160,133,0.25)",
-    "rgba(230,126,34,0.25)","rgba(52,152,219,0.25)","rgba(155,89,182,0.25)","rgba(26,188,156,0.25)"
+    "rgba(59,130,246,0.25)","rgba(52,211,153,0.25)","rgba(209,220,232,0.25)","rgba(96,165,250,0.25)",
+    "rgba(110,231,183,0.25)","rgba(147,197,253,0.25)","rgba(167,139,250,0.25)","rgba(45,212,191,0.25)"
   ];
   var h = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">';
-  h += '<title>Archetypes of Automation \u2014 Capability Report</title><style>';
+  h += '<title>Archetypes of Automation \u2014 Capability Report | Rhino Automator</title><style>';
+  h += '@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap");';
   h += '* { box-sizing:border-box; margin:0; padding:0; }';
-  h += 'body { font-family:"Segoe UI",-apple-system,sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
-  h += '.rh { display:flex; gap:16px; align-items:center; padding-bottom:18px; border-bottom:3px solid #3b5bdb; margin-bottom:28px; }';
+  h += 'body { font-family:"Barlow Condensed",sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
+  h += '.rh { display:flex; gap:16px; align-items:center; padding-bottom:18px; border-bottom:3px solid #3B82F6; margin-bottom:28px; }';
   h += '.rh-logo { font-size:2.4rem; }';
-  h += 'h1 { font-size:1.5rem; font-weight:800; color:#3b5bdb; margin-bottom:2px; }';
-  h += '.sub { font-size:0.82rem; color:#6b7394; }';
-  h += 'h2 { font-size:1.05rem; font-weight:700; color:#1a1f36; border-bottom:2px solid #3b5bdb; padding-bottom:6px; margin:28px 0 14px; }';
-  h += 'h3 { font-size:0.88rem; font-weight:700; color:#3b5bdb; margin:14px 0 5px; }';
+  h += 'h1 { font-family:"Bebas Neue",sans-serif; font-size:1.6rem; font-weight:400; color:#3B82F6; margin-bottom:2px; letter-spacing:0.05em; }';
+  h += '.sub { font-family:"DM Mono",monospace; font-size:0.72rem; color:#6b7394; letter-spacing:0.04em; }';
+  h += 'h2 { font-family:"Bebas Neue",sans-serif; font-size:1.15rem; font-weight:400; color:#1a1f36; border-bottom:2px solid #3B82F6; padding-bottom:6px; margin:28px 0 14px; letter-spacing:0.05em; }';
+  h += 'h3 { font-family:"Bebas Neue",sans-serif; font-size:0.95rem; font-weight:400; color:#3B82F6; margin:14px 0 5px; letter-spacing:0.04em; }';
   h += 'table { width:100%; border-collapse:collapse; font-size:12px; margin:10px 0 16px; }';
-  h += 'th { background:#e8ecfc; color:#3b5bdb; padding:7px 10px; text-align:left; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; }';
+  h += 'th { background:rgba(59,130,246,0.08); color:#3B82F6; padding:7px 10px; text-align:left; font-family:"DM Mono",monospace; font-weight:500; font-size:9px; text-transform:uppercase; letter-spacing:0.08em; }';
   h += 'td { padding:6px 10px; border-bottom:1px solid #f0f2f9; vertical-align:middle; }';
   h += 'tr:last-child td { border-bottom:none; }';
-  h += '.ex { font-size:12px; color:#374151; line-height:1.65; padding:10px 14px; background:#f4f6fb; border-left:3px solid #3b5bdb; border-radius:0 6px 6px 0; margin:6px 0 10px; }';
+  h += '.ex { font-size:12px; color:#374151; line-height:1.65; padding:10px 14px; background:#f4f6fb; border-left:3px solid #3B82F6; border-radius:0 6px 6px 0; margin:6px 0 10px; }';
   h += '.ds { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid #f0f2f9; }';
   h += '.ds:last-child { border-bottom:none; }';
   h += '.sl { margin-top:6px; }';
@@ -1384,12 +1391,12 @@ function buildReportHtml(includeIndiv, depth) {
   h += '</style></head><body>';
 
   h += '<div class="np" style="position:fixed;top:16px;right:16px;display:flex;gap:8px;z-index:100">';
-  h += '<button onclick="window.print()" style="padding:9px 18px;background:#3b5bdb;color:#fff;border:none;border-radius:7px;font-weight:700;cursor:pointer;font-size:13px">&#128438; Print / Save as PDF</button>';
-  h += '<button onclick="window.close()" style="padding:9px 14px;background:#fff;color:#6b7394;border:1px solid #dde3ee;border-radius:7px;cursor:pointer;font-size:13px">&times; Close</button>';
+  h += '<button onclick="window.print()" style="padding:9px 18px;background:#3B82F6;color:#fff;border:none;border-radius:5px;font-family:Barlow Condensed,sans-serif;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:0.05em;text-transform:uppercase">&#128438; Print / Save as PDF</button>';
+  h += '<button onclick="window.close()" style="padding:9px 14px;background:#fff;color:#6b7394;border:1px solid #dde3ee;border-radius:5px;font-family:Barlow Condensed,sans-serif;cursor:pointer;font-size:13px">&times; Close</button>';
   h += '</div>';
 
-  h += '<div class="rh"><div class="rh-logo">&#9881;&#65039;</div>';
-  h += '<div><h1>Archetypes of Automation</h1><p class="sub">A framework by Brian Simpson &middot; Team Capability Report &middot; ' + date + '</p></div></div>';
+  h += '<div class="rh"><div class="rh-logo">&#129423;</div>';
+  h += '<div><h1>ARCHETYPES OF AUTOMATION</h1><p class="sub">A framework by Brian Simpson &middot; rhinoautomator.com &middot; Team Capability Report &middot; ' + date + '</p></div></div>';
 
   if (teamMembers.length === 0) {
     h += '<p style="color:#6b7394;padding:20px 0">No team perspectives have been added. Return to the app and add perspectives to the Team Assessment tab first.</p>';
@@ -1427,7 +1434,7 @@ function buildReportHtml(includeIndiv, depth) {
   h += '<h3>Gap Analysis \u2014 Lowest to Highest Average</h3>';
   h += '<table><tr><th>Rank</th><th>Dimension</th><th>Team Average</th><th>Coverage</th></tr>';
   for (var gi = 0; gi < sorted.length; gi++) {
-    var gcol = sorted[gi].avg < 4 ? "#e03131" : sorted[gi].avg < 6 ? "#f08c00" : "#2b8a3e";
+    var gcol = sorted[gi].avg < 4 ? "#ef4444" : sorted[gi].avg < 6 ? "#D1DCE8" : "#34D399";
     var gpct = Math.round(sorted[gi].avg * 10);
     h += '<tr><td><span style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:' + gcol + ';color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:700">' + (gi+1) + '</span></td>';
     h += '<td>' + sorted[gi].name + '</td><td><strong style="color:' + gcol + '">' + sorted[gi].avg.toFixed(1) + '</strong>/10</td>';
@@ -1472,7 +1479,7 @@ function buildReportHtml(includeIndiv, depth) {
       for (var pdi = 0; pdi < ARCHETYPES.length; pdi++) {
         var sc = person.scores[pdi];
         var band = sc<=2?"Newcomer":sc<=4?"Emerging":sc<=6?"Functional":sc<=8?"Strong":"Exceptional";
-        var bc = sc<=2?"#adb5bd":sc<=4?"#f08c00":sc<=6?"#2b8a3e":sc<=8?"#1971c2":"#5f3dc4";
+        var bc = sc<=2?"#8B9EB8":sc<=4?"#D1DCE8":sc<=6?"#3B82F6":sc<=8?"#2563EB":"#34D399";
         h += '<tr><td style="font-size:11px">' + ARCHETYPES[pdi].id + '. ' + ARCHETYPES[pdi].name + '</td>';
         h += '<td><strong style="color:' + bc + '">' + sc + '</strong>/10</td>';
         h += '<td><span style="background:' + bc + ';color:#fff;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700">' + band + '</span></td></tr>';
@@ -1497,8 +1504,8 @@ function buildReportHtml(includeIndiv, depth) {
     }
   }
   h += '<div style="margin-top:40px;padding-top:18px;border-top:1px solid #e8ecfc;font-size:11px;color:#9ba6c8;text-align:center">';
-  h += 'Archetypes of Automation &mdash; a framework by Brian Simpson &middot; ';
-  h += '<a href="https://github.com/bmsimp/automation-archetypes-assessment" style="color:#3b5bdb" target="_blank" rel="noopener">github.com/bmsimp/automation-archetypes-assessment</a>';
+  h += 'Archetypes of Automation &mdash; a framework by Brian Simpson &middot; rhinoautomator.com &middot; ';
+  h += '<a href="https://github.com/bmsimp/automation-archetypes-assessment" style="color:#3B82F6" target="_blank" rel="noopener">github.com/bmsimp/automation-archetypes-assessment</a>';
   h += ' &middot; Issues, improvements, and contributions welcome.';
   h += '</div>';
   h += '</body></html>';
