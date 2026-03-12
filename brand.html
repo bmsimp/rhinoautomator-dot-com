@@ -31,20 +31,28 @@
   }
   .site-nav .links a:hover { color: #F0F6FF; }
   .site-nav .links a.active { color: #34D399; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .nav-dropdown > a .dd-arrow { font-size: 0.5rem; transition: transform 0.2s; }
+  .nav-dropdown.open > a .dd-arrow { transform: rotate(180deg); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 200;
+    background: #141B24; border: 1px solid #243044; border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35); min-width: 180px; overflow: hidden;
+  }
+  .nav-dropdown.open .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 10px 18px; font-weight: 600; font-size: 12px;
+    letter-spacing: 0.06em; color: #8B9EB8; transition: all 0.12s; text-transform: uppercase;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(59,130,246,0.08); color: #34D399; }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- Nav (loaded from _includes/) -->
 <div style="max-width:1000px;margin:0 auto;">
-  <nav class="site-nav">
-    <a href="index.html" class="logo">RHINO <span>AUTOMATOR</span></a>
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="assessment/">Assessment</a>
-      <a href="brand.html" class="active">Brand</a>
-    </div>
-  </nav>
+  <div id="site-nav" data-base="." data-active="brand"></div>
 </div>
 
 <div style="max-width:1000px;margin:0 auto;padding:32px 24px;">
@@ -57,7 +65,7 @@
     </div>
     <div style="text-align:right">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:#8B9EB8;margin-bottom:4px">rhinoautomator.com</div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#8B9EB8">Automation · Consulting · Public Speaking</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#8B9EB8">Automation Enthusiast · Community Engagement & Education</div>
     </div>
   </div>
 
@@ -259,7 +267,7 @@
           <a href="https://fonts.google.com/specimen/Barlow+Condensed" target="_blank" style="font-family:'DM Mono',monospace;font-size:9px;color:#8B9EB8;border:1px solid #243044;padding:3px 8px;border-radius:3px;text-decoration:none;letter-spacing:0.08em">↗ GOOGLE FONTS</a>
         </div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:400;font-size:15px;color:#8B9EB8;line-height:1.65;max-width:600px;margin-bottom:12px">Helping MSPs and IT teams build automation muscle without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to — regardless of technical background.</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:#F0F6FF;letter-spacing:0.1em;text-transform:uppercase">SERVICES · SPEAKING · BLOG · CONTACT</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:#F0F6FF;letter-spacing:0.1em;text-transform:uppercase">SERVICES · COMMUNITY · BLOG · CONTACT</div>
       </div>
 
       <div style="background:#141B24;border:1px solid #243044;border-radius:10px;padding:22px 24px">
@@ -311,7 +319,7 @@
           </div>
           <div style="display:flex;align-items:baseline;gap:10px">
             <div style="width:4px;height:4px;border-radius:50%;background:#34D399;flex-shrink:0;margin-top:6px"></div>
-            <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:0.04em;color:#D1DCE8">Automation · Consulting · Public Speaking</div>
+            <div style="font-family:'Bebas Neue';font-size:18px;letter-spacing:0.04em;color:#D1DCE8">Automation Enthusiast · Community Engagement & Education</div>
           </div>
           <div style="display:flex;align-items:baseline;gap:10px">
             <div style="width:4px;height:4px;border-radius:50%;background:#34D399;flex-shrink:0;margin-top:6px"></div>
@@ -339,19 +347,19 @@
         <div style="font-family:'Bebas Neue';font-size:20px;letter-spacing:0.07em">RHINO <span style="color:#D1DCE8">AUTOMATOR</span></div>
         <div style="display:flex;gap:20px">
           <span style="font-weight:600;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:#8B9EB8">Services</span>
-          <span style="font-weight:600;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:#8B9EB8">Speaking</span>
+          <span style="font-weight:600;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:#8B9EB8">Community</span>
           <span style="font-weight:600;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:#8B9EB8">Blog</span>
           <span style="font-weight:600;font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:#34D399">Contact</span>
         </div>
       </div>
       <div style="padding:36px 28px;background:linear-gradient(140deg,#0C1016 0%,#141B24 100%)">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;color:#34D399;letter-spacing:0.16em;margin-bottom:10px">// AUTOMATION · CONSULTING · PUBLIC SPEAKING</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:#34D399;letter-spacing:0.16em;margin-bottom:10px">// AUTOMATION ENTHUSIAST · COMMUNITY ENGAGEMENT & EDUCATION</div>
         <div style="font-family:'Bebas Neue';font-size:48px;letter-spacing:0.04em;line-height:0.92;color:#F0F6FF;margin-bottom:4px">MAKING AUTOMATION</div>
         <div style="font-family:'Bebas Neue';font-size:48px;letter-spacing:0.04em;line-height:0.92;color:#D1DCE8;margin-bottom:16px">ACCESSIBLE.</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;color:#8B9EB8;max-width:440px;line-height:1.6;margin-bottom:22px">Helping MSPs and IT teams build automation muscle — without needing a dedicated dev team.</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:#3B82F6;color:#fff;border-radius:4px">WORK WITH ME</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:transparent;color:#34D399;border:1.5px solid #34D399;border-radius:4px">SPEAKING TOPICS</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:transparent;color:#34D399;border:1.5px solid #34D399;border-radius:4px">COMMUNITY & EDUCATION</div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;background:transparent;color:#D1DCE8;border:1.5px solid #243044;border-radius:4px">LEARN MORE</div>
         </div>
       </div>
@@ -369,7 +377,7 @@
           <div>
             <div style="font-family:'Bebas Neue';font-size:20px;letter-spacing:0.05em;line-height:1;color:#F0F6FF">RHINO AUTOMATOR</div>
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:#34D399;margin-top:4px">@rhinoautomator</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#8B9EB8;margin-top:5px;line-height:1.4">Automation consulting · Public speaker · MSP nerd</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#8B9EB8;margin-top:5px;line-height:1.4">Automation enthusiast · Community engagement & education · MSP nerd</div>
             <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap">
               <span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid #3B82F644;border-radius:3px;color:#3B82F6">Rewst</span>
               <span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid #D1DCE844;border-radius:3px;color:#D1DCE8">M365</span>
@@ -482,7 +490,7 @@
           </div>
           <div style="margin-bottom:7px">
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:#8B9EB8;letter-spacing:0.08em">Pillars</div>
-            <div style="font-size:12px;color:#F0F6FF;margin-top:1px">Automation · Consulting · Speaking</div>
+            <div style="font-size:12px;color:#F0F6FF;margin-top:1px">Automation Enthusiast · Community Engagement & Education</div>
           </div>
           <div style="margin-bottom:7px">
             <div style="font-family:'DM Mono',monospace;font-size:9px;color:#8B9EB8;letter-spacing:0.08em">Tone</div>
@@ -507,6 +515,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="_includes/components.js"></script>
 <script>
 function copyHex(hex) {
   navigator.clipboard.writeText(hex).catch(()=>{});

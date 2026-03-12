@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rhino Automator — Automation · Consulting · Public Speaking</title>
+  <title>Rhino Automator — Automation Enthusiast · Community Engagement & Education</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -39,6 +39,21 @@
     }
     .site-nav .links a:hover { color: var(--text); }
     .site-nav .links a.active { color: var(--emerald); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a .dd-arrow { font-size: 0.5rem; transition: transform 0.2s; }
+    .nav-dropdown.open > a .dd-arrow { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 200;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35); min-width: 180px; overflow: hidden;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block; padding: 10px 18px; font-weight: 600; font-size: 13px;
+      letter-spacing: 0.06em; color: var(--muted); transition: all 0.12s;
+    }
+    .nav-dropdown-menu a:hover { background: rgba(59,130,246,0.08); color: var(--emerald); }
 
     /* Hero */
     .hero {
@@ -164,24 +179,17 @@
 </head>
 <body>
 
-  <!-- Nav -->
-  <nav class="site-nav">
-    <a href="index.html" class="logo">RHINO <span>AUTOMATOR</span></a>
-    <div class="links">
-      <a href="index.html" class="active">Home</a>
-      <a href="assessment/">Assessment</a>
-      <a href="brand.html">Brand</a>
-    </div>
-  </nav>
+  <!-- Nav (loaded from _includes/) -->
+  <div id="site-nav" data-base="." data-active="home"></div>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-tag">// AUTOMATION · CONSULTING · PUBLIC SPEAKING</div>
+    <div class="hero-tag">// AUTOMATION ENTHUSIAST · COMMUNITY ENGAGEMENT & EDUCATION</div>
     <h1>MAKING AUTOMATION<br/><span class="silver">ACCESSIBLE.</span></h1>
     <p class="hero-sub">Helping MSPs and IT teams build automation muscle — without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to.</p>
     <div class="hero-buttons">
       <a href="assessment/" class="btn btn-primary">TAKE THE ASSESSMENT</a>
-      <a href="#speaking" class="btn btn-outline-emerald">SPEAKING TOPICS</a>
+      <a href="#community" class="btn btn-outline-emerald">COMMUNITY & EDUCATION</a>
       <a href="#about" class="btn btn-outline-silver">LEARN MORE</a>
     </div>
   </section>
@@ -203,10 +211,10 @@
         <h3>CONSULTING</h3>
         <p>Helping teams identify what to automate, who should be involved, and how to build a practice that doesn't depend on a single developer.</p>
       </div>
-      <div class="pillar-card" id="speaking">
-        <div class="pillar-icon">🎤</div>
-        <h3>PUBLIC SPEAKING</h3>
-        <p>Conference talks and workshops on building automation muscle, team capability mapping, and making non-technical people meaningful contributors.</p>
+      <div class="pillar-card" id="community">
+        <div class="pillar-icon">🎓</div>
+        <h3>COMMUNITY ENGAGEMENT & EDUCATION</h3>
+        <p>Conference talks, workshops, and community content on building automation muscle, team capability mapping, and making non-technical people meaningful contributors.</p>
       </div>
     </div>
   </section>
@@ -258,11 +266,9 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="brand">RHINO AUTOMATOR</div>
-    <div class="meta">rhinoautomator.com · Automation · Consulting · Public Speaking</div>
-  </footer>
+  <!-- Footer (loaded from _includes/) -->
+  <div id="site-footer" data-base="."></div>
 
+<script src="_includes/components.js"></script>
 </body>
 </html>
