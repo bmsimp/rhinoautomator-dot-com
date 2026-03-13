@@ -39,7 +39,7 @@
     @media (max-width: 768px) { .pillars { grid-template-columns: 1fr; } }
     .pillar-card {
       background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-      padding: 28px 24px; transition: border-color 0.2s;
+      padding: 28px 24px; transition: border-color 0.2s; text-decoration: none; display: block;
     }
     .pillar-card:hover { border-color: var(--cobalt); }
     .pillar-icon {
@@ -115,21 +115,21 @@
     <p class="section-desc">Not a dev shop. Not a vendor. A practitioner who builds automation and teaches others to participate — regardless of technical background.</p>
 
     <div class="pillars">
-      <div class="pillar-card">
+      <a href="blog/" class="pillar-card">
         <div class="pillar-icon">⚡</div>
         <h3>AUTOMATION</h3>
         <p>Building real workflows that solve real problems. Rewst, Power Automate, and whatever gets the job done — focused on MSP and IT operations.</p>
-      </div>
-      <div class="pillar-card">
+      </a>
+      <a href="framework/" class="pillar-card">
         <div class="pillar-icon">🎯</div>
         <h3>CONSULTING</h3>
         <p>Helping teams identify what to automate, who should be involved, and how to build a practice that doesn't depend on a single developer.</p>
-      </div>
-      <div class="pillar-card" id="community">
+      </a>
+      <a href="community/seen-me.html" class="pillar-card" id="community">
         <div class="pillar-icon">🎓</div>
         <h3>COMMUNITY ENGAGEMENT & EDUCATION</h3>
         <p>Conference talks, workshops, and community content on building automation muscle, team capability mapping, and making non-technical people meaningful contributors.</p>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -177,6 +177,7 @@
       <h2>READY TO FIND YOUR AUTOMATION STRENGTHS?</h2>
       <p>Take the Archetypes of Automation self-assessment — it takes about 10 minutes and gives you a clear picture of where you and your team stand.</p>
       <a href="assessment/" class="btn btn-primary">START THE ASSESSMENT</a>
+      <a href="framework/" class="btn btn-outline-emerald">EXPLORE THE FRAMEWORK</a>
     </div>
   </div>
 
