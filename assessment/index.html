@@ -95,8 +95,8 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     #team-member-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
     #team-member-list.multi-col { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
     .member-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: var(--surface); }
-    .member-card-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .member-name-display { font-family: var(--ff-display); font-weight: 400; font-size: var(--fs-assess-name); letter-spacing: 0.04em; }
+    .member-card-header { display: flex; align-items: center; gap: 8px; }
+    .member-name-display { font-family: var(--ff-display); font-weight: 400; font-size: var(--fs-assess-name); letter-spacing: 0.04em; flex: 1; }
     .member-total { font-family: var(--ff-mono); font-size: var(--fs-assess-desc); color: var(--muted); letter-spacing: 0.04em; }
     .member-scores { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 2px 12px; margin-top: 8px; }
     .score-chip { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: var(--fs-assess-chip); }
@@ -195,10 +195,9 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
 <div id="site-nav" data-base=".." data-active="framework-assessment"></div>
 
 <header>
-  <div class="header-logo">&#129423;</div>
   <div>
     <h1>ARCHETYPES OF AUTOMATION <span class="brand-silver">&#8212; TEAM CAPABILITY ASSESSMENT</span></h1>
-    <p>// 8 Dimensions of Automation Readiness &middot; A framework by Brian Simpson &middot; <a href="https://github.com/bmsimp/rhinoautomator-dot-com" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">rhinoautomator.com</a></p>
+    <p>// 8 Dimensions of Automation Readiness &middot; A framework by Brian Simpson &middot; <a href="https://github.com/bmsimp/rhinoautomator-dot-com" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline">Contribute on Github</a></p>
   </div>
 </header>
 
@@ -206,14 +205,14 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
   <div class="team-layout">
     <div>
       <div class="card" style="margin-bottom:16px">
-        <div class="card-header">
+        <div class="card-header" style="border-bottom:none">
           <h2>Assessment Control <button class="info-btn" onclick="openHowtoModal()" aria-label="How to use this tool">i</button></h2>
           <div class="action-row" style="margin:0">
             <button class="btn btn-success" onclick="openWizard()">+ Add Assessment</button>
-            <button class="btn btn-secondary" onclick="importTeamJSON()">&#8679; Import</button>
+            <button class="btn btn-primary" onclick="importTeamJSON()">&#8679; Import</button>
             <button class="btn btn-primary" onclick="exportTeamJSON()">&#8681; Export</button>
             <button class="btn btn-danger" onclick="clearTeam()">Clear All</button>
-            <button class="btn" style="background:#34D399;color:#0C1016" onclick="openPdfModal()">&#128438; Generate Report</button>
+            <button class="btn btn-primary" onclick="openPdfModal()">&#128438; Generate Report</button>
           </div>
         </div>
       </div>
@@ -728,7 +727,7 @@ function renderTeamMembers() {
       '<span class="member-name-display" style="color:' + color + '">' + (m.name || "Evaluator " + (i+1)) + '</span>' +
       '<span class="member-profile" data-tooltip="' + prof.desc + '">' + prof.label + '</span>' +
       '<span class="member-total">Total: ' + total + '/80</span>' +
-      '<button class="btn btn-secondary" style="padding:4px 10px;font-size:0.75rem" onclick="editMember(' + i + ')">Edit</button>' +
+      '<button class="btn btn-primary" style="padding:4px 10px;font-size:0.75rem" onclick="editMember(' + i + ')">Edit</button>' +
       '<button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem" onclick="removeMember(' + i + ')">Remove</button>' +
       '<label class="member-toggle" data-tooltip="' + (enabled ? 'Exclude from radar and gap analysis' : 'Include in radar and gap analysis') + '"><input type="checkbox"' + (enabled ? ' checked' : '') + ' onchange="toggleMember(' + i + ')"><span class="toggle-track"></span></label>' +
       '</div><div class="member-scores">' + chips + '</div></div>';
