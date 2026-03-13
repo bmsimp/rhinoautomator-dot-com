@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Working with the Responses — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../.." data-blog-active="auto-teams-responses"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>WORKING WITH<br/><span class="silver">THE RESPONSES</span></h1>
+      <p>Your response handler workflow will get pinged on any "action" the bot can see. Bot installed as an application in a Team, newly created channels for a Team it's already installed in, channel deletion, reactions to posts made, comments made on posts, etc. What I primarily was working to build out was a workflow that will handle the responses to the different action buttons.</p>
+      <p>To do that, you need to understand the JSON payload that comes with the bot response. The primary part that you're concerned with is the <code>body</code>. There's quite a bit of useful, actionable information that you can get from it.</p>
+      <p>If you've properly built out your <code>Action.Submit</code> <code>data</code> fields, then the piece of the <code>body</code> that you'll be most interested in is <code>value</code>. Here you'll see the properly formatted approval body needed to send the SME approved service ticket to Azure DevOps.</p>
+      <p>By building this information into the JSON for the action, you'll be able to pass the information from the response handler workflow to the sub-workflow and action as needed.</p>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../.."></div>
+<script src="../../../_includes/components.js"></script>
+<script src="../../blog.js"></script>
+</body>
+</html>

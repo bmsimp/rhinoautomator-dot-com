@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Assignment Note — CW PSA Actions | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase=".." data-blog-active="psa-ticket-note"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; CONNECTWISE PSA ACTIONS</div>
+      <h1>TICKET<br/><span class="silver">ASSIGNMENT NOTE</span></h1>
+      <p>This action will add the assignment note and send it to the member. This action is not completed by the API when you add a resource to a ticket.</p>
+
+      <h2 id="variables">REQUIRED VARIABLES</h2>
+      <ul>
+        <li><strong>member_id</strong> &mdash; The ID of the ConnectWise PSA member that you want to assign</li>
+        <li><strong>ticket_id</strong> &mdash; The ID of the service ticket that you are assigning the member to</li>
+        <li><strong>assignment_note</strong> &mdash; The text note that you wish to include with the assignment. Regex in the body will handle replacing the spaces with '+'</li>
+        <li><strong>member_email</strong> &mdash; The email address of the member you are assigning</li>
+        <li><strong>member_first_name</strong> &mdash; The first name of the member you are assigning</li>
+        <li><strong>member_last_name</strong> &mdash; The last name of the member you are assigning</li>
+        <li><strong>member_identifier</strong> &mdash; The identifier of the member you are assigning. This can also be thought of as their PSA username such as tcat for Tom Cat.</li>
+      </ul>
+
+      <h2 id="action">ACTION</h2>
+<pre><code>POST</code></pre>
+
+      <h2 id="url">URL PATH</h2>
+<pre><code>{ base URL including version identifier }/services/system_io/actionprocessor/Service/SendStatusRequestAction.rails</code></pre>
+
+      <h2 id="headers">HEADERS</h2>
+      <table>
+        <tr><th>Key</th><th>Value</th></tr>
+        <tr><td>Content-Type</td><td>application/x-www-form-urlencoded</td></tr>
+      </table>
+
+      <h2 id="payload">PAYLOAD</h2>
+<pre><code>actionMessage=%7B%22payload%22%3A%22%7B%5C%22scheduleRecId%5C%22%3A{{ CTX.member_id }}%2C%5C%22srServiceRecId%5C%22%3A{{ CTX.ticket_id|int }}%2C%5C%22comments%5C%22%3A%5C%22{{ CTX.assignment_note|regex_replace(' ','+') }}%5C%22%2C%5C%22emailAddress%5C%22%3A%5C%22{{ CTX.member_email|urlencode }}%5C%22%2C%5C%22memberName%5C%22%3A%5C%22{{ CTX.member_first_name~"+"~CTX.member_last_name }}%5C%22%2C%5C%22requestType%5C%22%3A%5C%22new%5C%22%2C%5C%22resourceID%5C%22%3A%5C%22{{ CTX.member_identifier }}%5C%22%2C%5C%22documentRecIds%5C%22%3A%5B%5D%7D%22%2C%22payloadClassName%22%3A%22SendStatusRequestAction%22%2C%22project%22%3A%22ServiceCommon%22%7D</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../.."></div>
+<script src="../../_includes/components.js"></script>
+<script src="../blog.js"></script>
+</body>
+</html>

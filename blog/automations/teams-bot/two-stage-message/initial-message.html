@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formatting the Initial Message — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-initial"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>FORMATTING THE<br/><span class="silver">INITIAL MESSAGE</span></h1>
+      <p>Below is the basic format of the JSON you want to send to your bot to create the initial message:</p>
+<pre><code>{
+  "activity": {
+    "type": "message",
+    "summary": "Set this to a summary that you want to appear in the
+                desktop/mobile notification in Teams",
+    "attachments": [
+      {
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null,
+        "content": {
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "type": "AdaptiveCard",
+          "version": "1.5",
+          "body": [
+            // Place all of the JSON for the various pieces of your
+            // message here. Use the Adaptive Card Designer and
+            // Actionable Messages Designers to figure out the formatting.
+          ],
+          "padding": "None",
+          "msteams": { "width": "Full" }
+        }
+      }
+    ]
+  },
+  "bot": {
+    "id": "YOUR_BOT_ID",
+    "name": "YOUR_BOT_NAME"
+  },
+  "channelData": {
+    "team": { "id": "TEAM_ID" },
+    "tenant": { "id": "TENANT_ID" },
+    "channel": { "id": "CHANNEL_ID" },
+    "teamsTeamId": "TEAM_ID",
+    "teamsChannelId": "CHANNEL_ID"
+  },
+  "isGroup": true,
+  "tenantId": "TENANT_ID"
+}</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

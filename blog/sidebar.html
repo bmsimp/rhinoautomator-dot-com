@@ -1,0 +1,92 @@
+<aside class="blog-sidebar">
+  <div class="sidebar-inner">
+
+    <div class="cat-label">INTEGRATIONS</div>
+    <ul>
+      <li>
+        <a href="{{blogbase}}/integrations/cw-home/" class="parent-link" data-blog-nav="int-cw-home" data-children="int-cw-home-sub" onclick="toggleBlogSection(event, 'int-cw-home-sub')">
+          ConnectWise Home <span class="chevron">&#9654;</span>
+        </a>
+        <ul class="sub-items" id="int-cw-home-sub">
+          <li><a href="{{blogbase}}/integrations/cw-home/authentication.html" data-blog-nav="cwh-auth">Authentication</a></li>
+          <li><a href="{{blogbase}}/integrations/cw-home/api-documentation.html" data-blog-nav="cwh-api">API Documentation</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="cat-label">AUTOMATIONS</div>
+    <ul>
+      <li>
+        <a href="{{blogbase}}/automations/teams-bot/" class="parent-link" data-blog-nav="auto-teams" data-children="auto-teams-sub" onclick="toggleBlogSection(event, 'auto-teams-sub')">
+          Teams Notifications Azure Bot <span class="chevron">&#9654;</span>
+        </a>
+        <ul class="sub-items" id="auto-teams-sub">
+          <li><a href="{{blogbase}}/automations/teams-bot/acknowledgement.html" data-blog-nav="auto-teams-ack">Acknowledgement</a></li>
+          <li><a href="{{blogbase}}/automations/teams-bot/considerations.html" data-blog-nav="auto-teams-consider">Considerations</a></li>
+          <li>
+            <a href="{{blogbase}}/automations/teams-bot/getting-started/" class="parent-link" data-blog-nav="auto-teams-basics" data-children="auto-teams-basics-sub" onclick="toggleBlogSection(event, 'auto-teams-basics-sub')">
+              The Basics / Getting Started <span class="chevron">&#9654;</span>
+            </a>
+            <ul class="sub-items" id="auto-teams-basics-sub">
+              <li><a href="{{blogbase}}/automations/teams-bot/getting-started/response-handler.html" data-blog-nav="auto-teams-response">Response Handler Workflow</a></li>
+              <li><a href="{{blogbase}}/automations/teams-bot/getting-started/getting-teams-ids.html" data-blog-nav="auto-teams-ids">Getting the IDs from Teams</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{{blogbase}}/automations/teams-bot/two-stage-message/" class="parent-link" data-blog-nav="auto-teams-2stage" data-children="auto-teams-2stage-sub" onclick="toggleBlogSection(event, 'auto-teams-2stage-sub')">
+              Two Stage Message Process <span class="chevron">&#9654;</span>
+            </a>
+            <ul class="sub-items" id="auto-teams-2stage-sub">
+              <li><a href="{{blogbase}}/automations/teams-bot/two-stage-message/initial-message.html" data-blog-nav="auto-teams-initial">Formatting the Initial Message</a></li>
+              <li><a href="{{blogbase}}/automations/teams-bot/two-stage-message/message-update.html" data-blog-nav="auto-teams-update">Formatting the Message Update</a></li>
+              <li><a href="{{blogbase}}/automations/teams-bot/two-stage-message/message-ids.html" data-blog-nav="auto-teams-msgids">Getting the Message IDs</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{{blogbase}}/automations/teams-bot/action-buttons/" class="parent-link" data-blog-nav="auto-teams-buttons" data-children="auto-teams-buttons-sub" onclick="toggleBlogSection(event, 'auto-teams-buttons-sub')">
+              Formatting Action Buttons <span class="chevron">&#9654;</span>
+            </a>
+            <ul class="sub-items" id="auto-teams-buttons-sub">
+              <li><a href="{{blogbase}}/automations/teams-bot/action-buttons/approve-deny.html" data-blog-nav="auto-teams-approve">Approve/Deny</a></li>
+              <li><a href="{{blogbase}}/automations/teams-bot/action-buttons/assign-resource.html" data-blog-nav="auto-teams-assign">Assign Resource to Ticket</a></li>
+            </ul>
+          </li>
+          <li><a href="{{blogbase}}/automations/teams-bot/working-with-responses.html" data-blog-nav="auto-teams-responses">Working with the Responses</a></li>
+          <li>
+            <a href="{{blogbase}}/automations/teams-bot/incident-notifications/" class="parent-link" data-blog-nav="auto-teams-incidents" data-children="auto-teams-incidents-sub" onclick="toggleBlogSection(event, 'auto-teams-incidents-sub')">
+              Incident/Maintenance Notifications <span class="chevron">&#9654;</span>
+            </a>
+            <ul class="sub-items" id="auto-teams-incidents-sub">
+              <li><a href="{{blogbase}}/automations/teams-bot/incident-notifications/database.html" data-blog-nav="auto-teams-db">Admitting Defeat on the Database</a></li>
+              <li><a href="{{blogbase}}/automations/teams-bot/incident-notifications/workflow-structure.html" data-blog-nav="auto-teams-wfstructure">The Workflow Structure</a></li>
+            </ul>
+          </li>
+          <li><a href="{{blogbase}}/automations/teams-bot/resources.html" data-blog-nav="auto-teams-resources">Resources</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="{{blogbase}}/automations/github-notifications/" class="parent-link" data-blog-nav="auto-github" data-children="auto-github-sub" onclick="toggleBlogSection(event, 'auto-github-sub')">
+          GitHub/GitBook Update Notifications <span class="chevron">&#9654;</span>
+        </a>
+        <ul class="sub-items" id="auto-github-sub">
+          <li><a href="{{blogbase}}/automations/github-notifications/prerequisites.html" data-blog-nav="auto-github-prereqs">Prerequisites</a></li>
+          <li><a href="{{blogbase}}/automations/github-notifications/set-up-basic-workflow.html" data-blog-nav="auto-github-1">1. Set Up a Basic Workflow</a></li>
+          <li><a href="{{blogbase}}/automations/github-notifications/fork-github-repository.html" data-blog-nav="auto-github-2">2. Fork the GitHub Repository</a></li>
+          <li><a href="{{blogbase}}/automations/github-notifications/set-up-automatic-updates.html" data-blog-nav="auto-github-3">3. Set Up Automatic Updates</a></li>
+          <li><a href="{{blogbase}}/automations/github-notifications/set-up-notifications.html" data-blog-nav="auto-github-4">4. Set Up Notifications in GitHub</a></li>
+          <li><a href="{{blogbase}}/automations/github-notifications/remaining-workflow-actions.html" data-blog-nav="auto-github-5">5. Remaining Workflow Actions</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="cat-label">CONNECTWISE PSA ACTIONS</div>
+    <ul>
+      <li><a href="{{blogbase}}/cw-psa/about.html" data-blog-nav="psa-about">About</a></li>
+      <li><a href="{{blogbase}}/cw-psa/assigning-resources.html" data-blog-nav="psa-assign">Assigning Resources to Tickets</a></li>
+      <li><a href="{{blogbase}}/cw-psa/ticket-assignment-note.html" data-blog-nav="psa-ticket-note">Ticket Assignment Note</a></li>
+      <li><a href="{{blogbase}}/cw-psa/unbundle-ticket.html" data-blog-nav="psa-unbundle">Unbundle Ticket</a></li>
+      <li><a href="{{blogbase}}/cw-psa/sales-activity-note.html" data-blog-nav="psa-sales-note">Sales Activity Assignment Note</a></li>
+    </ul>
+
+  </div>
+</aside>

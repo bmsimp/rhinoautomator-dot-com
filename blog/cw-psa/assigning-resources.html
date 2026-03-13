@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assigning Resources to Tickets — CW PSA Actions | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase=".." data-blog-active="psa-assign"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; CONNECTWISE PSA ACTIONS</div>
+      <h1>ASSIGNING RESOURCES<br/><span class="silver">TO TICKETS</span></h1>
+
+      <h2 id="variables">REQUIRED VARIABLES</h2>
+      <ul>
+        <li><strong>ticket_id</strong> &mdash; The ID of the ticket you are assigning the member to</li>
+        <li><strong>member_id</strong> &mdash; The ID of the member you are assigning to the ticket</li>
+      </ul>
+
+      <h2 id="action">ACTION</h2>
+<pre><code>POST</code></pre>
+
+      <h2 id="url">URL PATH</h2>
+<pre><code>{ base URL including version identifier }/schedule/entries</code></pre>
+
+      <h2 id="payload">PAYLOAD</h2>
+<pre><code>{{
+    {
+    "objectId": CTX.ticket_id|int,
+    "member": {
+        "id": CTX.member_id|int
+        },
+    "type": {
+        "id": 4
+        }
+    }
+}}</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../.."></div>
+<script src="../../_includes/components.js"></script>
+<script src="../blog.js"></script>
+</body>
+</html>

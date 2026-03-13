@@ -7,7 +7,7 @@
 //
 // data-base: relative path to the site root (e.g. "." for root pages, ".." for subdirectories)
 // data-active: which nav item to highlight. Values:
-//   "home", "brand", "framework-about", "framework-assessment"
+//   "home", "framework-about", "framework-assessment", "blog", "community-seen-me", "about-me", "brand"
 
 (function () {
   var navEl = document.getElementById('site-nav');
@@ -29,8 +29,14 @@
       if (nav === active) {
         links[i].classList.add('active');
       }
-      // Also highlight the Framework parent dropdown trigger when a sub-item is active
+      // Also highlight parent dropdown triggers when a sub-item is active
       if (nav === 'framework' && (active === 'framework-about' || active === 'framework-assessment')) {
+        links[i].classList.add('active');
+      }
+      if (nav === 'community' && (active === 'community-seen-me')) {
+        links[i].classList.add('active');
+      }
+      if (nav === 'about' && (active === 'about-me' || active === 'brand')) {
         links[i].classList.add('active');
       }
     }
@@ -164,12 +170,19 @@
 })();
 
 // Nav dropdown toggle — global so the onclick in nav.html can call it
-function toggleNavDropdown(e) {
+function toggleNavDropdown(e, id) {
   e.preventDefault();
   e.stopPropagation();
-  document.getElementById('fw-dropdown').classList.toggle('open');
+  var target = document.getElementById(id);
+  var allDropdowns = document.querySelectorAll('.nav-dropdown');
+  for (var i = 0; i < allDropdowns.length; i++) {
+    if (allDropdowns[i] !== target) allDropdowns[i].classList.remove('open');
+  }
+  target.classList.toggle('open');
 }
 document.addEventListener('click', function (e) {
-  var dd = document.getElementById('fw-dropdown');
-  if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+  var allDropdowns = document.querySelectorAll('.nav-dropdown');
+  for (var i = 0; i < allDropdowns.length; i++) {
+    if (!allDropdowns[i].contains(e.target)) allDropdowns[i].classList.remove('open');
+  }
 });

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Getting the IDs from Teams — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-ids"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>GETTING THE IDS<br/><span class="silver">FROM TEAMS</span></h1>
+
+      <h3>IDs Needed</h3>
+      <p>When you work with proactive notifications, you need three IDs to be able to send a notification to Teams:</p>
+      <ul>
+        <li><strong>Tenant ID</strong></li>
+        <li><strong>Team ID</strong></li>
+        <li><strong>Channel ID</strong></li>
+      </ul>
+
+      <h3>From the Bot Response Webhook Handler</h3>
+      <p>Every time your bot is added to a new Team, those IDs get sent to the Rewst webhook. New channels that also get added to a team after the bot is installed are also sent. You can build a sub-workflow that handles how to document those IDs based on the response you get in the JSON payload.</p>
+
+      <h3>Using Graph API</h3>
+      <p>A second way to get these IDs is to use the Graph API:</p>
+      <a href="https://learn.microsoft.com/en-us/graph/api/teams-list?view=graph-rest-1.0&tabs=http" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">&#128196;</div>
+        <div class="link-text">
+          <div class="link-title">List Teams &mdash; Graph API</div>
+          <div class="link-desc">Graph API call to list teams and obtain IDs</div>
+        </div>
+      </a>
+      <a href="https://learn.microsoft.com/en-us/graph/api/channel-list?view=graph-rest-1.0&tabs=http" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">&#128196;</div>
+        <div class="link-text">
+          <div class="link-title">List Channels &mdash; Graph API</div>
+          <div class="link-desc">Graph API call to list channels of teams and obtain channel IDs</div>
+        </div>
+      </a>
+      <p>With those two calls you can discover the IDs for the team and channel. Using this way, you shouldn't need to dig for tenant IDs since to make the calls you would have to have had those in your system already.</p>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

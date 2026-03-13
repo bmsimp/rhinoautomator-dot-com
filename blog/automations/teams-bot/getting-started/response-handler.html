@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create a Response Handler Workflow — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-response"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>CREATE A RESPONSE HANDLER<br/><span class="silver">WORKFLOW IN REWST</span></h1>
+      <p>If you followed along with Giga's blog, you saw that he was using webhook.site as his test location for responses. Instead of doing that, I knew I was going to be building this in Rewst, so I created a new workflow in Rewst that I called "Response Webhook Handler".</p>
+      <ul>
+        <li>Create a new trigger of type "Core - Webhook" that only needs to be set up under your company in Rewst</li>
+        <li>Copy the URL generated and paste this into the Configuration tab of the bot's settings in Azure.</li>
+        <li>In the workflow, create a starting noop action that will handle splitting the response out into the appropriate sub-workflow for the type of action necessary on a response.</li>
+        <li>You'll add branches and sub-workflows as you continue to develop new notifications and action types.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

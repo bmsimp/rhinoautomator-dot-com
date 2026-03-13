@@ -3,12 +3,25 @@
   <div class="links">
     <a href="{{base}}/index.html" data-nav="home">Home</a>
     <div class="nav-dropdown" id="fw-dropdown">
-      <a href="javascript:void(0)" data-nav="framework" onclick="toggleNavDropdown(event)">Framework <span class="dd-arrow">&#9660;</span></a>
+      <a href="javascript:void(0)" data-nav="framework" onclick="toggleNavDropdown(event, 'fw-dropdown')">Framework <span class="dd-arrow">&#9660;</span></a>
       <div class="nav-dropdown-menu">
         <a href="{{base}}/framework/" data-nav="framework-about">About</a>
         <a href="{{base}}/assessment/" data-nav="framework-assessment">Assessment Tool</a>
       </div>
     </div>
-    <a href="{{base}}/brand.html" data-nav="brand">Brand</a>
+    <a href="{{base}}/blog/" data-nav="blog">Blog</a>
+    <div class="nav-dropdown" id="community-dropdown">
+      <a href="javascript:void(0)" data-nav="community" onclick="toggleNavDropdown(event, 'community-dropdown')">Community <span class="dd-arrow">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="{{base}}/community/seen-me.html" data-nav="community-seen-me">Where You've Seen Me</a>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="about-dropdown">
+      <a href="javascript:void(0)" data-nav="about" onclick="toggleNavDropdown(event, 'about-dropdown')">About <span class="dd-arrow">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="{{base}}/about/" data-nav="about-me">About Me</a>
+        <a href="{{base}}/about/brand.html" data-nav="brand">Brand</a>
+      </div>
+    </div>
   </div>
 </nav>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Workflow Structure — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-wfstructure"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>THE WORKFLOW<br/><span class="silver">STRUCTURE</span></h1>
+      <p>Using the template allows you to identify if you've already alerted on the particular incident. Most systems include something in the JSON body with the webhook payload that will be an incident ID. You can store this in that template and then filter if that incident exists or not early in the workflow.</p>
+      <p>This particular workflow will work for anything that uses Atlassian Status Page for sending out webhooks. I only wanted to alert on incidents and not all page updates, so I first filter on the existence of incident in the JSON:</p>
+<pre><code>{{ CTX.body.incident is defined }}</code></pre>
+      <p>If true, I then load the "lookup_table" in a data alias under the "Incident" transition:</p>
+<pre><code>{{ template("script template GUID from end of URL")|from_yaml_string }}</code></pre>
+      <p>Once I've done that, I can then split on if the incident has already been alerted or not:</p>
+<pre><code>{{ CTX.body.incident.id not in [item.smtp2go_incident_id for item in CTX.lookup_table] }}</code></pre>
+      <p>If this evaluates to false, the other transition is "On Success".</p>
+      <p>Yeah, one note with how this is shown. I was dumb and didn't build one master version that does each different system that uses Atlassian Status Page. They are always the same. That's a goal for the future to go back and merge them all into one workflow with a different trigger and variable configuration for each to simplify if I need to update the process.</p>
+      <p>If the action needed is a new card, it sends the card, gets the message IDs, and appends that to the script template list. It then updates the template. If the incident has been alerted previously, the card is updated with new incident information.</p>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

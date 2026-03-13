@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../_includes/tokens.css"/>
+  <link rel="stylesheet" href="blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base=".." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="." data-blog-active=""></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG</div>
+      <h1>NOTES FROM<br/><span class="silver">THE FIELD</span></h1>
+      <p>A collection of automation guides, API references, and integration notes from real-world projects. These are the things I've built, documented, and shared with the community &mdash; written for practitioners, not theorists.</p>
+
+      <div class="cat-grid">
+        <a href="automations/github-notifications.html" class="cat-card">
+          <h3>AUTOMATIONS</h3>
+          <p>Step-by-step guides for real automations I've built, including GitHub/GitBook update notifications and a Teams notification bot using Azure Bot Framework.</p>
+          <div class="count">2 GUIDES</div>
+        </a>
+        <a href="integrations/" class="cat-card">
+          <h3>INTEGRATIONS</h3>
+          <p>Custom integrations built in Rewst for platforms that don't come with a plug-and-play option.</p>
+          <div class="count">1 INTEGRATION</div>
+        </a>
+        <a href="cw-psa/about.html" class="cat-card">
+          <h3>CW PSA ACTIONS</h3>
+          <p>RAILS actions and less-obvious API calls for ConnectWise PSA that I've used in automation workflows.</p>
+          <div class="count">4 REFERENCES</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base=".."></div>
+<script src="../_includes/components.js"></script>
+<script src="blog.js"></script>
+</body>
+</html>

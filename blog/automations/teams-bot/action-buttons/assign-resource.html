@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assign Resource to Ticket — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-assign"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>ASSIGN RESOURCE<br/><span class="silver">TO TICKET</span></h1>
+      <p>In this action, I have a prior step in the workflow that will list all ConnectWise PSA members and build a list of possible choices for the drop down box. I have it show an assign card or an ignore card. Here is what the <code>CTX.member_list</code> variable looks like to be properly formatted for the <code>choices</code> key:</p>
+<pre><code>{
+  "type": "Container",
+  "id": "466ee0a4-b5ba-520e-0b5d-53841fffe66e",
+  "padding": "Default",
+  "items": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.ShowCard",
+          "title": "Assign New Resource",
+          "card": {
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Text",
+                "id": "AssignmentNote",
+                "placeholder": "Add a note to include with the assignment",
+                "isMultiline": true
+              },
+              {
+                "type": "Input.ChoiceSet",
+                "id": "ResourceToAssign",
+                "placeholder": "Select resource",
+                "label": "Which resource would you like to assign?",
+                "choices": "{{ CTX.member_list }}",
+                "isRequired": true
+              },
+              {
+                "type": "ActionSet",
+                "actions": [
+                  {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "data": {
+                      "Type": "TicketAssignment",
+                      "AssignAction": "Assign",
+                      "ServiceTicketId": "{{ CTX.body.retention_ticket_id }}",
+                      "CardId": "{{ CTX.card_id }}",
+                      "CardActivityId": "{{ CTX.card_activity_id }}"
+                    }
+                  }
+                ]
+              }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "padding": "None"
+          },
+          "style": "positive",
+          "isPrimary": true
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Ignore",
+          "card": {
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "ActionSet",
+                "actions": [
+                  {
+                    "type": "Action.Submit",
+                    "title": "Submit &amp; Clear Actions",
+                    "data": {
+                      "Type": "TicketAssignment",
+                      "AssignAction": "Ignore",
+                      "ServiceTicketId": "{{ CTX.body.retention_ticket_id }}",
+                      "CardId": "{{ CTX.card_id }}",
+                      "CardActivityId": "{{ CTX.card_activity_id }}"
+                    }
+                  }
+                ]
+              }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "padding": "None"
+          }
+        }
+      ],
+      "spacing": "None"
+    }
+  ],
+  "spacing": "None"
+}</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

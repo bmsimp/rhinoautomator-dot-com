@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Rhino Automator — Brand Guidelines</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="_includes/tokens.css"/>
+<link rel="stylesheet" href="../_includes/tokens.css"/>
 <style>
   .swatch { cursor: pointer; transition: transform 0.12s; }
   .swatch:hover { transform: scale(1.02); }
@@ -20,7 +20,7 @@
 
 <!-- Nav (loaded from _includes/) -->
 <div style="max-width:1200px;margin:0 auto;">
-  <div id="site-nav" data-base="." data-active="brand"></div>
+  <div id="site-nav" data-base=".." data-active="brand"></div>
 </div>
 
 <div style="max-width:1200px;margin:0 auto;padding:32px 24px;">
@@ -489,7 +489,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="_includes/components.js"></script>
+<script src="../_includes/components.js"></script>
 <script>
 function copyHex(hex) {
   navigator.clipboard.writeText(hex).catch(()=>{});

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1. Set Up a Basic Workflow — GitHub Notifications | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../.." data-blog-active="auto-github-1"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; GITHUB NOTIFICATIONS</div>
+      <h1>1. SET UP A<br/><span class="silver">BASIC WORKFLOW</span></h1>
+
+      <p>Before getting to work on the GitHub side, one of the bits you'll need from your automation platform is a webhook to enter into the notification settings.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h4>In Rewst, create a new workflow</h4>
+          <div class="callout info">
+            <div class="callout-label">Info</div>
+            Remember to follow best practices when naming your workflow. Just as Rewst has undergone a lot of standardization of naming, your organization should be doing the same.
+          </div>
+        </div>
+        <div class="step">
+          <h4>Create a single noop action</h4>
+          <p>Did you pronounce this noop or noop? Debate about it in the ROC Open Mic chat.</p>
+          <div class="callout warning">
+            <div class="callout-label">Warning</div>
+            Don't forget to hit publish to save otherwise you'll see a failure in your workflow history once the webhook notifications are set up in GitHub.
+          </div>
+        </div>
+        <div class="step">
+          <h4>Add a webhook trigger</h4>
+          <p>This trigger only needs to live at the parent organization level, so there is no need to toggle on the managed organizations or select any from the dropdown.</p>
+        </div>
+        <div class="step">
+          <h4>Copy the webhook or leave tab open for reference</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../.."></div>
+<script src="../../../_includes/components.js"></script>
+<script src="../../blog.js"></script>
+</body>
+</html>

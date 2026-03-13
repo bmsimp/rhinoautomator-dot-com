@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unbundle Ticket — CW PSA Actions | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase=".." data-blog-active="psa-unbundle"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; CONNECTWISE PSA ACTIONS</div>
+      <h1>UNBUNDLE<br/><span class="silver">TICKET</span></h1>
+      <p>This action will remove the listed ticket as a bundled item of the parent ticket.</p>
+
+      <h2 id="variables">REQUIRED VARIABLES</h2>
+      <ul>
+        <li><strong>parent_ticket_id</strong> &mdash; The ID of the parent service ticket</li>
+        <li><strong>child_ticket_id</strong> &mdash; The ID of the child service ticket</li>
+      </ul>
+
+      <h2 id="action">ACTION</h2>
+<pre><code>POST</code></pre>
+
+      <h2 id="url">URL PATH</h2>
+<pre><code>{ base URL including version identifier }/services/system_io/actionprocessor/Service/UpdateServiceBundledTicketsAttachmentAction.rails</code></pre>
+
+      <h2 id="headers">HEADERS</h2>
+      <table>
+        <tr><th>Key</th><th>Value</th></tr>
+        <tr><td>Content-Type</td><td>application/x-www-form-urlencoded</td></tr>
+      </table>
+
+      <h2 id="payload">PAYLOAD</h2>
+<pre><code>actionMessage=%7B%22payload%22%3A%22%7B%5C%22recId%5C%22%3A{{ CTX.parent_ticket_id }}%2C%5C%22attachItems%5C%22%3A%5B%7B%5C%22recId%5C%22%3A{{ CTX.child_ticket_id }}%7D%5D%7D%22%2C%22payloadClassName%22%3A%22UpdateServiceBundledTicketsAttachmentAction%22%2C%22project%22%3A%22ServiceCommon%22%7D</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../.."></div>
+<script src="../../_includes/components.js"></script>
+<script src="../blog.js"></script>
+</body>
+</html>

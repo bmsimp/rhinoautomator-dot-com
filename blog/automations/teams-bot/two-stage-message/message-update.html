@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formatting the Message Update — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-update"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>FORMATTING THE<br/><span class="silver">MESSAGE UPDATE</span></h1>
+      <p>When you send an update to the message, that gets handled differently. The format of the message JSON changes to the below:</p>
+<pre><code>{
+  "type": "message",
+  "summary": "Set this to a summary that you want to appear in the
+              desktop/mobile notification in Teams",
+  "attachments": [
+    {
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "contentUrl": null,
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.5",
+        "body": [
+          // Place JSON for the updated message here.
+          // Don't forget to add the JSON for your action buttons.
+          // See the "Formatting Action Buttons" section below.
+        ],
+        "padding": "None",
+        "msteams": { "width": "Full" }
+      }
+    }
+  ],
+  "msteams": { "width": "Full" }
+}</code></pre>
+      <p>Additionally, the sub-workflow for updating the message will also need the <code>card_id</code> and <code>card_activity_id</code> that you received in the response. Those are set as workflow inputs in Rewst for the sub-workflow as they are included in the URL for the PUT call.</p>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

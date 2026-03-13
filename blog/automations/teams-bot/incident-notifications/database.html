@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admitting Defeat on the Database — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-db"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>ADMITTING DEFEAT<br/><span class="silver">ON THE DATABASE</span></h1>
+      <p>Yeah, ok. This is where I had to admit that I was going to need some kind of "database". I still cheated though. Since most systems shouldn't have incidents/maintenance that often, I decided to use a script template in Rewst. The script template is set up in YAML and then immediately converted to JSON using the <code>|from_yaml_string</code> filter. If you've never done this before, you can set a data alias under a noop transition at the start of your workflow and use this format:</p>
+<pre><code>{{ template("template GUID copied from end of URL for template")|from_yaml_string }}</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>

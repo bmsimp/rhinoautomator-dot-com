@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>API Documentation — CW Home Actions | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../.." data-blog-active="cwh-api"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; INTEGRATIONS &mdash; CW HOME</div>
+      <h1>API<br/><span class="silver">DOCUMENTATION</span></h1>
+      <p>Here's a link to my GitHub repository where I've created an OpenAPI 3.0 document for what I've scraped from the dev tools. Feel free to suggest any additional endpoints that you may find.</p>
+
+      <div class="callout">
+        <strong>Note:</strong> This will import as is; however, there are several endpoints that require separate scoping that I have had to remove for the time being. There is a potential limitation on the Rewst side for handling multiple securitySchemes that requires different handling for account team endpoints. Everything regarding users and roles needed to include this in your own internal MSP onboarding is already there.
+      </div>
+
+      <a href="https://github.com/bmsimp/cwhomeapi/blob/main/cwhomeapi.json" target="_blank" rel="noopener" class="link-card">
+        <div class="link-icon">&#128187;</div>
+        <div class="link-text">
+          <div class="link-title">CW Home API &mdash; OpenAPI 3.0 Spec</div>
+          <div class="link-desc">GitHub: bmsimp/cwhomeapi</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../.."></div>
+<script src="../../../_includes/components.js"></script>
+<script src="../../blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Considerations — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../.." data-blog-active="auto-teams-consider"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>CONSIDERATIONS</h1>
+      <ul>
+        <li>My bot is specifically not built to handle unprompted responses. It's a notification bot only with the ability to take action on some of those notifications. As such, you won't see any slash commands, etc. built into my manifest.</li>
+        <li>If you need to proactively message individual users, you'll likely need to create a database to store the tenant IDs and conversation IDs. That is best accomplished somewhere in Azure Tables or SQL and is outside of the scope of what I'm doing.</li>
+        <li>For now, these notifications are only going to the MSP tenant, so I haven't had need to maintain any kind of table of tenant, team, and channel IDs but that is being considered for future improvements as the bot can be used for all kinds of notifications to our clients.</li>
+        <li>The RPA that I use is Rewst. If you don't use Rewst, you may need to modify how some of your setup is completed to account for how your platform handles responses, etc.</li>
+        <li>The primary reason why I wanted to do this is to be able to build Adaptive Cards that people could take action on, and the action buttons would disappear once someone did so. The idea is that this should prevent duplication of efforts.</li>
+        <li>Verify that your base URL for sending messages to Teams is the same as what I have in my sub-workflows if you copy them to your environment. So far, I haven't had a need to turn those into variables.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../.."></div>
+<script src="../../../_includes/components.js"></script>
+<script src="../../blog.js"></script>
+</body>
+</html>

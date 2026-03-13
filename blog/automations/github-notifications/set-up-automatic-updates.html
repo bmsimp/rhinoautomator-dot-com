@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3. Set Up Automatic Updates — GitHub Notifications | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../.." data-blog-active="auto-github-3"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; GITHUB NOTIFICATIONS</div>
+      <h1>3. SET UP<br/><span class="silver">AUTOMATIC UPDATES</span></h1>
+
+      <p>Now that you have your own fork of the Rewst documentation repo, you'll want to be sure to keep it up to date with the upstream repo. GitHub won't automatically pull those updates down for you. That's where the GitHub App Pull comes in.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h4>Install Pull</h4>
+          <p>It'll prompt you to sign in to GitHub again and if your GitHub user is a member of an organization, you'll have the option of installing to your user account or (if you are an admin of the organization) to the organization.</p>
+        </div>
+        <div class="step">
+          <h4>Select "All repositories" or "Only select repositories"</h4>
+          <p>Depending on your GitHub usage, you may have projects that you only want to manually update. This will determine how you configure Pull.</p>
+        </div>
+        <div class="step">
+          <h4>Click Install</h4>
+        </div>
+        <div class="step">
+          <h4>Create pull configuration file</h4>
+          <p>The default for Pull is to create a pull request that you manually need to merge. For something like staying up to date on changes to the upstream repo, you'll want to tweak this so that changes automatically merge to your repo.</p>
+          <p>On your fork of the docs site, click "Add file" and then "+ Create new file". In the "Name your file..." window type <code>.github/pull.yml</code> for the file's name.</p>
+          <div class="callout info">
+            <div class="callout-label">Info</div>
+            Inclusion of the <code>.github/</code> is important. This will create a folder called <code>.github</code> that the Pull GitHub App looks to for any update settings. Depending on the project and your use of the repository, not placing the file here could cause application deployment issues since this folder will be bypassed during Build and Deploy jobs.
+          </div>
+          <p>The contents of that file should be:</p>
+<pre><code>version: "1"
+rules:
+  - base: main
+    upstream: RewstApp:main
+    mergeMethod: merge</code></pre>
+          <p>The <code>mergeMethod</code> is what instructs Pull to automatically merge changes from the upstream repo into yours. Commit those changes to your main branch.</p>
+          <p>Pull will now automatically update your branch of the Rewst docs when the Rewst team publishes new updates!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../.."></div>
+<script src="../../../_includes/components.js"></script>
+<script src="../../blog.js"></script>
+</body>
+</html>

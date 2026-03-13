@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Approve/Deny — Teams Bot | Blog | Rhino Automator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
+  <link rel="stylesheet" href="../../../blog.css"/>
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
+  </div>
+
+  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
+    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-approve"></div>
+    <div class="blog-main">
+      <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
+      <h1>APPROVE<br/><span class="silver">DENY</span></h1>
+      <p>One of the basic actions is a need to approve/deny a request. Using the Adaptive Card Designer, I copied out the basics of the approve/deny JSON and edited to how it is below. You'll note that the <code>data</code> key under the <code>Action.Submit</code> is highly customizable.</p>
+      <p>In this example, you'll see the information that I determined was necessary to be able to handle the approval/denial of a submission from our service desk to our software subject matter experts. I added the following fields for the response handler workflow:</p>
+      <ul>
+        <li><strong>Type</strong> &mdash; Used to condition the initial noop on the response handler workflow to determine which sub-workflow is required</li>
+        <li><strong>ServiceTicketId</strong></li>
+        <li><strong>ApprovedTicketNote</strong> &mdash; The ticket note ID used to generate the approval. On approval, this is used to obtain the note/time entry and send the same information off to Azure DevOps to create the work item.</li>
+        <li><strong>CardID/CardActivityId</strong> &mdash; The information returned from the original message needed to update this message again once the response is recorded.</li>
+      </ul>
+<pre><code>{
+  "type": "Container",
+  "id": "466ee0a4-b5ba-520e-0b5d-53841fffe66e",
+  "padding": "Default",
+  "items": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.ShowCard",
+          "title": "Approve",
+          "card": {
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Text",
+                "id": "ApproveReason",
+                "placeholder": "Add a reason",
+                "isMultiline": true,
+                "isRequired": true
+              },
+              {
+                "type": "ActionSet",
+                "actions": [
+                  {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "data": {
+                      "Type": "QAApproval",
+                      "ServiceTicketId": "{{ CTX.body.Entity.id }}",
+                      "ApprovedTicketNote": "{{ CTX.sorted_notes[CTX.last_note_int].id }}",
+                      "CardId": "{{ CTX.card_id }}",
+                      "CardActivityId": "{{ CTX.card_activity_id }}"
+                    }
+                  }
+                ]
+              }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "padding": "None"
+          },
+          "style": "positive",
+          "isPrimary": true
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Decline",
+          "card": {
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Text",
+                "id": "DeclineReason",
+                "placeholder": "Add a reason",
+                "isMultiline": true,
+                "isRequired": true
+              },
+              {
+                "type": "ActionSet",
+                "actions": [
+                  {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "data": {
+                      "Type": "QAApproval",
+                      "ServiceTicketId": "{{ CTX.body.Entity.id }}",
+                      "CardId": "{{ CTX.card_id }}",
+                      "CardActivityId": "{{ CTX.card_activity_id }}"
+                    }
+                  }
+                ]
+              }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "padding": "None"
+          }
+        }
+      ],
+      "spacing": "None"
+    }
+  ],
+  "spacing": "None"
+}</code></pre>
+    </div>
+  </div>
+
+  <div id="site-footer" data-base="../../../.."></div>
+<script src="../../../../_includes/components.js"></script>
+<script src="../../../blog.js"></script>
+</body>
+</html>
