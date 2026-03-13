@@ -10,11 +10,18 @@
 }
 .blog-sidebar .sidebar-inner { padding: 0 20px; }
 
+.blog-sidebar .blog-home-link {
+  display: block; padding: 0 0 12px 0; margin-bottom: 16px;
+  font-family: var(--ff-body); font-size: var(--fs-body); font-weight: 600;
+  color: var(--cobalt); text-decoration: none; border-left: none;
+  border-bottom: 1px solid var(--border);
+}
+.blog-sidebar .blog-home-link:hover { color: var(--emerald); }
+
 .blog-sidebar .cat-label {
   font-family: var(--ff-display); font-size: 15px; letter-spacing: 0.08em;
   color: var(--text); margin: 24px 0 6px; padding: 0;
 }
-.blog-sidebar .cat-label:first-child { margin-top: 0; }
 
 .blog-sidebar ul { list-style: none; margin: 0; padding: 0; }
 .blog-sidebar li { margin: 0; }
