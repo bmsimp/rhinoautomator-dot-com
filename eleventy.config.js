@@ -29,6 +29,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('favicon.svg');
   eleventyConfig.addPassthroughCopy('og-image.png');
 
+  eleventyConfig.ignores.add('scripts/**');
+
   return {
     templateFormats: ['html', 'njk'],
     htmlTemplateEngine: false,

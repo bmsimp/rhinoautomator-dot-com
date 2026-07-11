@@ -123,8 +123,9 @@ a { text-decoration: none; }
 .site-nav .logo {
   font-family: var(--ff-display); font-size: var(--fs-nav-logo); letter-spacing: 0.07em;
   color: var(--text); text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
 }
-.site-nav .logo span { color: var(--silver); }
+.site-nav .logo .logo-text span { color: var(--silver); }
 .site-nav .links { display: flex; gap: 24px; align-items: center; }
 .site-nav .links a {
   font-weight: 600; font-size: var(--fs-nav-link); letter-spacing: 0.09em; text-transform: uppercase;

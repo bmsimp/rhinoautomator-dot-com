@@ -123,7 +123,13 @@ The assessment tool lives at [`/assessment`](https://rhinoautomator.com/assessme
 │   └── sidebar.njk              # Blog sidebar tree
 ├── assets/
 │   ├── tokens.css               # Shared design tokens & component styles
-│   └── site.js                  # Nav dropdowns, mobile menu, page-nav TOC
+│   ├── site.js                  # Nav dropdowns, mobile menu, page-nav TOC
+│   └── logo/                    # badge.svg, mark.svg, mark-light.svg + CC0 silhouette source
+├── scripts/                     # Dev tools, excluded from the Eleventy build
+│   ├── generate-logo.mjs        # Regenerates assets/logo/* + favicon.svg (npm run logos)
+│   ├── og-card.html             # Source for the social card (keep copy in sync with hero)
+│   ├── render-og.py             # Renders og-image.png from og-card.html
+│   └── BebasNeue-Regular.ttf    # Font file used to bake wordmark text to SVG paths
 ├── assessment/
 │   └── index.html               # Archetypes of Automation assessment tool
 ├── framework/
