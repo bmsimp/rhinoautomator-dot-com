@@ -29,7 +29,8 @@ const HEX_INNER = '100,20 166,58 166,124 34,124 34,58';
 
 // Bake the plate text to paths so the SVG has zero font dependency.
 // opentype.js v2's loadSync() is a deprecated no-op stub that returns undefined;
-// use parse() on the raw buffer instead (see docs/superpowers/specs/2026-07-10-badge-logo-design.md).
+// use parse() on the raw buffer instead. The slice bounds matter: Node Buffers can
+// share a larger pooled ArrayBuffer, so passing .buffer raw would hand parse() the slab.
 const fontBuffer = fs.readFileSync('scripts/BebasNeue-Regular.ttf');
 const font = opentype.parse(fontBuffer.buffer.slice(fontBuffer.byteOffset, fontBuffer.byteOffset + fontBuffer.byteLength));
 const TEXT = 'RHINO AUTOMATOR';
