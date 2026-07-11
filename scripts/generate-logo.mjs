@@ -11,8 +11,13 @@ const BG = '#0C1016';
 const INK = '#1A1F36'; // assessment report text color (light-background report variant only)
 
 const src = fs.readFileSync('assets/logo/rhino-silhouette.svg', 'utf8');
-const viewBox = src.match(/viewBox="([\d. ]+)"/)[1];
+const viewBoxMatch = src.match(/viewBox="([\d. ]+)"/);
+if (!viewBoxMatch) throw new Error('rhino-silhouette.svg: no numeric viewBox attribute found');
+const viewBox = viewBoxMatch[1];
 const gSrc = src.slice(src.indexOf('<g'), src.lastIndexOf('</g>') + 4);
+if (!gSrc.startsWith('<g') || !gSrc.includes('fill="#000000"')) {
+  throw new Error('rhino-silhouette.svg: expected a single <g> group with fill="#000000"');
+}
 
 const rhino = (x, y, w, h, color) => {
   const g = gSrc.replace('fill="#000000"', `fill="${color}"`);
