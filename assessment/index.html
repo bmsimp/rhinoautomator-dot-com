@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Archetypes of Automation — Team Capability Assessment | Rhino Automator</title>
+  <meta name="description" content="Free team capability assessment for the Archetypes of Automation framework — score your team across 8 dimensions and visualize coverage on a radar chart."/>
+  <link rel="canonical" href="https://rhinoautomator.com/assessment/"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <meta name="theme-color" content="#0C1016"/>
+  <meta property="og:site_name" content="Rhino Automator"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Archetypes of Automation — Team Capability Assessment | Rhino Automator"/>
+  <meta property="og:description" content="Free team capability assessment for the Archetypes of Automation framework — score your team across 8 dimensions and visualize coverage on a radar chart."/>
+  <meta property="og:url" content="https://rhinoautomator.com/assessment/"/>
+  <meta property="og:image" content="https://rhinoautomator.com/og-image.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../_includes/tokens.css"/>
   <style>
@@ -17,12 +30,15 @@
       --shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
 
-    /* ── Header ── */
+    /* ── Header — full-bleed gradient, content constrained to the site column ── */
     header {
       background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
-      color: #fff; padding: 20px 32px; display: flex; align-items: center; gap: 16px;
+      color: #fff;
       border-bottom: 1px solid var(--border);
       box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    header > div {
+      max-width: 1100px; margin: 0 auto; padding: 20px 32px;
     }
 header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font-weight: 400; letter-spacing: 0.05em; }
     header h1 .brand-silver { color: var(--silver); }
@@ -30,8 +46,8 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
 .header-logo { font-size: var(--fs-assess-logo); }
 
     /* ── Layout ── */
-    /* ── Card ── */
-    .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+    /* ── Card — shared .card from tokens.css; header/body supply the padding ── */
+    .card { padding: 0; box-shadow: var(--shadow); }
     .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .card-header h2 { font-family: var(--ff-display); font-size: var(--fs-assess-h2); font-weight: 400; letter-spacing: 0.06em; }
     .card-body { padding: 20px; }
@@ -69,8 +85,7 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     /* ── Sub-archetypes ── */
     .sub-list { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
     .sub-list-title { font-family: var(--ff-mono); font-size: var(--fs-assess-mono-sm); font-weight: 500; color: var(--emerald); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
-    .sub-item { margin-bottom: 7px; padding: 8px 10px; background: var(--surface-alt); border-radius: 6px; border-left: 3px solid var(--accent); }
-    .sub-item { border-left-color: var(--cobalt); }
+    .sub-item { margin-bottom: 7px; padding: 8px 10px; background: var(--surface-alt); border-radius: 6px; border-left: 3px solid var(--cobalt); }
     .sub-item-name { font-family: var(--ff-body); font-size: var(--fs-assess-body); font-weight: 700; }
     .sub-item-desc { font-family: var(--ff-body); font-size: var(--fs-assess-desc); color: var(--muted); margin-top: 1px; }
     .sub-item-ref { font-family: var(--ff-mono); font-size: var(--fs-assess-mono-sm); color: var(--muted); margin-top: 2px; font-style: normal; letter-spacing: 0.02em; }
@@ -82,15 +97,13 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
 
     /* ── Buttons ── */
     .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .btn-secondary { background: transparent; color: var(--silver, #D1DCE8); border: 1.5px solid var(--border); }
-    .btn-secondary:hover { background: var(--surface-alt); border-color: var(--silver); }
     .btn-success { background: var(--emerald); color: var(--bg); border: none; }
     .btn-success:hover { background: #2bb585; }
-    .btn-danger { background: #e03131; color: #fff; border: none; }
-    .btn-danger:hover { background: #b52929; }
+    .btn-danger { background: transparent; color: #EF4444; border: 1.5px solid #EF4444; }
+    .btn-danger:hover { background: rgba(239,68,68,0.08); }
 
     /* ── Team Tab ── */
-    .team-layout { display: grid; grid-template-columns: 1fr 440px; gap: 24px; padding: 24px 32px; align-items: start; }
+    .team-layout { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 440px; gap: 24px; padding: 24px 32px; align-items: start; }
     @media (max-width: 960px) { .team-layout { grid-template-columns: 1fr; } }
     #team-member-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
     #team-member-list.multi-col { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
@@ -193,7 +206,9 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
 <body>
 
 <!-- Site Nav (loaded from _includes/) -->
-<div id="site-nav" data-base=".." data-active="framework-assessment"></div>
+<div style="max-width:1100px;margin:0 auto">
+  <div id="site-nav" data-base=".." data-active="framework-assessment"></div>
+</div>
 
 <header>
   <div>
@@ -209,11 +224,11 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
         <div class="card-header" style="border-bottom:none">
           <h2>Assessment Control <button class="info-btn" onclick="openHowtoModal()" aria-label="How to use this tool">i</button></h2>
           <div class="action-row" style="margin:0">
-            <button class="btn btn-success" onclick="openWizard()">+ Add Assessment</button>
-            <button class="btn btn-primary" onclick="importTeamJSON()">&#8679; Import</button>
-            <button class="btn btn-primary" onclick="exportTeamJSON()">&#8681; Export</button>
+            <button class="btn btn-primary" onclick="openWizard()">+ Add Assessment</button>
+            <button class="btn btn-outline-silver" onclick="importTeamJSON()">&#8679; Import</button>
+            <button class="btn btn-outline-silver" onclick="exportTeamJSON()">&#8681; Export</button>
+            <button class="btn btn-outline-silver" onclick="openPdfModal()">&#128438; Generate Report</button>
             <button class="btn btn-danger" onclick="clearTeam()">Clear All</button>
-            <button class="btn btn-primary" onclick="openPdfModal()">&#128438; Generate Report</button>
           </div>
         </div>
       </div>
@@ -251,9 +266,9 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
     <div class="modal-body" id="wizard-body"></div>
     <div class="modal-footer">
       <div class="wizard-footer">
-        <button class="btn btn-secondary" id="wizard-back" onclick="wizardBack()">&#8592; Back</button>
+        <button class="btn btn-outline-silver" id="wizard-back" onclick="wizardBack()">&#8592; Back</button>
         <div class="wizard-footer-right">
-          <button class="btn btn-secondary" onclick="closeWizard()">Cancel</button>
+          <button class="btn btn-outline-silver" onclick="closeWizard()">Cancel</button>
           <button class="btn btn-primary" id="wizard-next" onclick="wizardNext()">Next &#8594;</button>
         </div>
       </div>
@@ -298,7 +313,7 @@ header h1 { font-family: var(--ff-display); font-size: var(--fs-assess-h1); font
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closePdfModal()">Cancel</button>
+      <button class="btn btn-outline-silver" onclick="closePdfModal()">Cancel</button>
       <button class="btn btn-primary" onclick="doGenerateReport()">&#128438; Generate Report</button>
     </div>
   </div>
@@ -731,7 +746,7 @@ function renderTeamMembers() {
       '</div>' +
       '<div class="member-card-header">' +
         '<span class="member-total">Total: ' + total + '/80</span>' +
-        '<button class="btn btn-primary" style="padding:4px 10px;font-size:0.75rem" onclick="editMember(' + i + ')">Edit</button>' +
+        '<button class="btn btn-outline-silver" style="padding:4px 10px;font-size:0.75rem" onclick="editMember(' + i + ')">Edit</button>' +
         '<button class="btn btn-danger" style="padding:4px 10px;font-size:0.75rem" onclick="removeMember(' + i + ')">Remove</button>' +
         '<label class="member-toggle" data-tooltip="' + (enabled ? 'Exclude from radar and gap analysis' : 'Include in radar and gap analysis') + '"><input type="checkbox"' + (enabled ? ' checked' : '') + ' onchange="toggleMember(' + i + ')"><span class="toggle-track"></span></label>' +
       '</div>' +
@@ -1198,8 +1213,9 @@ function buildReportHtml(includeIndiv, depth) {
     "rgba(110,231,183,0.25)","rgba(147,197,253,0.25)","rgba(167,139,250,0.25)","rgba(45,212,191,0.25)"
   ];
   var h = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">';
-  h += '<title>Archetypes of Automation \u2014 Capability Report | Rhino Automator</title><style>';
-  h += '@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap");';
+  h += '<title>Archetypes of Automation \u2014 Capability Report | Rhino Automator</title>';
+  h += '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+  h += '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><style>';
   h += '* { box-sizing:border-box; margin:0; padding:0; }';
   h += 'body { font-family:"Barlow Condensed",sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
   h += '.rh { display:flex; gap:16px; align-items:center; padding-bottom:18px; border-bottom:3px solid #3B82F6; margin-bottom:28px; }';
