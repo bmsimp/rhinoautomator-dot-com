@@ -10,7 +10,9 @@ pageCss: |2
       }
       .hero {
         max-width: 1100px; margin: 0 auto; padding: 80px 32px 64px;
+        display: flex; align-items: center; justify-content: space-between; gap: 48px;
       }
+      .hero-badge { width: 300px; height: auto; flex-shrink: 0; }
       .hero-tag {
         font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--emerald);
         letter-spacing: 0.16em; margin-bottom: 16px;
@@ -35,7 +37,11 @@ pageCss: |2
 
       /* Pillar cards */
       .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      @media (max-width: 768px) { .pillars { grid-template-columns: 1fr; } }
+      @media (max-width: 768px) {
+        .pillars { grid-template-columns: 1fr; }
+        .hero { flex-direction: column; align-items: flex-start; }
+        .hero-badge { width: 180px; align-self: center; }
+      }
       .pillar-card { padding: 28px 24px; display: block; }
       .pillar-icon { margin-bottom: 16px; }
       .pillar-card h3 {
@@ -81,9 +87,12 @@ pageCss: |2
   <!-- Hero -->
   <div class="hero-bleed">
     <section class="hero">
-      <div class="hero-tag">// AUTOMATION ENTHUSIAST · COMMUNITY ENGAGEMENT & EDUCATION</div>
-      <h1>MAKING AUTOMATION<br/><span class="silver">ACCESSIBLE.</span></h1>
-      <p class="hero-sub">Helping MSPs and IT teams build automation muscle — without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to.</p>
+      <div class="hero-text">
+        <div class="hero-tag">// AUTOMATION ENTHUSIAST · COMMUNITY ENGAGEMENT & EDUCATION</div>
+        <h1>MAKING AUTOMATION<br/><span class="silver">ACCESSIBLE.</span></h1>
+        <p class="hero-sub">Helping MSPs and IT teams build automation muscle — without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to.</p>
+      </div>
+      <img class="hero-badge" src="/assets/logo/badge.svg" alt="Rhino Automator badge" width="300" height="300"/>
     </section>
   </div>
 
