@@ -1,35 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Unbundle Ticket — CW PSA Actions | Blog | Rhino Automator</title>
-  <meta name="description" content="This action will remove the listed ticket as a bundled item of the parent ticket."/>
-  <link rel="canonical" href="https://rhinoautomator.com/blog/cw-psa/unbundle-ticket.html"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-  <meta name="theme-color" content="#0C1016"/>
-  <meta property="og:site_name" content="Rhino Automator"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Unbundle Ticket — CW PSA Actions | Blog | Rhino Automator"/>
-  <meta property="og:description" content="This action will remove the listed ticket as a bundled item of the parent ticket."/>
-  <meta property="og:url" content="https://rhinoautomator.com/blog/cw-psa/unbundle-ticket.html"/>
-  <meta property="og:image" content="https://rhinoautomator.com/og-image.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../_includes/tokens.css"/>
-  <link rel="stylesheet" href="../blog.css"/>
-</head>
-<body>
-
-  <div style="max-width:1100px;margin:0 auto">
-    <div id="site-nav" data-base="../.." data-active="blog"></div>
-  </div>
-
-  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
-    <div id="blog-sidebar" data-blogbase=".." data-blog-active="psa-unbundle"></div>
-    <div class="blog-main">
+---
+title: "Unbundle Ticket — CW PSA Actions | Blog | Rhino Automator"
+description: "This action will remove the listed ticket as a bundled item of the parent ticket."
+blogActive: "psa-unbundle"
+---
       <div class="subtitle">// BLOG &mdash; CONNECTWISE PSA ACTIONS</div>
       <h1>UNBUNDLE<br/><span class="silver">TICKET</span></h1>
       <p>This action will remove the listed ticket as a bundled item of the parent ticket.</p>
@@ -54,11 +27,3 @@
 
       <h2 id="payload">PAYLOAD</h2>
 <pre><code>actionMessage=%7B%22payload%22%3A%22%7B%5C%22recId%5C%22%3A{{ CTX.parent_ticket_id }}%2C%5C%22attachItems%5C%22%3A%5B%7B%5C%22recId%5C%22%3A{{ CTX.child_ticket_id }}%7D%5D%7D%22%2C%22payloadClassName%22%3A%22UpdateServiceBundledTicketsAttachmentAction%22%2C%22project%22%3A%22ServiceCommon%22%7D</code></pre>
-    </div>
-  </div>
-
-  <div id="site-footer" data-base="../.."></div>
-<script src="../../_includes/components.js"></script>
-<script src="../blog.js"></script>
-</body>
-</html>

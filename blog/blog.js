@@ -1,57 +1,37 @@
-// Blog sidebar loader and interaction
-// Loads sidebar.html and injects it, then highlights the active page.
-//
-// Usage: <div id="blog-sidebar" data-blogbase="." data-blog-active="auto-teams"></div>
-//
-// data-blogbase: relative path to /blog/ (e.g. "." from /blog/index.html, ".." from /blog/automations/x.html)
-// data-blog-active: which sidebar item to highlight (matches data-blog-nav values in sidebar.html)
+// Blog sidebar interaction
+// The sidebar markup is baked in at build time (_includes/sidebar.njk); this script
+// highlights the active page (from the aside's data-active attribute, set per page
+// via blogActive front matter) and expands its ancestor sections.
 
 (function () {
-  var el = document.getElementById('blog-sidebar');
-  if (!el) return;
+  var sidebar = document.querySelector('.blog-sidebar');
+  if (!sidebar) return;
 
-  var blogbase = el.getAttribute('data-blogbase') || '.';
-  var active = el.getAttribute('data-blog-active') || '';
+  var active = sidebar.getAttribute('data-active') || '';
+  if (!active) return;
 
-  fetch(blogbase + '/sidebar.html')
-    .then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.text();
-    })
-    .then(function (html) {
-      html = html.replace(/\{\{blogbase\}\}/g, blogbase);
-      el.outerHTML = html;
+  var links = sidebar.querySelectorAll('[data-blog-nav]');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('data-blog-nav') !== active) continue;
+    links[i].classList.add('active');
 
-      // Highlight active link
-      var links = document.querySelectorAll('.blog-sidebar [data-blog-nav]');
-      for (var i = 0; i < links.length; i++) {
-        if (links[i].getAttribute('data-blog-nav') === active) {
-          links[i].classList.add('active');
+    // If this is a sub-item, expand all ancestor sections
+    var subItems = links[i].closest('.sub-items');
+    while (subItems) {
+      subItems.classList.add('open');
+      var parentLink = subItems.previousElementSibling;
+      if (parentLink) parentLink.classList.add('expanded');
+      subItems = subItems.parentElement ? subItems.parentElement.closest('.sub-items') : null;
+    }
 
-          // If this is a sub-item, expand all ancestor sections
-          var subItems = links[i].closest('.sub-items');
-          while (subItems) {
-            subItems.classList.add('open');
-            var parentLink = subItems.previousElementSibling;
-            if (parentLink) parentLink.classList.add('expanded');
-            subItems = subItems.parentElement ? subItems.parentElement.closest('.sub-items') : null;
-          }
-
-          // If this is a parent link, expand its children
-          var childId = links[i].getAttribute('data-children');
-          if (childId) {
-            var children = document.getElementById(childId);
-            if (children) children.classList.add('open');
-            links[i].classList.add('expanded');
-          }
-        }
-      }
-    })
-    .catch(function (err) {
-      console.warn('[blog] failed to load sidebar:', err);
-      var placeholder = document.getElementById('blog-sidebar');
-      if (placeholder) placeholder.remove();
-    });
+    // If this is a parent link, expand its children
+    var childId = links[i].getAttribute('data-children');
+    if (childId) {
+      var children = document.getElementById(childId);
+      if (children) children.classList.add('open');
+      links[i].classList.add('expanded');
+    }
+  }
 })();
 
 // Toggle expandable sidebar sections

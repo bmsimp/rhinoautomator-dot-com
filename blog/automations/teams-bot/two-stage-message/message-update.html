@@ -1,35 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formatting the Message Update — Teams Bot | Blog | Rhino Automator</title>
-  <meta name="description" content="When you send an update to the message, that gets handled differently. The format of the message JSON changes to the below:"/>
-  <link rel="canonical" href="https://rhinoautomator.com/blog/automations/teams-bot/two-stage-message/message-update.html"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-  <meta name="theme-color" content="#0C1016"/>
-  <meta property="og:site_name" content="Rhino Automator"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Formatting the Message Update — Teams Bot | Blog | Rhino Automator"/>
-  <meta property="og:description" content="When you send an update to the message, that gets handled differently. The format of the message JSON changes to the below:"/>
-  <meta property="og:url" content="https://rhinoautomator.com/blog/automations/teams-bot/two-stage-message/message-update.html"/>
-  <meta property="og:image" content="https://rhinoautomator.com/og-image.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../../../../_includes/tokens.css"/>
-  <link rel="stylesheet" href="../../../blog.css"/>
-</head>
-<body>
-
-  <div style="max-width:1100px;margin:0 auto">
-    <div id="site-nav" data-base="../../../.." data-active="blog"></div>
-  </div>
-
-  <div class="blog-layout" style="max-width:1100px;margin:0 auto">
-    <div id="blog-sidebar" data-blogbase="../../.." data-blog-active="auto-teams-update"></div>
-    <div class="blog-main">
+---
+title: "Formatting the Message Update — Teams Bot | Blog | Rhino Automator"
+description: "When you send an update to the message, that gets handled differently. The format of the message JSON changes to the below:"
+blogActive: "auto-teams-update"
+---
       <div class="subtitle">// BLOG &mdash; AUTOMATIONS &mdash; TEAMS BOT</div>
       <h1>FORMATTING THE<br/><span class="silver">MESSAGE UPDATE</span></h1>
       <p>When you send an update to the message, that gets handled differently. The format of the message JSON changes to the below:</p>
@@ -58,11 +31,3 @@
   "msteams": { "width": "Full" }
 }</code></pre>
       <p>Additionally, the sub-workflow for updating the message will also need the <code>card_id</code> and <code>card_activity_id</code> that you received in the response. Those are set as workflow inputs in Rewst for the sub-workflow as they are included in the URL for the PUT call.</p>
-    </div>
-  </div>
-
-  <div id="site-footer" data-base="../../../.."></div>
-<script src="../../../../_includes/components.js"></script>
-<script src="../../../blog.js"></script>
-</body>
-</html>

@@ -1,0 +1,31 @@
+<nav class="site-nav">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <a href="/" class="logo">RHINO <span>AUTOMATOR</span></a>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="links">
+    <a href="/" class="{{ 'active' if navActive == 'home' }}">Home</a>
+    <div class="nav-dropdown" id="fw-dropdown">
+      <a href="javascript:void(0)" class="{{ 'active' if navActive in ['framework-about', 'framework-assessment'] }}" aria-haspopup="true" aria-expanded="false" onclick="toggleNavDropdown(event, 'fw-dropdown')">Framework <span class="dd-arrow" aria-hidden="true">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="/framework/" class="{{ 'active' if navActive == 'framework-about' }}">About</a>
+        <a href="/assessment/" class="{{ 'active' if navActive == 'framework-assessment' }}">Assessment Tool</a>
+      </div>
+    </div>
+    <a href="/blog/" class="{{ 'active' if navActive == 'blog' }}">Blog</a>
+    <div class="nav-dropdown" id="community-dropdown">
+      <a href="javascript:void(0)" class="{{ 'active' if navActive == 'community-seen-me' }}" aria-haspopup="true" aria-expanded="false" onclick="toggleNavDropdown(event, 'community-dropdown')">Community <span class="dd-arrow" aria-hidden="true">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="/community/seen-me.html" class="{{ 'active' if navActive == 'community-seen-me' }}">Where You've Seen Me</a>
+      </div>
+    </div>
+    <div class="nav-dropdown" id="about-dropdown">
+      <a href="javascript:void(0)" class="{{ 'active' if navActive in ['about-me', 'brand'] }}" aria-haspopup="true" aria-expanded="false" onclick="toggleNavDropdown(event, 'about-dropdown')">About <span class="dd-arrow" aria-hidden="true">&#9660;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="/about/" class="{{ 'active' if navActive == 'about-me' }}">About Me</a>
+        <a href="/about/brand.html" class="{{ 'active' if navActive == 'brand' }}">Brand</a>
+      </div>
+    </div>
+  </div>
+</nav>

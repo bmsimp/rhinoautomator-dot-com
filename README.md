@@ -4,7 +4,28 @@
 
 The website and digital home of **Rhino Automator**, a brand by Brian Simpson focused on helping MSPs and IT teams build automation muscle without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to — regardless of technical background.
 
-Hosted via Cloudflare Pages.
+Built with [Eleventy](https://www.11ty.dev/) and hosted via Cloudflare Pages.
+
+## Developing
+
+```bash
+npm install
+npm run serve   # local dev server with live reload
+npm run build   # writes the site to _site/
+```
+
+**Adding a page:** create an `.html` file with front matter — the base layout supplies the head, nav, and footer:
+
+```html
+---
+title: My Page — Rhino Automator
+description: One-sentence summary used for meta description and link previews.
+navActive: blog        # which top-nav item to highlight (omit for none)
+---
+<div class="content">…page content only — no <html>/<head>/<body>…</div>
+```
+
+Blog pages get `layout: blog.njk`, `blog: true`, and `navActive: blog` automatically from `blog/blog.11tydata.json`; set `blogActive` in front matter to the sidebar key to highlight (see `_includes/sidebar.njk`), and add the new page's link to that sidebar. Page-specific CSS goes in a `pageCss: |2` front-matter block. URLs mirror source paths exactly (`about/brand.html` → `/about/brand.html`).
 
 ---
 
@@ -45,8 +66,8 @@ The assessment tool lives at [`/assessment`](https://rhinoautomator.com/assessme
 ├── blog/
 │   ├── index.html               # Blog landing page
 │   ├── blog.css                 # Shared blog styles
-│   ├── blog.js                  # Blog sidebar loader
-│   ├── sidebar.html             # Shared sidebar nav (loaded via JS)
+│   ├── blog.js                  # Sidebar active-state + expand/collapse behavior
+│   ├── blog.11tydata.json       # Directory data: blog layout + nav defaults
 │   ├── automations/
 │   │   ├── index.html               # Automations category landing
 │   │   ├── teams-bot/
@@ -94,15 +115,21 @@ The assessment tool lives at [`/assessment`](https://rhinoautomator.com/assessme
 │       └── sales-activity-note.html
 ├── community/
 │   └── seen-me.html             # Where You've Seen Me — articles, videos, open mic contributions
-├── _includes/
-│   ├── tokens.css               # Shared design tokens & component styles (colors, fonts, nav, buttons, footer)
-│   ├── nav.html                 # Shared navigation bar (loaded via JS)
-│   ├── footer.html              # Shared footer (loaded via JS)
-│   └── components.js            # Loader script for shared components + page-nav
+├── _includes/                   # Eleventy layouts & includes (not published)
+│   ├── base.njk                 # Base layout: head/meta/OG, nav, footer
+│   ├── blog.njk                 # Blog layout: sidebar + main column (wraps base)
+│   ├── nav.njk                  # Navigation bar (active state from navActive)
+│   ├── footer.njk               # Footer
+│   └── sidebar.njk              # Blog sidebar tree
+├── assets/
+│   ├── tokens.css               # Shared design tokens & component styles
+│   └── site.js                  # Nav dropdowns, mobile menu, page-nav TOC
 ├── assessment/
 │   └── index.html               # Archetypes of Automation assessment tool
 ├── framework/
 │   └── index.html               # About the Framework page
+├── eleventy.config.js           # Build config: exact-URL permalinks, passthrough copy
+├── package.json
 ├── CLAUDE.md
 ├── README.md
 └── LICENSE
