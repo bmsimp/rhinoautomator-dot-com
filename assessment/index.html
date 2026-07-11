@@ -1194,7 +1194,7 @@ function buildReportHtml(includeIndiv, depth) {
   h += '* { box-sizing:border-box; margin:0; padding:0; }';
   h += 'body { font-family:"Barlow Condensed",sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
   h += '.rh { display:flex; gap:16px; align-items:center; padding-bottom:18px; border-bottom:3px solid #3B82F6; margin-bottom:28px; }';
-  h += '.rh-logo { font-size:2.4rem; }';
+  h += '.rh-logo { width:52px; height:52px; }';
   h += 'h1 { font-family:"Bebas Neue",sans-serif; font-size:1.6rem; font-weight:400; color:#3B82F6; margin-bottom:2px; letter-spacing:0.05em; }';
   h += '.sub { font-family:"DM Mono",monospace; font-size:0.72rem; color:#6b7394; letter-spacing:0.04em; }';
   h += 'h2 { font-family:"Bebas Neue",sans-serif; font-size:1.15rem; font-weight:400; color:#1a1f36; border-bottom:2px solid #3B82F6; padding-bottom:6px; margin:28px 0 14px; letter-spacing:0.05em; }';
@@ -1220,7 +1220,7 @@ function buildReportHtml(includeIndiv, depth) {
   h += '<button onclick="window.close()" style="padding:9px 14px;background:#fff;color:#6b7394;border:1px solid #dde3ee;border-radius:5px;font-family:Barlow Condensed,sans-serif;cursor:pointer;font-size:13px">&times; Close</button>';
   h += '</div>';
 
-  h += '<div class="rh"><div class="rh-logo">&#129423;</div>';
+  h += '<div class="rh"><div class="rh-logo"><img src="' + location.origin + '/assets/logo/mark-light.svg" width="52" height="52" alt=""/></div>';
   h += '<div><h1>ARCHETYPES OF AUTOMATION</h1><p class="sub">A framework by Brian Simpson &middot; rhinoautomator.com &middot; Team Capability Report &middot; ' + date + '</p></div></div>';
 
   var pdfActive = [];
