@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}"/>
+  <link rel="canonical" href="{{ canonical }}"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <meta name="theme-color" content="#0C1016"/>
+  <meta property="og:site_name" content="Rhino Automator"/>
+  <meta property="og:type" content="{{ ogType }}"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:url" content="{{ canonical }}"/>
+  <meta property="og:image" content="https://rhinoautomator.com/og-image.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/tokens.css"/>
+{%- if blog %}
+  <link rel="stylesheet" href="/blog/blog.css"/>
+{%- endif %}
+{%- if pageCss %}
+  <style>
+{{ pageCss | safe }}
+  </style>
+{%- endif %}
+</head>
+<body>
+
+  <div style="max-width:1100px;margin:0 auto">
+    {% include "nav.njk" %}
+  </div>
+
+  <div id="main-content" tabindex="-1">
+{{ content | safe }}
+  </div>
+
+  {% include "footer.njk" %}
+
+<script src="/assets/site.js"></script>
+{%- if blog %}
+<script src="/blog/blog.js"></script>
+{%- endif %}
+</body>
+</html>

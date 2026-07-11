@@ -1,0 +1,9 @@
+---
+layout: base.njk
+---
+<div class="blog-layout" style="max-width:1100px;margin:0 auto">
+  {% include "sidebar.njk" %}
+  <div class="blog-main">
+{{ content | safe }}
+  </div>
+</div>

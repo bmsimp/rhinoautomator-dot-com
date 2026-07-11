@@ -1,79 +1,11 @@
-// Shared component loader for rhinoautomator.com
-// Loads nav.html and footer.html from _includes/ and injects them into placeholder elements.
-//
-// Usage: Add these elements to any page:
-//   <div id="site-nav" data-base="." data-active="home"></div>
-//   <div id="site-footer" data-base="."></div>
-//
-// data-base: relative path to the site root (e.g. "." for root pages, ".." for subdirectories)
-// data-active: which nav item to highlight. Values:
-//   "home", "framework-about", "framework-assessment", "blog", "community-seen-me", "about-me", "brand"
+// Site-wide interactivity for rhinoautomator.com
+// Nav, footer, and sidebar are baked in at build time by Eleventy (_includes/*.njk);
+// this file only handles behavior that genuinely needs JS.
 
-(function () {
-  var navEl = document.getElementById('site-nav');
-  var footerEl = document.getElementById('site-footer');
-  if (!navEl && !footerEl) { window.__includesReady = Promise.resolve(); return; }
-
-  var base = (navEl || footerEl).getAttribute('data-base') || '.';
-  var active = navEl ? (navEl.getAttribute('data-active') || '') : '';
-
-  function loadInto(el, file) {
-    return fetch(base + '/_includes/' + file)
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.text();
-      })
-      .then(function (html) {
-        el.outerHTML = html.replace(/\{\{base\}\}/g, base);
-      })
-      .catch(function (err) {
-        console.warn('[includes] failed to load ' + file + ':', err);
-      });
-  }
-
-  function setActive() {
-    // Highlight active nav links
-    var links = document.querySelectorAll('.site-nav [data-nav]');
-    for (var i = 0; i < links.length; i++) {
-      var nav = links[i].getAttribute('data-nav');
-      if (nav === active) {
-        links[i].classList.add('active');
-      }
-      // Also highlight parent dropdown triggers when a sub-item is active
-      if (nav === 'framework' && (active === 'framework-about' || active === 'framework-assessment')) {
-        links[i].classList.add('active');
-      }
-      if (nav === 'community' && (active === 'community-seen-me')) {
-        links[i].classList.add('active');
-      }
-      if (nav === 'about' && (active === 'about-me' || active === 'brand')) {
-        links[i].classList.add('active');
-      }
-    }
-  }
-
-  var jobs = [];
-  if (navEl) jobs.push(loadInto(navEl, 'nav.html'));
-  if (footerEl) jobs.push(loadInto(footerEl, 'footer.html'));
-
-  // Other scripts (page-nav below) can wait on this to know the includes are in the DOM.
-  window.__includesReady = Promise.all(jobs).then(function () {
-    setActive();
-    // Give the skip link in nav.html a target: tag the page's main content region.
-    if (!document.getElementById('main-content')) {
-      var main = document.querySelector('.blog-main, .content, .team-layout, .hero, .section');
-      if (main) {
-        main.id = 'main-content';
-        main.setAttribute('tabindex', '-1');
-      }
-    }
-  });
-})();
-
-// Intrapage navigation — auto-generated from h2[id] elements
+// ── Intrapage navigation — auto-generated from headings with ids ──
 // Usage: Add <div id="page-nav"></div> anywhere on the page.
-// The script scans for all h2 elements with an id attribute and builds a sticky
-// right-side table of contents. Active state updates on scroll.
+// Scans h1/h2/h3 elements with an id (plus any [data-nav-label] element) and
+// builds a sticky right-side table of contents. Active state updates on scroll.
 (function () {
   var container = document.getElementById('page-nav');
   if (!container) return;
@@ -96,7 +28,6 @@
     // Collect h1[id], h2[id], h3[id] elements and any element with data-nav-label
     var hTags = document.querySelectorAll('h1[id], h2[id], h3[id]');
     var labeled = document.querySelectorAll('[data-nav-label]');
-    // Merge into a single ordered list by document position
     var all = [];
     for (var a = 0; a < hTags.length; a++) {
       var tag = hTags[a].tagName;
@@ -121,13 +52,13 @@
     for (var i = 0; i < headings.length; i++) {
       var h = headings[i];
       var li = document.createElement('li');
-      var a = document.createElement('a');
-      a.href = '#' + h.id;
-      a.textContent = h.label;
-      a.setAttribute('data-target', h.id);
-      if (h.indent) a.style.paddingLeft = '24px';
-      if (h.indent) a.style.fontSize = 'var(--fs-pagenav-sub)';
-      li.appendChild(a);
+      var a2 = document.createElement('a');
+      a2.href = '#' + h.id;
+      a2.textContent = h.label;
+      a2.setAttribute('data-target', h.id);
+      if (h.indent) a2.style.paddingLeft = '24px';
+      if (h.indent) a2.style.fontSize = 'var(--fs-pagenav-sub)';
+      li.appendChild(a2);
       ul.appendChild(li);
     }
     nav.appendChild(ul);
@@ -160,18 +91,14 @@
     onScroll();
   }
 
-  // Build once the nav/footer includes are in the DOM (no timing race)
-  function start() {
-    (window.__includesReady || Promise.resolve()).then(build);
-  }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start);
+    document.addEventListener('DOMContentLoaded', build);
   } else {
-    start();
+    build();
   }
 })();
 
-// Mobile nav toggle — global so the onclick in nav.html can call it
+// ── Mobile nav toggle — global so the onclick in nav.njk can call it ──
 function toggleMobileNav(btn) {
   var nav = btn.closest('.site-nav');
   if (!nav) return;
@@ -179,10 +106,10 @@ function toggleMobileNav(btn) {
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 
-// Nav dropdown toggle — global so the onclick in nav.html can call it
+// ── Nav dropdown toggle — global so the onclick in nav.njk can call it ──
 function setNavDropdownState(dd, open) {
   dd.classList.toggle('open', open);
-  var trigger = dd.firstElementChild;
+  var trigger = dd.querySelector('a');
   if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 function toggleNavDropdown(e, id) {

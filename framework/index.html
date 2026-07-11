@@ -1,79 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About the Framework — Archetypes of Automation | Rhino Automator</title>
-  <meta name="description" content="The Archetypes of Automation framework: 8 dimensions of automation capability that help teams find their gaps and fill them."/>
-  <link rel="canonical" href="https://rhinoautomator.com/framework/"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-  <meta name="theme-color" content="#0C1016"/>
-  <meta property="og:site_name" content="Rhino Automator"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="About the Framework — Archetypes of Automation | Rhino Automator"/>
-  <meta property="og:description" content="The Archetypes of Automation framework: 8 dimensions of automation capability that help teams find their gaps and fill them."/>
-  <meta property="og:url" content="https://rhinoautomator.com/framework/"/>
-  <meta property="og:image" content="https://rhinoautomator.com/og-image.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../_includes/tokens.css"/>
-  <style>
-    /* Archetype cards — collapsible */
-    .arch-card { margin-bottom: 14px; overflow: hidden; padding: 0; }
-    .arch-card-trigger {
-      padding: 20px 22px; cursor: pointer; display: flex; align-items: center;
-      justify-content: space-between; gap: 12px; user-select: none;
-    }
-    .arch-card-trigger:hover { background: rgba(59,130,246,0.04); }
-    .arch-card-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-    .arch-num {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--cobalt); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--ff-mono); font-size: var(--fs-body); font-weight: 500; flex-shrink: 0;
-    }
-    .arch-title-wrap { flex: 1; min-width: 0; }
-    .arch-title-wrap h3 { margin: 0; font-size: 26px; }
-    .arch-card-desc { font-size: var(--fs-body); color: var(--muted); line-height: 1.5; margin-top: 2px; }
-    .arch-chevron {
-      font-size: 20px; color: var(--muted); transition: transform 0.25s; flex-shrink: 0;
-    }
-    .arch-card.open .arch-chevron { transform: rotate(180deg); }
-    .arch-card.open .arch-chevron { color: var(--cobalt); }
-    .arch-body {
-      max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
-    }
-    .arch-body-inner { padding: 0 22px 22px; }
-    .arch-intro { font-size: var(--fs-body); color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
-    .sub-list { display: flex; flex-direction: column; gap: 10px; }
-    .sub-item {
-      padding: 14px 16px; background: var(--surface-alt); border-radius: 8px;
-      border-left: 3px solid var(--cobalt);
-    }
-    .sub-name { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 6px; }
-    .sub-desc { font-size: var(--fs-nav-link); color: var(--muted); line-height: 1.55; }
-    .sub-desc ul { margin: 4px 0 0 16px; list-style: disc; }
-    .sub-desc ul li { margin-bottom: 3px; }
-    .sub-ref {
-      font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--muted);
-      margin-top: 8px; font-style: italic; line-height: 1.4;
-    }
+---
+title: "About the Framework — Archetypes of Automation | Rhino Automator"
+description: "The Archetypes of Automation framework: 8 dimensions of automation capability that help teams find their gaps and fill them."
+navActive: "framework-about"
+pageCss: |2
+      /* Archetype cards — collapsible */
+      .arch-card { margin-bottom: 14px; overflow: hidden; padding: 0; }
+      .arch-card-trigger {
+        padding: 20px 22px; cursor: pointer; display: flex; align-items: center;
+        justify-content: space-between; gap: 12px; user-select: none;
+      }
+      .arch-card-trigger:hover { background: rgba(59,130,246,0.04); }
+      .arch-card-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+      .arch-num {
+        width: 36px; height: 36px; border-radius: 50%; background: var(--cobalt); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--ff-mono); font-size: var(--fs-body); font-weight: 500; flex-shrink: 0;
+      }
+      .arch-title-wrap { flex: 1; min-width: 0; }
+      .arch-title-wrap h3 { margin: 0; font-size: 26px; }
+      .arch-card-desc { font-size: var(--fs-body); color: var(--muted); line-height: 1.5; margin-top: 2px; }
+      .arch-chevron {
+        font-size: 20px; color: var(--muted); transition: transform 0.25s; flex-shrink: 0;
+      }
+      .arch-card.open .arch-chevron { transform: rotate(180deg); }
+      .arch-card.open .arch-chevron { color: var(--cobalt); }
+      .arch-body {
+        max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+      }
+      .arch-body-inner { padding: 0 22px 22px; }
+      .arch-intro { font-size: var(--fs-body); color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+      .sub-list { display: flex; flex-direction: column; gap: 10px; }
+      .sub-item {
+        padding: 14px 16px; background: var(--surface-alt); border-radius: 8px;
+        border-left: 3px solid var(--cobalt);
+      }
+      .sub-name { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 6px; }
+      .sub-desc { font-size: var(--fs-nav-link); color: var(--muted); line-height: 1.55; }
+      .sub-desc ul { margin: 4px 0 0 16px; list-style: disc; }
+      .sub-desc ul li { margin-bottom: 3px; }
+      .sub-ref {
+        font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--muted);
+        margin-top: 8px; font-style: italic; line-height: 1.4;
+      }
 
-    /* CTA */
-    .cta { text-align: center; margin-top: 40px; }
-    .cta h2 { border: none; margin: 0 0 8px; }
-    .cta p { margin-bottom: 20px; }
-
-  </style>
-</head>
-<body>
-
-  <!-- Nav (loaded from _includes/) -->
-  <div style="max-width:1100px;margin:0 auto">
-    <div id="site-nav" data-base=".." data-active="framework-about"></div>
-  </div>
-
+      /* CTA */
+      .cta { text-align: center; margin-top: 40px; }
+      .cta h2 { border: none; margin: 0 0 8px; }
+      .cta p { margin-bottom: 20px; }
+---
   <div class="content">
    <div class="page-nav-wrapper">
     <div>
@@ -703,11 +677,7 @@
     </div>
   </div>
 
-  <!-- Footer (loaded from _includes/) -->
-  <div id="site-footer" data-base=".."></div>
-
-<script src="../_includes/components.js"></script>
-<script>
+  <script>
 function toggleArch(id) {
   var card = document.getElementById(id);
   var body = card.querySelector('.arch-body');
@@ -720,5 +690,3 @@ function toggleArch(id) {
   }
 }
 </script>
-</body>
-</html>
