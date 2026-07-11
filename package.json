@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "clean": "node -e \"fs.rmSync('_site',{recursive:true,force:true})\""
+    "clean": "node -e \"fs.rmSync('_site',{recursive:true,force:true})\"",
+    "logos": "node scripts/generate-logo.mjs"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/bmsimp/rhinoautomator-dot-com#readme",
   "private": "true",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6"
+    "@11ty/eleventy": "^3.1.6",
+    "opentype.js": "^2.0.0"
   }
 }
