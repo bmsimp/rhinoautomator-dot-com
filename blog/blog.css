@@ -72,9 +72,11 @@ code {
 }
 pre code { background: none; padding: 0; color: var(--text); }
 
-/* ── Callout Boxes ── */
+/* ── Callout Boxes — self-sufficient; also composes with .card .card-accent ── */
 .callout {
   padding: 14px 18px; margin: 14px 0; font-size: var(--fs-body); color: var(--muted); line-height: 1.6;
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--cobalt); border-radius: 0 8px 8px 0;
 }
 .callout.warning { border-left-color: #F59E0B; }
 .callout.info { border-left-color: var(--cobalt); }

@@ -14,7 +14,10 @@
   var active = el.getAttribute('data-blog-active') || '';
 
   fetch(blogbase + '/sidebar.html')
-    .then(function (r) { return r.text(); })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
     .then(function (html) {
       html = html.replace(/\{\{blogbase\}\}/g, blogbase);
       el.outerHTML = html;
@@ -43,6 +46,11 @@
           }
         }
       }
+    })
+    .catch(function (err) {
+      console.warn('[blog] failed to load sidebar:', err);
+      var placeholder = document.getElementById('blog-sidebar');
+      if (placeholder) placeholder.remove();
     });
 })();
 

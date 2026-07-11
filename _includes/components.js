@@ -12,13 +12,23 @@
 (function () {
   var navEl = document.getElementById('site-nav');
   var footerEl = document.getElementById('site-footer');
-  if (!navEl && !footerEl) return;
+  if (!navEl && !footerEl) { window.__includesReady = Promise.resolve(); return; }
 
   var base = (navEl || footerEl).getAttribute('data-base') || '.';
   var active = navEl ? (navEl.getAttribute('data-active') || '') : '';
 
-  function inject(el, html) {
-    el.outerHTML = html;
+  function loadInto(el, file) {
+    return fetch(base + '/_includes/' + file)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        el.outerHTML = html.replace(/\{\{base\}\}/g, base);
+      })
+      .catch(function (err) {
+        console.warn('[includes] failed to load ' + file + ':', err);
+      });
   }
 
   function setActive() {
@@ -42,33 +52,22 @@
     }
   }
 
-  var loaded = 0;
-  var total = (navEl ? 1 : 0) + (footerEl ? 1 : 0);
+  var jobs = [];
+  if (navEl) jobs.push(loadInto(navEl, 'nav.html'));
+  if (footerEl) jobs.push(loadInto(footerEl, 'footer.html'));
 
-  function done() {
-    loaded++;
-    if (loaded >= total) setActive();
-  }
-
-  if (navEl) {
-    fetch(base + '/_includes/nav.html')
-      .then(function (r) { return r.text(); })
-      .then(function (html) {
-        inject(navEl, html.replace(/\{\{base\}\}/g, base));
-        done();
-      })
-      .catch(function () { done(); });
-  }
-
-  if (footerEl) {
-    fetch(base + '/_includes/footer.html')
-      .then(function (r) { return r.text(); })
-      .then(function (html) {
-        inject(footerEl, html.replace(/\{\{base\}\}/g, base));
-        done();
-      })
-      .catch(function () { done(); });
-  }
+  // Other scripts (page-nav below) can wait on this to know the includes are in the DOM.
+  window.__includesReady = Promise.all(jobs).then(function () {
+    setActive();
+    // Give the skip link in nav.html a target: tag the page's main content region.
+    if (!document.getElementById('main-content')) {
+      var main = document.querySelector('.blog-main, .content, .team-layout, .hero, .section');
+      if (main) {
+        main.id = 'main-content';
+        main.setAttribute('tabindex', '-1');
+      }
+    }
+  });
 })();
 
 // Intrapage navigation — auto-generated from h2[id] elements
@@ -161,28 +160,44 @@
     onScroll();
   }
 
-  // Build after a short delay so other components (nav/footer injection) finish first
+  // Build once the nav/footer includes are in the DOM (no timing race)
+  function start() {
+    (window.__includesReady || Promise.resolve()).then(build);
+  }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 50); });
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    setTimeout(build, 50);
+    start();
   }
 })();
 
+// Mobile nav toggle — global so the onclick in nav.html can call it
+function toggleMobileNav(btn) {
+  var nav = btn.closest('.site-nav');
+  if (!nav) return;
+  var open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
 // Nav dropdown toggle — global so the onclick in nav.html can call it
+function setNavDropdownState(dd, open) {
+  dd.classList.toggle('open', open);
+  var trigger = dd.firstElementChild;
+  if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 function toggleNavDropdown(e, id) {
   e.preventDefault();
   e.stopPropagation();
   var target = document.getElementById(id);
   var allDropdowns = document.querySelectorAll('.nav-dropdown');
   for (var i = 0; i < allDropdowns.length; i++) {
-    if (allDropdowns[i] !== target) allDropdowns[i].classList.remove('open');
+    if (allDropdowns[i] !== target) setNavDropdownState(allDropdowns[i], false);
   }
-  target.classList.toggle('open');
+  setNavDropdownState(target, !target.classList.contains('open'));
 }
 document.addEventListener('click', function (e) {
   var allDropdowns = document.querySelectorAll('.nav-dropdown');
   for (var i = 0; i < allDropdowns.length; i++) {
-    if (!allDropdowns[i].contains(e.target)) allDropdowns[i].classList.remove('open');
+    if (!allDropdowns[i].contains(e.target)) setNavDropdownState(allDropdowns[i], false);
   }
 });
