@@ -35,7 +35,7 @@ pageCss: |2
       .radar .axis { stroke: var(--border); stroke-width: 1; }
       .radar .axis-label {
         /* SVG units: the chart scales with its width, so labels grow as the chart shrinks */
-        font-family: var(--ff-mono); font-size: 13px; letter-spacing: 0.08em;
+        font-family: var(--ff-mono); font-size: 16px; letter-spacing: 0.06em;
         fill: var(--muted); text-transform: uppercase;
       }
       .radar .axis-label.gap { fill: var(--emerald); }
@@ -74,6 +74,10 @@ pageCss: |2
         color: var(--text); margin-bottom: 8px;
       }
       .pillar-card p { font-size: var(--fs-body); color: var(--muted); line-height: 1.6; }
+      .pillar-cta {
+        display: inline-block; margin-top: 16px; font-weight: 700; font-size: var(--fs-btn);
+        letter-spacing: 0.08em; text-transform: uppercase; color: var(--emerald);
+      }
 
       /* Feature list */
       .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -103,7 +107,7 @@ pageCss: |2
       @media (max-width: 860px) {
         .hero { grid-template-columns: 1fr; }
         .radar-figure { max-width: 420px; justify-self: center; width: 100%; }
-        .radar .axis-label { font-size: 17px; letter-spacing: 0.04em; }
+        .radar .axis-label { font-size: 19px; letter-spacing: 0.04em; }
         .pillars, .proof, .features { grid-template-columns: 1fr; }
       }
       @media (max-width: 600px) {
@@ -196,10 +200,11 @@ pageCss: |2
         <h3>AUTOMATION</h3>
         <p>Real workflows that solve real problems. Rewst, Power Automate, and whatever gets the job done, focused on MSP and IT operations.</p>
       </a>
-      <a href="/framework/" class="card pillar-card">
+      <a href="mailto:brian@rhinoautomator.com?subject=Automation%20consulting" class="card pillar-card">
         <div class="icon-box pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3>CONSULTING</h3>
         <p>Helping teams decide what to automate, who should be involved, and how to build a practice that doesn't depend on a single developer.</p>
+        <span class="pillar-cta">Email me about consulting &rarr;</span>
       </a>
       <a href="/community/seen-me.html" class="card pillar-card">
         <div class="icon-box pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>

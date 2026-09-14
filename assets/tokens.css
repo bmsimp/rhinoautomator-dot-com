@@ -118,6 +118,7 @@ p, li, td, dd, blockquote, figcaption { font-family: var(--ff-text); }
    NAVIGATION
    ════════════════════════════════════ */
 
+.nav-wrap { max-width: 1100px; margin: 0 auto; }
 .site-nav {
   background: var(--bg); border-bottom: 1px solid var(--border);
   padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;

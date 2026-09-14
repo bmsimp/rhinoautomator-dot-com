@@ -46,7 +46,7 @@ pageCss: |2
 
       /* ── Archetype ── */
       .archetype-name { font-family: var(--ff-display); font-weight: 400; font-size: var(--fs-assess-name); flex: 1; letter-spacing: 0.04em; }
-      .archetype-desc { font-family: var(--ff-body); font-size: var(--fs-assess-desc); color: var(--muted); margin-top: 2px; }
+      .archetype-desc { font-family: var(--ff-text); font-size: var(--fs-assess-desc); color: var(--muted); margin-top: 2px; }
       .archetype-score-badge {
         min-width: 36px; height: 36px; border-radius: 8px; background: var(--accent); color: #fff;
         display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-assess-badge); flex-shrink: 0;
@@ -70,7 +70,7 @@ pageCss: |2
       .sub-list-title { font-family: var(--ff-mono); font-size: var(--fs-assess-mono-sm); font-weight: 500; color: var(--emerald); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
       .sub-item { margin-bottom: 7px; padding: 8px 10px; background: var(--surface-alt); border-radius: 6px; border-left: 3px solid var(--cobalt); }
       .sub-item-name { font-family: var(--ff-body); font-size: var(--fs-assess-body); font-weight: 700; }
-      .sub-item-desc { font-family: var(--ff-body); font-size: var(--fs-assess-desc); color: var(--muted); margin-top: 1px; }
+      .sub-item-desc { font-family: var(--ff-text); font-size: var(--fs-assess-desc); color: var(--muted); margin-top: 1px; }
       .sub-item-ref { font-family: var(--ff-mono); font-size: var(--fs-assess-mono-sm); color: var(--muted); margin-top: 2px; font-style: normal; letter-spacing: 0.02em; }
 
       /* ── Chart ── */
@@ -1190,9 +1190,9 @@ function buildReportHtml(includeIndiv, depth) {
   var h = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">';
   h += '<title>Archetypes of Automation \u2014 Capability Report | Rhino Automator</title>';
   h += '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-  h += '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><style>';
+  h += '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><style>';
   h += '* { box-sizing:border-box; margin:0; padding:0; }';
-  h += 'body { font-family:"Barlow Condensed",sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
+  h += 'body { font-family:"Barlow",sans-serif; color:#1a1f36; background:#fff; padding:40px 48px; max-width:960px; margin:0 auto; font-size:13px; }';
   h += '.rh { display:flex; gap:16px; align-items:center; padding-bottom:18px; border-bottom:3px solid #3B82F6; margin-bottom:28px; }';
   h += '.rh-logo { width:52px; height:52px; }';
   h += 'h1 { font-family:"Bebas Neue",sans-serif; font-size:1.6rem; font-weight:400; color:#3B82F6; margin-bottom:2px; letter-spacing:0.05em; }';
