@@ -3,6 +3,14 @@ title: "About — Rhino Automator"
 description: "Meet Brian Simpson, the Rhino Automator — why the rhino, and how to get in touch."
 navActive: "about-me"
 pageCss: |2
+      /* Headshot intro */
+      .about-intro { display: flex; align-items: center; gap: 24px; margin: 8px 0 20px; }
+      .about-intro img {
+        width: 140px; height: 140px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+        border: 2px solid var(--border);
+      }
+      .about-intro p { margin-bottom: 0; }
+
       /* Book callout */
       .book-callout {
         padding: 24px 28px; margin: 24px 0; display: flex; align-items: flex-start; gap: 16px;
@@ -31,7 +39,10 @@ pageCss: |2
     <div class="subtitle">// ABOUT</div>
     <h1>THE RHINO<br/><span class="silver">AUTOMATOR</span></h1>
 
-    <p>Howdy! My name is Brian. I'm the Rhino Automator.</p>
+    <div class="about-intro">
+      <img src="/assets/brian-simpson.jpg" width="140" height="140" alt="Brian Simpson"/>
+      <p>Howdy! My name is Brian. I'm the Rhino Automator.</p>
+    </div>
 
     <p>Why rhino? Well, once upon a time I was in sales. One of my managers gave me a book called <strong>"Rhinoceros Success"</strong> by Scott Alexander. The author outlined what he believed made the rhinoceros a model for success. One of the key pieces I took away was that the rhinoceros &mdash; with its thick skin, large body, and horn &mdash; would blast through obstacles to achieve its task.</p>
 

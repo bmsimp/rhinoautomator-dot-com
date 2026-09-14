@@ -65,6 +65,22 @@ pageCss: |2
         font-size: var(--fs-body-lg); color: var(--muted); line-height: 1.55; max-width: 640px; margin-bottom: 32px;
       }
 
+      /* Intro with headshot */
+      .intro { display: flex; align-items: center; gap: 24px; margin-bottom: 32px; }
+      .intro .section-desc { margin-bottom: 0; }
+      .headshot {
+        width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+        border: 2px solid var(--border);
+      }
+      .intro-name {
+        font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--emerald);
+        letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+      }
+      @media (max-width: 600px) {
+        .intro { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .headshot { width: 96px; height: 96px; }
+      }
+
       /* Pillar cards */
       .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
       .pillar-card { padding: 28px 24px; display: block; }
@@ -192,7 +208,13 @@ pageCss: |2
   <section class="section">
     <div class="section-label">What I do</div>
     <h2>BUILD, ADVISE, TEACH</h2>
-    <p class="section-desc">Not a dev shop. Not a vendor. A practitioner who builds automation and teaches others to take part, whatever their technical background.</p>
+    <div class="intro">
+      <img class="headshot" src="/assets/brian-simpson.jpg" width="120" height="120" alt="Brian Simpson"/>
+      <div>
+        <div class="intro-name">Brian Simpson · The Rhino Automator</div>
+        <p class="section-desc">Not a dev shop. Not a vendor. A practitioner who builds automation and teaches others to take part, whatever their technical background.</p>
+      </div>
+    </div>
 
     <div class="pillars">
       <a href="/blog/" class="card pillar-card">
