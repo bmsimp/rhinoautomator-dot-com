@@ -109,7 +109,7 @@ function toggleMobileNav(btn) {
 // ── Nav dropdown toggle — global so the onclick in nav.njk can call it ──
 function setNavDropdownState(dd, open) {
   dd.classList.toggle('open', open);
-  var trigger = dd.querySelector('a');
+  var trigger = dd.querySelector('button');
   if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 function toggleNavDropdown(e, id) {

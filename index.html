@@ -1,5 +1,5 @@
 ---
-title: "Rhino Automator — Automation Enthusiast · Community Engagement & Education"
+title: "Rhino Automator — Automation for MSPs Without a Dev Team"
 description: "Helping MSPs and IT teams build automation muscle without a dedicated dev team — practical frameworks, real workflows, and the Archetypes of Automation assessment."
 navActive: "home"
 pageCss: |2
@@ -9,10 +9,9 @@ pageCss: |2
         border-bottom: 1px solid var(--border);
       }
       .hero {
-        max-width: 1100px; margin: 0 auto; padding: 80px 32px 64px;
-        display: flex; align-items: center; justify-content: space-between; gap: 48px;
+        max-width: 1100px; margin: 0 auto; padding: 72px 32px 56px;
+        display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 40px;
       }
-      .hero-badge { width: 300px; height: auto; flex-shrink: 0; }
       .hero-tag {
         font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--emerald);
         letter-spacing: 0.16em; margin-bottom: 16px;
@@ -24,24 +23,50 @@ pageCss: |2
       .hero h1 .silver { color: var(--silver); }
       .hero-sub {
         font-size: var(--fs-body-lg); color: var(--muted); max-width: 520px;
-        line-height: 1.6; margin: 20px 0 32px;
+        line-height: 1.55; margin: 20px 0 32px;
       }
+      .hero-sub strong { color: var(--text); font-weight: 600; }
+      .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+      /* Hero radar — an illustrative two-person team profile */
+      .radar-figure { margin: 0; }
+      .radar { width: 100%; height: auto; display: block; }
+      .radar .grid { fill: none; stroke: var(--border); stroke-width: 1; }
+      .radar .axis { stroke: var(--border); stroke-width: 1; }
+      .radar .axis-label {
+        /* SVG units: the chart scales with its width, so labels grow as the chart shrinks */
+        font-family: var(--ff-mono); font-size: 13px; letter-spacing: 0.08em;
+        fill: var(--muted); text-transform: uppercase;
+      }
+      .radar .axis-label.gap { fill: var(--emerald); }
+      .radar .shape { stroke-width: 2; stroke-linejoin: round; }
+      .radar .shape-a { fill: rgba(59,130,246,0.18); stroke: var(--cobalt); }
+      .radar .shape-b { fill: rgba(209,220,232,0.10); stroke: var(--silver); }
+      .radar .gap-ring { fill: none; stroke: var(--emerald); stroke-width: 1.5; stroke-dasharray: 4 4; }
+      .radar-caption {
+        font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--muted);
+        letter-spacing: 0.06em; line-height: 1.6; text-align: center; margin-top: 8px;
+      }
+      .radar-caption .gap { color: var(--emerald); }
+      @media (prefers-reduced-motion: no-preference) {
+        .radar .shape { transform-origin: 200px 200px; animation: radar-grow 0.9s cubic-bezier(.2,.8,.2,1) both; }
+        .radar .shape-b { animation-delay: 0.15s; }
+        .radar .gap-ring, .radar .axis-label.gap { animation: gap-in 0.4s ease-out 1s both; }
+      }
+      @keyframes radar-grow { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      @keyframes gap-in { from { opacity: 0; } to { opacity: 1; } }
+
       /* Section content */
       .section h2 {
         font-family: var(--ff-display); font-size: var(--fs-h2); letter-spacing: 0.05em;
         color: var(--text); margin-bottom: 8px;
       }
       .section-desc {
-        font-size: var(--fs-body); color: var(--muted); line-height: 1.6; max-width: 600px; margin-bottom: 32px;
+        font-size: var(--fs-body-lg); color: var(--muted); line-height: 1.55; max-width: 640px; margin-bottom: 32px;
       }
 
       /* Pillar cards */
       .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      @media (max-width: 768px) {
-        .pillars { grid-template-columns: 1fr; }
-        .hero { flex-direction: column; align-items: flex-start; }
-        .hero-badge { width: 180px; align-self: center; }
-      }
       .pillar-card { padding: 28px 24px; display: block; }
       .pillar-icon { margin-bottom: 16px; }
       .pillar-card h3 {
@@ -50,19 +75,16 @@ pageCss: |2
       }
       .pillar-card p { font-size: var(--fs-body); color: var(--muted); line-height: 1.6; }
 
-      /* Feature cards */
+      /* Feature list */
       .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-      @media (max-width: 768px) { .features { grid-template-columns: 1fr; } }
-      .feature-card { display: flex; gap: 16px; align-items: flex-start; }
-      .feature-dot {
-        width: 8px; height: 8px; border-radius: 50%; background: var(--emerald);
-        flex-shrink: 0; margin-top: 6px;
-      }
       .feature-card h4 {
         font-family: var(--ff-display); font-size: var(--fs-h4); letter-spacing: 0.04em;
         color: var(--silver); margin-bottom: 4px;
       }
-      .feature-card p { font-size: var(--fs-nav-link); color: var(--muted); line-height: 1.5; }
+      .feature-card p { font-size: var(--fs-body); color: var(--muted); line-height: 1.55; }
+
+      /* Proof strip */
+      .proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
       /* CTA banner */
       .cta-banner {
@@ -74,97 +96,152 @@ pageCss: |2
         color: var(--text); margin-bottom: 8px;
       }
       .cta-inner p {
-        font-size: var(--fs-body); color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+        font-size: var(--fs-body-lg); color: var(--muted); margin: 0 auto 28px; line-height: 1.55; max-width: 560px;
       }
+      .cta-inner .btn-row { justify-content: center; }
 
+      @media (max-width: 860px) {
+        .hero { grid-template-columns: 1fr; }
+        .radar-figure { max-width: 420px; justify-self: center; width: 100%; }
+        .radar .axis-label { font-size: 17px; letter-spacing: 0.04em; }
+        .pillars, .proof, .features { grid-template-columns: 1fr; }
+      }
       @media (max-width: 600px) {
         .hero h1 { font-size: var(--fs-hero-mobile); }
         .section h2 { font-size: var(--fs-h2-mobile); }
         .hero { padding: 48px 20px 40px; }
         .section { padding: 40px 20px; }
+        .cta-banner { padding: 0 20px 48px; }
+        .cta-inner { padding: 36px 20px; }
       }
 ---
   <!-- Hero -->
   <div class="hero-bleed">
     <section class="hero">
       <div class="hero-text">
-        <div class="hero-tag">// AUTOMATION ENTHUSIAST · COMMUNITY ENGAGEMENT & EDUCATION</div>
+        <div class="hero-tag">// FOR MSPS &amp; IT TEAMS</div>
         <h1>MAKING AUTOMATION<br/><span class="silver">ACCESSIBLE.</span></h1>
-        <p class="hero-sub">Helping MSPs and IT teams build automation muscle — without needing a dedicated dev team. Practical frameworks, real workflows, and a methodology anyone can contribute to.</p>
+        <p class="hero-sub">Your team doesn't need a developer to automate. <strong>It needs the right mix of people.</strong> Find out who covers what across the 8 Archetypes of Automation, and where the gaps are.</p>
+        <div class="btn-row">
+          <a href="/assessment/" class="btn btn-primary">Start the assessment</a>
+          <a href="/framework/" class="btn btn-outline-emerald">Explore the framework</a>
+        </div>
       </div>
-      <img class="hero-badge" src="/assets/logo/badge.svg" alt="Rhino Automator badge" width="300" height="300"/>
+
+      <figure class="radar-figure">
+        <svg class="radar" viewBox="-70 0 540 400" role="img" aria-labelledby="radar-title radar-desc">
+          <title id="radar-title">Example team radar chart</title>
+          <desc id="radar-desc">Two team members overlaid across the 8 archetypes. Both score 9 in Building and near zero in Quality, leaving Quality as the team's gap.</desc>
+          <polygon class="grid" points="200,50 306.1,93.9 350,200 306.1,306.1 200,350 93.9,306.1 50,200 93.9,93.9"/>
+          <polygon class="grid" points="200,100 270.7,129.3 300,200 270.7,270.7 200,300 129.3,270.7 100,200 129.3,129.3"/>
+          <polygon class="grid" points="200,150 235.4,164.6 250,200 235.4,235.4 200,250 164.6,235.4 150,200 164.6,164.6"/>
+          <g class="axis">
+            <line x1="200" y1="200" x2="200" y2="50"/><line x1="200" y1="200" x2="306.1" y2="93.9"/>
+            <line x1="200" y1="200" x2="350" y2="200"/><line x1="200" y1="200" x2="306.1" y2="306.1"/>
+            <line x1="200" y1="200" x2="200" y2="350"/><line x1="200" y1="200" x2="93.9" y2="306.1"/>
+            <line x1="200" y1="200" x2="50" y2="200"/><line x1="200" y1="200" x2="93.9" y2="93.9"/>
+          </g>
+          <polygon class="shape shape-a" points="200,110 242.4,157.6 305,200 231.8,231.8 200,335 189.4,210.6 170,200 147,147"/>
+          <polygon class="shape shape-b" points="200,155 253,147 290,200 242.4,242.4 200,335 200,200 140,200 168.2,168.2"/>
+          <circle class="gap-ring" cx="93.9" cy="306.1" r="14"/>
+          <text class="axis-label" x="200" y="34" text-anchor="middle">Process</text>
+          <text class="axis-label" x="320" y="84" text-anchor="start">Problem</text>
+          <text class="axis-label" x="362" y="205" text-anchor="start">Design</text>
+          <text class="axis-label" x="320" y="330" text-anchor="start">Comms</text>
+          <text class="axis-label" x="200" y="378" text-anchor="middle">Building</text>
+          <text class="axis-label gap" x="74" y="336" text-anchor="end">Quality</text>
+          <text class="axis-label" x="38" y="205" text-anchor="end">Human</text>
+          <text class="axis-label" x="80" y="84" text-anchor="end">Strategy</text>
+        </svg>
+        <figcaption class="radar-caption">Two 9s in Building, zero in Quality.<br/><span class="gap">That's a risk profile.</span></figcaption>
+      </figure>
     </section>
   </div>
 
+  <!-- Framework -->
+  <section class="section">
+    <div class="section-label">The framework</div>
+    <h2>ARCHETYPES OF AUTOMATION</h2>
+    <p class="section-desc">The biggest barrier to automation isn't technical skill. It's process thinking, team composition, and role awareness. The framework maps 8 dimensions of automation capability so teams can find their gaps and fill them.</p>
+
+    <div class="features">
+      <div class="card feature-card">
+        <h4>INDIVIDUAL SELF-ASSESSMENT</h4>
+        <p>Score yourself across 8 archetypes to see where you contribute most and where you have room to grow.</p>
+      </div>
+      <div class="card feature-card">
+        <h4>TEAM RADAR CHARTS</h4>
+        <p>Overlay everyone's scores to see your team's coverage at a glance, like the chart above.</p>
+      </div>
+      <div class="card feature-card">
+        <h4>GAP ANALYSIS</h4>
+        <p>The archetype with the lowest combined team score is your most urgent investment in hiring, training, or partnerships.</p>
+      </div>
+      <div class="card feature-card">
+        <h4>RESEARCH-BACKED</h4>
+        <p>Built on established frameworks: Theory of Constraints, Lean, Design Thinking, Kotter's Change Model, Team Topologies, and more.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pillars -->
   <section class="section">
-    <div class="section-label">01 — What I Do</div>
-    <h2>THREE PILLARS</h2>
-    <p class="section-desc">Not a dev shop. Not a vendor. A practitioner who builds automation and teaches others to participate — regardless of technical background.</p>
+    <div class="section-label">What I do</div>
+    <h2>BUILD, ADVISE, TEACH</h2>
+    <p class="section-desc">Not a dev shop. Not a vendor. A practitioner who builds automation and teaches others to take part, whatever their technical background.</p>
 
     <div class="pillars">
-      <a href="blog/" class="card pillar-card">
+      <a href="/blog/" class="card pillar-card">
         <div class="icon-box pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <h3>AUTOMATION</h3>
-        <p>Building real workflows that solve real problems. Rewst, Power Automate, and whatever gets the job done — focused on MSP and IT operations.</p>
+        <p>Real workflows that solve real problems. Rewst, Power Automate, and whatever gets the job done, focused on MSP and IT operations.</p>
       </a>
-      <a href="framework/" class="card pillar-card">
+      <a href="/framework/" class="card pillar-card">
         <div class="icon-box pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3>CONSULTING</h3>
-        <p>Helping teams identify what to automate, who should be involved, and how to build a practice that doesn't depend on a single developer.</p>
+        <p>Helping teams decide what to automate, who should be involved, and how to build a practice that doesn't depend on a single developer.</p>
       </a>
-      <a href="community/seen-me.html" class="card pillar-card">
+      <a href="/community/seen-me.html" class="card pillar-card">
         <div class="icon-box pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <h3>COMMUNITY & EDUCATION</h3>
-        <p>Conference talks, workshops, and community content on building automation muscle, team capability mapping, and making non-technical people meaningful contributors.</p>
+        <h3>COMMUNITY &amp; EDUCATION</h3>
+        <p>Conference talks, workshops, and community content on building automation muscle and making non-technical people meaningful contributors.</p>
       </a>
     </div>
   </section>
 
-  <!-- Assessment teaser -->
+  <!-- Proof -->
   <section class="section">
-    <div class="section-label">02 — The Framework</div>
-    <h2>ARCHETYPES OF AUTOMATION</h2>
-    <p class="section-desc">The biggest barrier to automation isn't technical skill. It's process thinking, team composition, and role awareness. The Archetypes framework maps 8 dimensions of automation capability so teams can find their gaps and fill them.</p>
-
-    <div class="features">
-      <div class="card feature-card">
-        <div class="feature-dot"></div>
-        <div>
-          <h4>INDIVIDUAL SELF-ASSESSMENT</h4>
-          <p>Score yourself across 8 archetypes to understand where you contribute most and where you have room to grow.</p>
+    <div class="section-label">Where you've seen me</div>
+    <div class="proof">
+      <a href="/community/seen-me.html#speaking" class="card card-snug link-card">
+        <div class="link-text">
+          <div class="link-meta">FLOW 2025 &middot; Talk</div>
+          <div class="link-title">Cracking the Automation Code: How Process-Minded Thinkers Can Thrive in Technical Roles</div>
         </div>
-      </div>
-      <div class="card feature-card">
-        <div class="feature-dot"></div>
-        <div>
-          <h4>TEAM RADAR CHARTS</h4>
-          <p>Overlay individual scores to visualize your team's coverage. Two 9s in Building and zero in Quality is a risk profile.</p>
+      </a>
+      <a href="https://rewst.io/blog/workflow-wizards-how-brian-simpson-kicks-goals-with-automation/" target="_blank" rel="noopener" class="card card-snug link-card">
+        <div class="link-text">
+          <div class="link-meta">rewst.io &middot; Feature</div>
+          <div class="link-title">Workflow Wizards: How Brian Simpson Kicks Goals with Automation</div>
         </div>
-      </div>
-      <div class="card feature-card">
-        <div class="feature-dot"></div>
-        <div>
-          <h4>GAP ANALYSIS</h4>
-          <p>The archetype with the lowest combined team score is your most urgent investment in hiring, training, or partnerships.</p>
+      </a>
+      <a href="/community/seen-me.html#roc-open-mics" class="card card-snug link-card">
+        <div class="link-text">
+          <div class="link-meta">Rewst ROC &middot; 2023–2025</div>
+          <div class="link-title">14 ROC Open Mic workflow demos, from NCE license cleanup to patch-failure remediation</div>
         </div>
-      </div>
-      <div class="card feature-card">
-        <div class="feature-dot"></div>
-        <div>
-          <h4>RESEARCH-BACKED</h4>
-          <p>Built on established frameworks: Theory of Constraints, Lean, Design Thinking, Kotter's Change Model, Team Topologies, and more.</p>
-        </div>
-      </div>
+      </a>
     </div>
   </section>
 
   <!-- CTA -->
   <div class="cta-banner">
     <div class="card cta-inner">
-      <h2>READY TO FIND YOUR AUTOMATION STRENGTHS?</h2>
-      <p>Take the Archetypes of Automation self-assessment! It takes about 10 minutes and gives you a clear picture of where you and your team stand.</p>
-      <a href="assessment/" class="btn btn-primary">START THE ASSESSMENT</a>
-      <a href="framework/" class="btn btn-outline-emerald">EXPLORE THE FRAMEWORK</a>
+      <h2>WHERE DOES YOUR TEAM STAND?</h2>
+      <p>The self-assessment takes about 10 minutes. Have everyone take it, then overlay the results to see your team's coverage.</p>
+      <div class="btn-row">
+        <a href="/assessment/" class="btn btn-primary">Start the assessment</a>
+        <a href="/framework/" class="btn btn-outline-emerald">Explore the framework</a>
+      </div>
     </div>
   </div>

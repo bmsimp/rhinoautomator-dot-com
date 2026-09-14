@@ -19,7 +19,7 @@
 .blog-sidebar .blog-home-link:hover { color: var(--emerald); }
 
 .blog-sidebar .cat-label {
-  font-family: var(--ff-display); font-size: 15px; letter-spacing: 0.08em;
+  font-family: var(--ff-display); font-size: 1.0625rem; letter-spacing: 0.08em;
   color: var(--text); margin: 24px 0 6px; padding: 0;
 }
 
@@ -40,17 +40,17 @@
   padding-right: 4px; cursor: pointer;
 }
 .blog-sidebar .parent-link .chevron {
-  font-size: 10px; color: var(--muted); transition: transform 0.2s;
+  font-size: 0.625rem; color: var(--muted); transition: transform 0.2s;
 }
 .blog-sidebar .parent-link.expanded .chevron { transform: rotate(90deg); }
 
 /* Sub-items */
 .blog-sidebar .sub-items { display: none; }
 .blog-sidebar .sub-items.open { display: block; }
-.blog-sidebar .sub-items a { padding-left: 28px; font-size: 13px; }
+.blog-sidebar .sub-items a { padding-left: 28px; font-size: 0.9375rem; }
 
 /* Nested sub-items (3rd level) */
-.blog-sidebar .sub-items .sub-items a { padding-left: 42px; font-size: 12px; }
+.blog-sidebar .sub-items .sub-items a { padding-left: 42px; font-size: 0.875rem; }
 
 @media (max-width: 960px) {
   .blog-sidebar { display: none; }
@@ -64,10 +64,10 @@
 pre {
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
   padding: 16px 20px; overflow-x: auto; margin: 12px 0 18px;
-  font-family: var(--ff-mono); font-size: 14px; color: var(--text); line-height: 1.5;
+  font-family: var(--ff-mono); font-size: 0.875rem; color: var(--text); line-height: 1.5;
 }
 code {
-  font-family: var(--ff-mono); font-size: 14px; background: var(--surface);
+  font-family: var(--ff-mono); font-size: 0.875rem; background: var(--surface);
   padding: 2px 6px; border-radius: 4px; color: var(--emerald);
 }
 pre code { background: none; padding: 0; color: var(--text); }
@@ -99,7 +99,7 @@ pre code { background: none; padding: 0; color: var(--text); }
   position: absolute; left: 0; top: 0;
   width: 28px; height: 28px; border-radius: 50%; background: var(--cobalt); color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--ff-mono); font-size: 14px; font-weight: 500;
+  font-family: var(--ff-mono); font-size: 0.875rem; font-weight: 500;
 }
 
 /* ── Link Cards (extends shared .link-card from tokens.css) ── */
