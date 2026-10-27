@@ -72,20 +72,18 @@ code {
 }
 pre code { background: none; padding: 0; color: var(--text); }
 
-/* ── Callout Boxes — self-sufficient; also composes with .card .card-accent ── */
+/* ── Callout Boxes — self-sufficient; also composes with .card ── */
 .callout {
   padding: 14px 18px; margin: 14px 0; font-size: var(--fs-body); color: var(--muted); line-height: 1.6;
-  background: var(--surface); border: 1px solid var(--border);
-  border-left: 3px solid var(--cobalt); border-radius: 0 8px 8px 0;
+  background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px;
 }
-.callout.warning { border-left-color: #F59E0B; }
-.callout.info { border-left-color: var(--cobalt); }
+.callout.warning { background: rgba(250,204,21,0.06); border-color: rgba(250,204,21,0.34); }
 .callout strong { color: var(--text); }
 .callout-label {
   font-family: var(--ff-mono); font-size: var(--fs-tag); font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
 }
-.callout.warning .callout-label { color: #F59E0B; }
+.callout.warning .callout-label { color: var(--warn); }
 .callout.info .callout-label { color: var(--cobalt); }
 
 /* ── Numbered Steps ── */
@@ -113,10 +111,15 @@ pre code { background: none; padding: 0; color: var(--text); }
 /* ── Category Cards (index page) ── */
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
 .cat-card { /* extends .card */ }
-.cat-card h3 {
+.cat-card h2, .cat-card h3 {
   font-family: var(--ff-display); font-size: var(--fs-h3-content); letter-spacing: 0.04em;
-  color: var(--text); margin-bottom: 8px;
+  color: var(--text); margin: 0 0 8px; padding-bottom: 0; border-bottom: none;
 }
+
+/* Correct heading level (h2 under the page h1) with the smaller look of the old h3/h4 */
+.blog-main h2.as-h3, .blog-main h2.as-h4 { padding-bottom: 0; border-bottom: none; letter-spacing: 0.04em; }
+.blog-main h2.as-h3 { font-size: var(--fs-h3-content); margin: 24px 0 8px; }
+.blog-main h2.as-h4 { font-size: var(--fs-h4); margin: 20px 0 6px; }
 .cat-card p { margin-bottom: 0; font-size: var(--fs-body); color: var(--muted); line-height: 1.65; }
 .cat-card .count {
   font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--cobalt);
