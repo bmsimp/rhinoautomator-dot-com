@@ -16,6 +16,9 @@
   --cobalt:      #3B82F6;
   --silver:      #D1DCE8;
   --emerald:     #34D399;
+  --risk:        #EF4444;  /* gap / risk marks and strokes; matches the assessment's low-score red */
+  --risk-text:   #F87171;  /* small text on dark surfaces: 6.3:1 vs 4.6:1 for --risk */
+  --warn:        #FACC15;  /* warning callouts only; a yellow, not the avoided orange */
   --text:        #F0F6FF;
   --muted:       #8B9EB8;
 
@@ -108,6 +111,10 @@ p, li, td, dd, blockquote, figcaption { font-family: var(--ff-text); }
 /* Visible keyboard focus on every interactive element */
 :focus-visible { outline: 2px solid var(--emerald); outline-offset: 3px; border-radius: 4px; }
 #main-content:focus-visible { outline: none; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
@@ -202,8 +209,8 @@ p, li, td, dd, blockquote, figcaption { font-family: var(--ff-text); }
   letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 28px;
   border-radius: 4px; cursor: pointer; transition: all 0.15s; display: inline-block;
 }
-.btn-primary { background: var(--cobalt); color: #fff; border: none; }
-.btn-primary:hover { background: #2563EB; }
+.btn-primary { background: #2563EB; color: #fff; border: none; }
+.btn-primary:hover { background: #1D4ED8; }
 .btn-outline-emerald { background: transparent; color: var(--emerald); border: 1.5px solid var(--emerald); }
 .btn-outline-emerald:hover { background: rgba(52,211,153,0.08); }
 .btn-outline-silver { background: transparent; color: var(--silver); border: 1.5px solid var(--border); }
@@ -241,11 +248,6 @@ a.card:hover, .card.arch-card:hover { border-color: var(--cobalt); }
 .card-snug    { padding: 18px 22px; }
 .card-roomy   { padding: 28px; }
 .card-spacious { padding: 36px 32px; }
-
-/* Card with left accent border (callouts) */
-.card-accent {
-  border-left: 3px solid var(--cobalt); border-radius: 0 8px 8px 0;
-}
 
 /* Card interior helpers */
 .card-label {
@@ -328,7 +330,7 @@ a.card:hover, .card.arch-card:hover { border-color: var(--cobalt); }
 }
 .content h1 .silver, .blog-main h1 .silver { color: var(--silver); }
 .content .subtitle, .blog-main .subtitle {
-  font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--emerald);
+  font-family: var(--ff-mono); font-size: var(--fs-tag); color: var(--silver);
   letter-spacing: 0.14em; margin-bottom: 32px;
 }
 .content h2, .blog-main h2 {
