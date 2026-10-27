@@ -63,6 +63,8 @@ pageCss: |2
       .rule-list.cobalt li::before { color: var(--cobalt); }
       .rule-list.silver li::before { color: var(--silver); }
       .rule-list.emerald li::before { color: var(--emerald); }
+      .rule-list.risk li::before { color: var(--risk-text); }
+      .rule-list.warn li::before { color: var(--warn); }
 
       /* Type specimens */
       .spec-stack { display: flex; flex-direction: column; gap: 12px; }
@@ -158,12 +160,16 @@ pageCss: |2
       .c-cobalt  { color: var(--cobalt); }
       .c-silver  { color: var(--silver); }
       .c-emerald { color: var(--emerald); }
+      .c-risk    { color: var(--risk-text); }
+      .c-warn    { color: var(--warn); }
       .c-muted   { color: var(--muted); }
       .c-text    { color: var(--text); }
       .bg-cobalt  { background: var(--cobalt); }
       .bg-silver  { background: var(--silver); }
       .bg-emerald { background: var(--emerald); }
-      .bg-page    { background: var(--bg); }
+      .bg-risk    { background: var(--risk); }
+      .bg-warn    { background: var(--warn); }
+      .bg-page   { background: var(--bg); }
       .bg-surface { background: var(--surface); }
       .bg-card    { background: var(--surface-alt); }
       .bg-border  { background: var(--border); }
@@ -281,6 +287,22 @@ pageCss: |2
             <div class="swatch-use">Captions, metadata</div>
           </div>
         </div>
+        <div class="swatch sm" onclick="copyHex('#EF4444')">
+          <div class="swatch-chip bg-risk"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Risk</div>
+            <div class="swatch-hex mono-xs c-muted">#EF4444</div>
+            <div class="swatch-use">Gaps, low scores. Small text #F87171</div>
+          </div>
+        </div>
+        <div class="swatch sm" onclick="copyHex('#FACC15')">
+          <div class="swatch-chip bg-warn"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Warning</div>
+            <div class="swatch-hex mono-xs c-muted">#FACC15</div>
+            <div class="swatch-use">Warning callouts only</div>
+          </div>
+        </div>
       </div>
 
       <!-- Usage rules -->
@@ -315,6 +337,21 @@ pageCss: |2
               <li>Active/success indicators</li>
               <li>Code syntax highlights</li>
               <li>Keynote slide accent moments</li>
+            </ul>
+          </div>
+          <div>
+            <div class="rule-head c-risk"><div class="dot bg-risk"></div>Risk</div>
+            <ul class="rule-list risk">
+              <li>Gaps and low scores in charts and analysis</li>
+              <li>Fills and strokes in Risk; small text in its lighter tint</li>
+              <li>Never for CTAs, links or success states</li>
+            </ul>
+          </div>
+          <div>
+            <div class="rule-head c-warn"><div class="dot bg-warn"></div>Warning</div>
+            <ul class="rule-list warn">
+              <li>Warning callouts in the blog</li>
+              <li>A yellow, not an orange. Orange stays off-brand</li>
             </ul>
           </div>
         </div>
